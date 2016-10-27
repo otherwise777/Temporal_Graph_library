@@ -7,7 +7,7 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161027.041407-75-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161027.041407-75-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

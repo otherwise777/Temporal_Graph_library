@@ -200,7 +200,7 @@ public class Tgraph<K,VV,EV,N> {
     Stores the results in a Vertex Dataset where the vertex value is te distance
 
     */
-    public DataSet<Vertex<K,Long>> ShortestPathsEAT(K startingnode) throws Exception {
+    public DataSet<Vertex<K,Long>> ShortestPathsEAT(K startingnode, Long TimeLowerBound, Long TimeUpperBound) throws Exception {
 //      getting the edges and sorting them by their edge value
 //      somehow this works, but it should sort on the starting value of the temporal edge, currently
 //      it sorts on the tuple
@@ -215,6 +215,8 @@ public class Tgraph<K,VV,EV,N> {
                 }
             }
         });
+        tempedges.map(new MapFunction<Edge<K,Tuple3<EV,N,N>>, Object>() {
+        })
         tempedges.print();
         return Tempvertices;
     }
