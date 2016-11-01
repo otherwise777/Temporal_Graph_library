@@ -14,6 +14,11 @@ import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.library.LabelPropagation;
+import org.apache.flink.graph.pregel.ComputeFunction;
+import org.apache.flink.graph.pregel.MessageCombiner;
+import org.apache.flink.graph.spargel.MessageIterator;
+import org.apache.flink.graph.spargel.GatherFunction;
+import org.apache.flink.graph.spargel.ScatterFunction;
 import org.apache.flink.types.NullValue;
 import org.apache.flink.util.Collector;
 
@@ -23,7 +28,7 @@ import org.apache.flink.util.Collector;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test11();
+        test12();
     }
 
 
@@ -48,13 +53,7 @@ public class testclass {
     /**
      * Initializes the vertex values with the vertex ID
      */
-    public static final class InitVertices implements MapFunction<Long, Long> {
 
-        @Override
-        public Long map(Long vertexId) {
-            return vertexId;
-        }
-    }
 
     private static void test9() throws Exception {
         Configuration conf = new Configuration();
@@ -122,8 +121,11 @@ public class testclass {
 
 
         DataSet<Vertex<Long, NullValue>> startnodeset = tempgraph.getVertices().first(1);
-        Long test = tempgraph.ShortestPathsEAT(1L).collect().get(0).getId();
-//        System.out.println(test);
+        Long test = tempgraph.ShortestPathsEAT(1L,Long.MIN_VALUE,Long.MAX_VALUE).collect().get(0).getId();
+//        Long test2 = tempgraph.ShortestPathsEAT(1L,Long.MIN_VALUE,Long.MAX_VALUE).collect().get(0).getId();
+//        Long test3 = tempgraph.ShortestPathsEAT(1L,Long.MIN_VALUE,Long.MAX_VALUE).collect().get(0).getId();
+//        System.out.println(test + test2 + test3);
+        System.out.println(test);
 
 //        tempgraph.getTemporalEdges().print();
 //        tempgraph.ShortestPathsEAT(test)
@@ -132,4 +134,116 @@ public class testclass {
 
 
     }
+    public static void test12() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+
+        // a temporal set created with Flink, now we need to make it into a temporal set into gelly
+//        DataSet<Tuple4<Long, Long, Long, Long>> temporalset = env.readCsvFile("./datasets/Testgraph")
+//                .fieldDelimiter(",")  // node IDs are separated by spaces
+//                .ignoreComments("%")  // comments start with "%"
+//                .types(Long.class, Long.class, Long.class, Long.class); // read the node IDs as Longs
+//        Tgraph<Long, NullValue, NullValue, Long> tempgraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalset, env);
+//        Graph<Long, NullValue, Tuple3<NullValue, Long, Long>> graph = tempgraph.getGellyGraph();
+
+
+        // read the input graph
+
+
+// define the maximum number of iterations
+        int maxIterations = 5;
+
+// Execute the vertex-centric iteration
+//        Graph<Long, NullValue, Tuple3<NullValue, Long, Long>> result = graph.runVertexCentricIteration(
+//                new MinDistanceMessenger(), new VertexDistanceUpdater(), maxIterations);
+
+// a temporal set created with Flink, now we need to make it into a temporal set into gelly
+        DataSet<Tuple3<Long, Long, Double>> egetuples = env.readCsvFile("./datasets/Testgraph")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(Long.class, Long.class, Double.class); // read the node IDs as Longs
+
+//        DataSet<Tuple2<Long,Double>> Vertextuples = env.readCsvFile("./datasets/Testgraph")
+//                .fieldDelimiter(",")  // node IDs are separated by spaces
+//                .ignoreComments("%")  // comments start with "%"
+//                .types(Long.class, Double.class); // read the node IDs as Longs
+
+        Graph<Long, Double, Double> graph2 = Graph.fromTupleDataSet(egetuples,new InitVertices(),env);
+
+//        graph2.getEdges().print();
+//        graph2.getVertices().print();
+
+        Graph<Long, Double, Double> result = graph2.runScatterGatherIteration(
+                new MinDistanceMessenger(), new VertexDistanceUpdater(), maxIterations);
+
+
+// Extract the vertices as the result
+        result.getVertices().print();
+
+// - - -  UDFs - - - //
+    }
+    /**
+     * Distributes the minimum distance associated with a given vertex among all
+     * the target vertices summed up with the edge's value.
+     */
+    @SuppressWarnings("serial")
+    private static final class MinDistanceMessenger extends ScatterFunction<Long, Double, Double, Double> {
+
+        @Override
+        public void sendMessages(Vertex<Long, Double> vertex) {
+            if (vertex.getValue() < Double.POSITIVE_INFINITY) {
+                for (Edge<Long, Double> edge : getEdges()) {
+                    sendMessageTo(edge.getTarget(), vertex.getValue() + edge.getValue());
+                }
+            }
+        }
+    }
+    /**
+     * Function that updates the value of a vertex by picking the minimum
+     * distance from all incoming messages.
+     */
+    @SuppressWarnings("serial")
+    private static final class VertexDistanceUpdater extends GatherFunction<Long, Double, Double> {
+
+        @Override
+        public void updateVertex(Vertex<Long, Double> vertex, MessageIterator<Double> inMessages) {
+
+            Double minDistance = Double.MAX_VALUE;
+
+            for (double msg : inMessages) {
+                if (msg < minDistance) {
+                    minDistance = msg;
+                }
+            }
+
+            if (vertex.getValue() > minDistance) {
+                setNewVertexValue(minDistance);
+            }
+        }
+    }
+    /**
+     * Initializes the vertex values with the vertex ID
+     */
+    public static final class InitVertices implements MapFunction<Long, Double> {
+
+        @Override
+        public Double map(Long vertexId) {
+            if (vertexId == 1L) {
+                return 0D;
+            } else {
+                return Double.MAX_VALUE;
+            }
+        }
+    }
+
+//    public static final class InitVertices implements MapFunction<Long, Long> {
+//
+//        @Override
+//        public Long map(Long vertexId) {
+//            return vertexId;
+//        }
+//    }
+
 }

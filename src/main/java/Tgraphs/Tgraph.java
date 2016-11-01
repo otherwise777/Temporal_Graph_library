@@ -13,6 +13,9 @@ import org.apache.flink.types.NullValue;
 
 import javax.xml.crypto.Data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.apache.commons.math3.util.Precision.compareTo;
 
 /**
@@ -204,10 +207,14 @@ public class Tgraph<K,VV,EV,N> {
 //      getting the edges and sorting them by their edge value
 //      somehow this works, but it should sort on the starting value of the temporal edge, currently
 //      it sorts on the tuple
+        Map<K,Long> Vertexes = new HashMap<>();
+
         DataSet<Edge<K,Tuple3<EV,N,N>>> tempedges = this.getTemporalEdges().sortPartition(2, Order.ASCENDING);
         DataSet<Vertex<K,Long>> Tempvertices = this.getVertices().distinct().map(new MapFunction<Vertex<K, VV>, Vertex<K, Long>>() {
             @Override
             public Vertex<K, Long> map(Vertex<K, VV> value) throws Exception {
+                Vertexes.put(value.getId(),1L);
+                System.out.println(value.getId());
                 if (startingnode == value.getId()) {
                     return new Vertex<K, Long>(value.getId(), 0L);
                 } else {
@@ -215,8 +222,14 @@ public class Tgraph<K,VV,EV,N> {
                 }
             }
         });
-        tempedges.map(new MapFunction<Edge<K,Tuple3<EV,N,N>>, Object>() {
-        })
+        System.out.println("printing vertexes");
+        for(Map.Entry<K,Long> vertex : Vertexes.entrySet()) {
+            System.out.println("vertex x");
+            System.out.println(vertex.getKey());
+            System.out.println(vertex.getValue());
+        }
+//        tempedges.map(new MapFunction<Edge<K,Tuple3<EV,N,N>>, Object>() {
+//        })
         tempedges.print();
         return Tempvertices;
     }
