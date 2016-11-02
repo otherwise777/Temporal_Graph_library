@@ -86,6 +86,17 @@ public class Tgraph<K,VV,EV,N> {
         return FromEdgeSet(edges,context);
     }
 
+    public static <K,VV,EV,N> Tgraph<K,VV,EV,N> From5TuplewithEdgesandVertices(DataSet<Tuple5<K,K,N,N,EV>> tupleset,final MapFunction<K, VV> vertexValueInitializer, ExecutionEnvironment context) throws Exception {
+        DataSet<Edge<K,Tuple3<EV,N,N>>> edges = tupleset.map(new MapFunction<Tuple5<K, K, N, N, EV>, Edge<K, Tuple3<EV, N, N>>>() {
+             @Override
+             public Edge<K, Tuple3<EV,N,N>> map(Tuple5<K, K, N, N, EV> value) throws Exception {
+                 return new Edge<>(value.f0, value.f1, new Tuple3<>(value.f4, value.f2, value.f3));
+             }
+         });
+        Graph<K,VV,Tuple3<EV,N,N>> temporalgraph = Graph.fromDataSet(edges,vertexValueInitializer,context);
+        return new Tgraph<>(temporalgraph.getVertices(), edges, context);
+    }
+
     /*
     * @param edges edge dataset
     * @param context the flink execution environment.

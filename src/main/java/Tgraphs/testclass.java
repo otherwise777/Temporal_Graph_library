@@ -14,6 +14,7 @@ import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.library.LabelPropagation;
+import org.apache.flink.graph.library.SingleSourceShortestPaths;
 import org.apache.flink.graph.pregel.ComputeFunction;
 import org.apache.flink.graph.pregel.MessageCombiner;
 import org.apache.flink.graph.spargel.MessageIterator;
@@ -141,12 +142,15 @@ public class testclass {
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
 
         // a temporal set created with Flink, now we need to make it into a temporal set into gelly
-//        DataSet<Tuple4<Long, Long, Long, Long>> temporalset = env.readCsvFile("./datasets/Testgraph")
-//                .fieldDelimiter(",")  // node IDs are separated by spaces
-//                .ignoreComments("%")  // comments start with "%"
-//                .types(Long.class, Long.class, Long.class, Long.class); // read the node IDs as Longs
-//        Tgraph<Long, NullValue, NullValue, Long> tempgraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalset, env);
-//        Graph<Long, NullValue, Tuple3<NullValue, Long, Long>> graph = tempgraph.getGellyGraph();
+        DataSet<Tuple5<Long, Long, Long, Long, Long>> temporalset = env.readCsvFile("./datasets/Testgraph")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(Long.class, Long.class, Long.class, Long.class, Long.class); // read the node IDs as Longs
+
+        Tgraph<Long, Double, Long, Long> tempgraph = Tgraph.From5TuplewithEdgesandVertices(temporalset,new InitVertices(),env);
+//        tempgraph.getTemporalEdges().print();
+//        tempgraph.getVertices().print();
+//        Graph<Long, Double, Tuple3<Long, Long, Long>> temporalgraph = tempgraph.getGellyGraph();
 
 
         // read the input graph
@@ -171,16 +175,27 @@ public class testclass {
 //                .types(Long.class, Double.class); // read the node IDs as Longs
 
         Graph<Long, Double, Double> graph2 = Graph.fromTupleDataSet(egetuples,new InitVertices(),env);
+        Graph<Long, Double, Tuple3<Long,Long,Long>> graph3 = tempgraph.getGellyGraph();
+        Graph<Long, Double, Tuple3<Long,Long,Long>> graph4 = graph3.runScatterGatherIteration(
+                new MinDistanceMessengerforTuple(), new VertexDistanceUpdater(), maxIterations);
+
+//        graph4.getVertices().print();
+        Long sourcevertex = 1L;
+        Integer maxit = 5;
+//        graph2.run(new SingleSourceShortestPaths<Long>(sourcevertex,maxit)).print();
 
 //        graph2.getEdges().print();
 //        graph2.getVertices().print();
+//        graph2.getEdges().print();
+//        graph2.getVertices().print();
 
-        Graph<Long, Double, Double> result = graph2.runScatterGatherIteration(
-                new MinDistanceMessenger(), new VertexDistanceUpdater(), maxIterations);
-
+//        Graph<Long, Double, Long> result = graph2.runScatterGatherIteration(
+//                new MinDistanceMessenger(), new VertexDistanceUpdater(), maxIterations);
+//        result.getVertices().print();
 
 // Extract the vertices as the result
-        result.getVertices().print();
+//        result.getVertices().print();
+
 
 // - - -  UDFs - - - //
     }
@@ -189,17 +204,35 @@ public class testclass {
      * the target vertices summed up with the edge's value.
      */
     @SuppressWarnings("serial")
-    private static final class MinDistanceMessenger extends ScatterFunction<Long, Double, Double, Double> {
+    private static final class MinDistanceMessenger extends ScatterFunction<Long, Double, Double, Long> {
 
         @Override
         public void sendMessages(Vertex<Long, Double> vertex) {
             if (vertex.getValue() < Double.POSITIVE_INFINITY) {
-                for (Edge<Long, Double> edge : getEdges()) {
+
+                for (Edge<Long, Long> edge : getEdges()) {
+//                    System.out.println(edge);
                     sendMessageTo(edge.getTarget(), vertex.getValue() + edge.getValue());
                 }
             }
         }
     }
+    @SuppressWarnings("serial")
+    private static final class MinDistanceMessengerforTuple extends ScatterFunction<Long, Double, Double, Tuple3<Long,Long,Long>> {
+
+        @Override
+        public void sendMessages(Vertex<Long, Double> vertex) {
+            if (vertex.getValue() < Double.POSITIVE_INFINITY) {
+                for (Edge<Long, Tuple3<Long,Long,Long>> edge : getEdges()) {
+                    if (edge.getValue().f1 >= vertex.getValue()) {
+                        sendMessageTo(edge.getTarget(), edge.getValue().f2.doubleValue());
+                    }
+                }
+            }
+        }
+    }
+
+
     /**
      * Function that updates the value of a vertex by picking the minimum
      * distance from all incoming messages.
@@ -223,6 +256,7 @@ public class testclass {
             }
         }
     }
+
     /**
      * Initializes the vertex values with the vertex ID
      */
@@ -237,6 +271,9 @@ public class testclass {
             }
         }
     }
+
+
+
 
 //    public static final class InitVertices implements MapFunction<Long, Long> {
 //
