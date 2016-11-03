@@ -198,9 +198,9 @@ public class testclass {
 // Extract the vertices as the result
 //        result.getVertices().print();
 
-        Graph<Long, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> graph6 = tempgraph.getGellyGraph2();
+        Graph<Long, Tuple2<Double,ArrayList<Long>>, Tuple3<Long,Long,Long>> graph6 = tempgraph.getGellyGraph2();
 
-        Graph<Long, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> graph7 = graph6.runScatterGatherIteration(
+        Graph<Long, Tuple2<Double,ArrayList<Long>>, Tuple3<Long,Long,Long>> graph7 = graph6.runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath(), new VertexDistanceUpdaterwithpath(), maxIterations);
         graph7.getVertices().print();
 // - - -  UDFs - - - //
@@ -253,15 +253,17 @@ public class testclass {
         }
     }
     @SuppressWarnings("serial")
-    private static final class MinDistanceMessengerforTuplewithpath extends ScatterFunction<Long, Tuple2<Double,Long[]>, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> {
+    private static final class MinDistanceMessengerforTuplewithpath extends ScatterFunction<Long, Tuple2<Double,ArrayList<Long>>, Tuple2<Double,ArrayList<Long>>, Tuple3<Long,Long,Long>> {
 
         @Override
-        public void sendMessages(Vertex<Long, Tuple2<Double,Long[]>> vertex) {
+        public void sendMessages(Vertex<Long, Tuple2<Double,ArrayList<Long>>> vertex) {
             if ((Double) vertex.getValue().getField(0) < Double.POSITIVE_INFINITY) {
                 for (Edge<Long, Tuple3<Long,Long,Long>> edge : getEdges()) {
-                    if (edge.getValue().f1 >= ((Double) vertex.getValue().getField(0)).doubleValue()) {
-                        Long[] test = {4L};
-                        sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f2.doubleValue(), test) );
+                    if (edge.getValue().f1 >= vertex.getValue().f0) {
+                        ArrayList<Long> temp = new ArrayList<>(vertex.getValue().f1);
+                        temp.add(vertex.getId());
+//                        System.out.println("temparray of " + vertex.getId() + ": " + temp.toString());
+                        sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f2.doubleValue(), temp) );
                     }
                 }
             }
@@ -272,21 +274,22 @@ public class testclass {
      * distance from all incoming messages.
      */
     @SuppressWarnings("serial")
-    private static final class VertexDistanceUpdaterwithpath extends GatherFunction<Long, Tuple2<Double,Long[]>, Tuple2<Double,Long[]>> {
+    private static final class VertexDistanceUpdaterwithpath extends GatherFunction<Long, Tuple2<Double,ArrayList<Long>>, Tuple2<Double,ArrayList<Long>>> {
 
         @Override
-        public void updateVertex(Vertex<Long, Tuple2<Double,Long[]>> vertex, MessageIterator<Tuple2<Double,Long[]>> inMessages) {
+        public void updateVertex(Vertex<Long, Tuple2<Double,ArrayList<Long>>> vertex, MessageIterator<Tuple2<Double,ArrayList<Long>>> inMessages) {
 
             Double minDistance = Double.MAX_VALUE;
-
-            for (Tuple2<Double,Long[]> msg : inMessages) {
-                if ((Double) msg.getField(0) < minDistance) {
+            ArrayList<Long> minpath = vertex.getValue().f1;
+            for (Tuple2<Double,ArrayList<Long>> msg : inMessages) {
+                if (msg.f0 < minDistance) {
                     minDistance = msg.getField(0);
+                    minpath = msg.f1;
                 }
             }
-            Long[] test = {4L};
-            if ((Double) vertex.getValue().getField(0) > minDistance) {
-                setNewVertexValue(new Tuple2<>(minDistance,test));
+
+            if (vertex.getValue().f0 > minDistance) {
+                setNewVertexValue(new Tuple2<>(minDistance,minpath));
             }
         }
     }

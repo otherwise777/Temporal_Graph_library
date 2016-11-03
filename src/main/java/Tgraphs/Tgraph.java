@@ -13,6 +13,7 @@ import org.apache.flink.types.NullValue;
 
 import javax.xml.crypto.Data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -194,15 +195,16 @@ public class Tgraph<K,VV,EV,N> {
     }
 
 
-    public Graph<K,Tuple2<VV,Long[]>,Tuple3<EV,N,N>> getGellyGraph2() {
-        DataSet<Vertex<K,Tuple2<VV,Long[]>>> newvertices = vertices.map(new MapFunction<Vertex<K, VV>, Vertex<K, Tuple2<VV, Long[]>>>() {
+    public Graph<K,Tuple2<VV,ArrayList<Long>>,Tuple3<EV,N,N>> getGellyGraph2() {
+        DataSet<Vertex<K,Tuple2<VV,ArrayList<Long>>>> newvertices = vertices.map(new MapFunction<Vertex<K, VV>, Vertex<K, Tuple2<VV, ArrayList<Long>>>>() {
             @Override
-            public Vertex<K, Tuple2<VV, Long[]>> map(Vertex<K, VV> value) throws Exception {
-                Long[] tempar = {};
-                return new Vertex<K, Tuple2<VV, Long[]>>(value.getId(), new Tuple2<>(value.getValue(),tempar));
+            public Vertex<K, Tuple2<VV, ArrayList<Long>>> map(Vertex<K, VV> value) throws Exception {
+//                Long[] tempar = {};
+                ArrayList<Long> tempar = new ArrayList<Long>();
+                return new Vertex<K, Tuple2<VV, ArrayList<Long>>>(value.getId(), new Tuple2<>(value.getValue(),tempar));
             }
         });
-        Graph<K,Tuple2<VV,Long[]>,Tuple3<EV,N,N>> tempgraph = Graph.fromDataSet(newvertices,edges,context);
+        Graph<K,Tuple2<VV,ArrayList<Long>>,Tuple3<EV,N,N>> tempgraph = Graph.fromDataSet(newvertices,edges,context);
         return tempgraph;
     }
 
