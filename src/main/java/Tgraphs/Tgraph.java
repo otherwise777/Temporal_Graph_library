@@ -8,6 +8,7 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.*;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
+import org.apache.flink.graph.GraphAlgorithm;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.types.NullValue;
 
@@ -222,6 +223,16 @@ public class Tgraph<K,VV,EV,N> {
 //            checks the 2nd field, so the starting time is greater then 3
             return (int) edge.getValue().getField(1) >= start && (int) edge.getValue().getField(2) <= finish;
         }
+    }
+
+    /**
+     * @param algorithm the algorithm to run on the Graph
+     * @param <T> the return type
+     * @return the result of the graph algorithm
+     * @throws Exception
+     */
+    public <T> T run(TGraphAlgorithm<K, VV, EV,N, T> algorithm) throws Exception {
+        return algorithm.run(this);
     }
 
     /*

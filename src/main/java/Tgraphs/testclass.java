@@ -184,7 +184,7 @@ public class testclass {
 //        graph4.getVertices().print();
         Long sourcevertex = 1L;
         Integer maxit = 5;
-//        graph2.run(new SingleSourceShortestPaths<Long>(sourcevertex,maxit)).print();
+        graph2.run(new SingleSourceShortestPaths<Long>(sourcevertex,maxit)).print();
 
 //        graph2.getEdges().print();
 //        graph2.getVertices().print();
@@ -202,7 +202,22 @@ public class testclass {
 
         Graph<Long, Tuple2<Double,ArrayList<Long>>, Tuple3<Long,Long,Long>> graph7 = graph6.runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath(), new VertexDistanceUpdaterwithpath(), maxIterations);
-        graph7.getVertices().print();
+
+        Graph<Long, Double, Tuple3<Long,Long,Long>> graph8 = tempgraph.getGellyGraph();
+
+
+        DataSet<Tuple5<Long, Long, Double, Double, Long>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(Long.class, Long.class, Double.class, Double.class, Long.class); // read the node IDs as Longs
+
+        Tgraph<Long, Double, Long, Double> tempgraphdoubles = Tgraph.From5TuplewithEdgesandVertices(temporalsetdoubles,new InitVertices(),env);
+
+
+        DataSet<Vertex<Long,Tuple2<Double,ArrayList<Long>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT<>(1L,maxIterations));
+
+        verticess.print();
+
 // - - -  UDFs - - - //
     }
     /**
@@ -273,6 +288,7 @@ public class testclass {
      * Function that updates the value of a vertex by picking the minimum
      * distance from all incoming messages.
      */
+
     @SuppressWarnings("serial")
     private static final class VertexDistanceUpdaterwithpath extends GatherFunction<Long, Tuple2<Double,ArrayList<Long>>, Tuple2<Double,ArrayList<Long>>> {
 
