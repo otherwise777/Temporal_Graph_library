@@ -193,6 +193,19 @@ public class Tgraph<K,VV,EV,N> {
         return new Tgraph<>(vertices, newedges, context);
     }
 
+
+    public Graph<K,Tuple2<VV,Long[]>,Tuple3<EV,N,N>> getGellyGraph2() {
+        DataSet<Vertex<K,Tuple2<VV,Long[]>>> newvertices = vertices.map(new MapFunction<Vertex<K, VV>, Vertex<K, Tuple2<VV, Long[]>>>() {
+            @Override
+            public Vertex<K, Tuple2<VV, Long[]>> map(Vertex<K, VV> value) throws Exception {
+                Long[] tempar = {};
+                return new Vertex<K, Tuple2<VV, Long[]>>(value.getId(), new Tuple2<>(value.getValue(),tempar));
+            }
+        });
+        Graph<K,Tuple2<VV,Long[]>,Tuple3<EV,N,N>> tempgraph = Graph.fromDataSet(newvertices,edges,context);
+        return tempgraph;
+    }
+
     // FilterFunction that filters out all Integers smaller than zero.
     public class TemporalSlicer implements FilterFunction<Edge<K,Tuple3<EV,N,N>>> {
         long finish;

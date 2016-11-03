@@ -22,22 +22,27 @@
     <favorites_list name="Temporal_Graph_library" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.61620706">
+    <splitter split-orientation="horizontal" split-proportion="0.6538712">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="testclass.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="802">
-                  <caret line="210" column="40" selection-start-line="210" selection-start-column="40" selection-end-line="210" selection-end-column="40" />
+                <state relative-caret-position="264">
+                  <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#test8#0;class#testclass#0" expanded="false" />
                     <element signature="method#test9#0;class#testclass#0" expanded="false" />
                     <element signature="method#test10#0;class#testclass#0" expanded="false" />
                     <element signature="method#test11#0;class#testclass#0" expanded="false" />
-                    <element signature="e#10729#10756#0" expanded="true" />
-                    <element signature="e#11260#11287#0" expanded="true" />
+                    <element signature="e#11123#11150#0" expanded="true" />
+                    <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+                    <element signature="e#11654#11681#0" expanded="true" />
+                    <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+                    <element signature="e#12270#12297#0" expanded="true" />
+                    <element signature="e#12989#13016#0" expanded="true" />
+                    <element signature="e#13915#13942#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -81,8 +86,8 @@
           <file leaf-file-name="Tgraph.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="96" column="26" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
+                <state relative-caret-position="275">
+                  <caret line="196" column="67" selection-start-line="196" selection-start-column="53" selection-end-line="196" selection-end-column="67" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -192,20 +197,20 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GatherFunction.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="GatherFunction.java" pinned="false" current-in-tab="true">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="247">
+                <state relative-caret-position="179">
                   <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ScatterFunction.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ScatterFunction.java" pinned="false" current-in-tab="false">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
+                <state relative-caret-position="180">
                   <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
                   <folding />
                 </state>
@@ -333,8 +338,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1104,7 +1109,7 @@
       <updated>1477057827000</updated>
       <workItem from="1477057832139" duration="55164000" />
       <workItem from="1477556853848" duration="9132000" />
-      <workItem from="1477903247479" duration="33302000" />
+      <workItem from="1477903247479" duration="38111000" />
     </task>
     <servers />
   </component>
@@ -1126,10 +1131,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97598000" />
+    <option name="totallyTimeSpent" value="102407000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1141,11 +1146,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3378076" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.052771855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.060513448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1176,12 +1181,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java</url>
-          <line>80</line>
+          <line>82</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1219,8 +1224,13 @@
             <element signature="method#test9#0;class#testclass#0" expanded="false" />
             <element signature="method#test10#0;class#testclass#0" expanded="false" />
             <element signature="method#test11#0;class#testclass#0" expanded="false" />
-            <element signature="e#10729#10756#0" expanded="true" />
-            <element signature="e#11260#11287#0" expanded="true" />
+            <element signature="e#11123#11150#0" expanded="true" />
+            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+            <element signature="e#11654#11681#0" expanded="true" />
+            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+            <element signature="e#12270#12297#0" expanded="true" />
+            <element signature="e#12989#13016#0" expanded="true" />
+            <element signature="e#13915#13942#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1407,8 +1417,13 @@
             <element signature="method#test9#0;class#testclass#0" expanded="false" />
             <element signature="method#test10#0;class#testclass#0" expanded="false" />
             <element signature="method#test11#0;class#testclass#0" expanded="false" />
-            <element signature="e#10729#10756#0" expanded="true" />
-            <element signature="e#11260#11287#0" expanded="true" />
+            <element signature="e#11123#11150#0" expanded="true" />
+            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+            <element signature="e#11654#11681#0" expanded="true" />
+            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+            <element signature="e#12270#12297#0" expanded="true" />
+            <element signature="e#12989#13016#0" expanded="true" />
+            <element signature="e#13915#13942#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1693,16 +1708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="96" column="26" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-SNAPSHOT-sources.jar!/org/apache/flink/graph/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1780,34 +1785,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="275">
+          <caret line="196" column="67" selection-start-line="196" selection-start-column="53" selection-end-line="196" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="180">
           <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="210" column="40" selection-start-line="210" selection-start-column="40" selection-end-line="210" selection-end-column="40" />
+        <state relative-caret-position="264">
+          <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#test8#0;class#testclass#0" expanded="false" />
             <element signature="method#test9#0;class#testclass#0" expanded="false" />
             <element signature="method#test10#0;class#testclass#0" expanded="false" />
             <element signature="method#test11#0;class#testclass#0" expanded="false" />
-            <element signature="e#10729#10756#0" expanded="true" />
-            <element signature="e#11260#11287#0" expanded="true" />
+            <element signature="e#11123#11150#0" expanded="true" />
+            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+            <element signature="e#11654#11681#0" expanded="true" />
+            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+            <element signature="e#12270#12297#0" expanded="true" />
+            <element signature="e#12989#13016#0" expanded="true" />
+            <element signature="e#13915#13942#0" expanded="true" />
           </folding>
         </state>
       </provider>

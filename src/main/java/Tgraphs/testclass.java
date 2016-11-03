@@ -23,6 +23,8 @@ import org.apache.flink.graph.spargel.ScatterFunction;
 import org.apache.flink.types.NullValue;
 import org.apache.flink.util.Collector;
 
+import java.util.ArrayList;
+
 /**
  * Created by s133781 on 24-Oct-16.
  */
@@ -196,7 +198,11 @@ public class testclass {
 // Extract the vertices as the result
 //        result.getVertices().print();
 
+        Graph<Long, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> graph6 = tempgraph.getGellyGraph2();
 
+        Graph<Long, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> graph7 = graph6.runScatterGatherIteration(
+                new MinDistanceMessengerforTuplewithpath(), new VertexDistanceUpdaterwithpath(), maxIterations);
+        graph7.getVertices().print();
 // - - -  UDFs - - - //
     }
     /**
@@ -231,8 +237,59 @@ public class testclass {
             }
         }
     }
+    @SuppressWarnings("serial")
+    private static final class MinDistanceMessengerforTuplewithpath2 extends ScatterFunction<Long, Double, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> {
 
+        @Override
+        public void sendMessages(Vertex<Long, Double> vertex) {
+            if (vertex.getValue() < Double.POSITIVE_INFINITY) {
+                for (Edge<Long, Tuple3<Long,Long,Long>> edge : getEdges()) {
+                    if (edge.getValue().f1 >= vertex.getValue().doubleValue()) {
+                        Long[] test = {4L};
+                        sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f2.doubleValue(), test) );
+                    }
+                }
+            }
+        }
+    }
+    @SuppressWarnings("serial")
+    private static final class MinDistanceMessengerforTuplewithpath extends ScatterFunction<Long, Tuple2<Double,Long[]>, Tuple2<Double,Long[]>, Tuple3<Long,Long,Long>> {
 
+        @Override
+        public void sendMessages(Vertex<Long, Tuple2<Double,Long[]>> vertex) {
+            if ((Double) vertex.getValue().getField(0) < Double.POSITIVE_INFINITY) {
+                for (Edge<Long, Tuple3<Long,Long,Long>> edge : getEdges()) {
+                    if (edge.getValue().f1 >= ((Double) vertex.getValue().getField(0)).doubleValue()) {
+                        Long[] test = {4L};
+                        sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f2.doubleValue(), test) );
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Function that updates the value of a vertex by picking the minimum
+     * distance from all incoming messages.
+     */
+    @SuppressWarnings("serial")
+    private static final class VertexDistanceUpdaterwithpath extends GatherFunction<Long, Tuple2<Double,Long[]>, Tuple2<Double,Long[]>> {
+
+        @Override
+        public void updateVertex(Vertex<Long, Tuple2<Double,Long[]>> vertex, MessageIterator<Tuple2<Double,Long[]>> inMessages) {
+
+            Double minDistance = Double.MAX_VALUE;
+
+            for (Tuple2<Double,Long[]> msg : inMessages) {
+                if ((Double) msg.getField(0) < minDistance) {
+                    minDistance = msg.getField(0);
+                }
+            }
+            Long[] test = {4L};
+            if ((Double) vertex.getValue().getField(0) > minDistance) {
+                setNewVertexValue(new Tuple2<>(minDistance,test));
+            }
+        }
+    }
     /**
      * Function that updates the value of a vertex by picking the minimum
      * distance from all incoming messages.
