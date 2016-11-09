@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test12();
+        test14();
     }
 
 
@@ -214,11 +214,52 @@ public class testclass {
         Tgraph<Long, Double, Long, Double> tempgraphdoubles = Tgraph.From5TuplewithEdgesandVertices(temporalsetdoubles,new InitVertices(),env);
 
 
-        DataSet<Vertex<Long,Tuple2<Double,ArrayList<Long>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT<>(1L,maxIterations));
+        DataSet<Vertex<Long,Tuple2<Double,ArrayList<Long>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>(1L,maxIterations));
 
         verticess.print();
 
 // - - -  UDFs - - - //
+    }
+
+/*
+* Test with testgraph2, single shortset path EAT with paths
+* */
+    public static void test13() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 10;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, Double, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesWithVertices(temporalsetdoubles,new InitVerticesfordoubles(),env);
+
+        DataSet<Vertex<String,Tuple2<Double,ArrayList<String>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>("A",maxIterations));
+
+        verticess.print();
+    }
+    /*
+* Test with testgraph2, single shortset path EAT without paths
+* */
+    public static void test14() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 10;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, Double, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesWithVertices(temporalsetdoubles,new InitVerticesfordoubles(),env);
+
+        DataSet<Vertex<String,Double>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT<>("A",maxIterations));
+
+        verticess.print();
     }
     /**
      * Distributes the minimum distance associated with a given vertex among all
@@ -340,11 +381,18 @@ public class testclass {
 
         @Override
         public Double map(Long vertexId) {
-            if (vertexId == 1L) {
+//            if (vertexId == 1L) {
                 return 0D;
-            } else {
-                return Double.MAX_VALUE;
-            }
+//            } else {
+//                return Double.MAX_VALUE;
+//            }
+        }
+    }
+    public static final class InitVerticesfordoubles implements MapFunction<String, Double> {
+
+        @Override
+        public Double map(String vertexId) {
+            return 0D;
         }
     }
 

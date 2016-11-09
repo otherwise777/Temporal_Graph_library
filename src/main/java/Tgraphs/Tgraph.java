@@ -87,7 +87,23 @@ public class Tgraph<K,VV,EV,N> {
         });
         return FromEdgeSet(edges,context);
     }
-
+    /*
+    * Transforms a tuple4 of (source node, target node, start time, end time) to a temporal graph set
+    * with no vertex values and no edge values
+    * @param tupleset DataSet Tuple4 with (source node, target node, start time, end time)
+    * @param context the flink execution environment.
+    * @return newly created Tgraphs.Tgraph
+    * */
+    public static <K,VV,N> Tgraph<K,VV,NullValue,N> From4TupleNoEdgesWithVertices(DataSet<Tuple4<K,K,N,N>> tupleset,final MapFunction<K, VV> vertexValueInitializer, ExecutionEnvironment context) throws Exception {
+        DataSet<Edge<K,Tuple3<NullValue,N,N>>> edges = tupleset.map(new MapFunction<Tuple4<K, K, N, N>, Edge<K, Tuple3<NullValue, N, N>>>() {
+            @Override
+            public Edge<K, Tuple3<NullValue, N, N>> map(Tuple4<K, K, N, N> value) throws Exception {
+                return new Edge<>(value.f0, value.f1, new Tuple3<>(NullValue.getInstance(), value.f2, value.f3));
+            }
+        });
+        Graph<K,VV,Tuple3<NullValue,N,N>> temporalgraph = Graph.fromDataSet(edges,vertexValueInitializer,context);
+        return new Tgraph<>(temporalgraph.getVertices(), edges, context);
+    }
     public static <K,VV,EV,N> Tgraph<K,VV,EV,N> From5TuplewithEdgesandVertices(DataSet<Tuple5<K,K,N,N,EV>> tupleset,final MapFunction<K, VV> vertexValueInitializer, ExecutionEnvironment context) throws Exception {
         DataSet<Edge<K,Tuple3<EV,N,N>>> edges = tupleset.map(new MapFunction<Tuple5<K, K, N, N, EV>, Edge<K, Tuple3<EV, N, N>>>() {
              @Override
