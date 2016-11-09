@@ -1,8 +1,8 @@
 package Tgraphs;
 
+import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Vertex;
@@ -22,21 +22,47 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
+public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
+    private DataSet<Double> startedges;
 
-    public SingleSourceShortestTemporalPathEAT(K srcVertexId, Integer maxIterations) {
+    public SingleSourceShortestTemporalPathSTT(K srcVertexId, Integer maxIterations) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
+        //Filling up the startingedges with distinct values of the starting times of the starting edges
+        DataSet<Edge<K,Tuple3<EV,Double,Double>>> startedgesset = input.getGellyGraph().getEdges().filter(new Filterstartingedges(srcVertexId));
+        startedges = startedgesset.map(new MapFunction<Edge<K, Tuple3<EV, Double, Double>>, Double>() {
+            @Override
+            public Double map(Edge<K, Tuple3<EV, Double, Double>> value) throws Exception {
+                return value.getValue().f1;
+            }
+        }).distinct();
+
+
+
+        startedges.print();
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
                 maxIterations).getVertices();
 
+    }
+    public class Filterstartingedges implements FilterFunction<Edge<K,Tuple3<EV,Double,Double>>> {
+        private K srcVertexId;
+        public Filterstartingedges(K srcVertexId) { this.srcVertexId = srcVertexId; }
+
+        @Override
+        public boolean filter(Edge<K, Tuple3<EV, Double, Double>> value) throws Exception {
+            if(value.getSource().equals(srcVertexId)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, NullValue>, Double> {

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test14();
+        test15();
     }
 
 
@@ -255,9 +255,27 @@ public class testclass {
                 .fieldDelimiter(",")  // node IDs are separated by spaces
                 .ignoreComments("%")  // comments start with "%"
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
-        Tgraph<String, Double, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesWithVertices(temporalsetdoubles,new InitVerticesfordoubles(),env);
-
+        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
         DataSet<Vertex<String,Double>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT<>("A",maxIterations));
+
+        verticess.print();
+    }
+    /*
+* Test with testgraph2, single shortset path EAT without paths
+* */
+    public static void test15() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 10;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
+        DataSet<Vertex<String,Double>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTT<>("A",maxIterations));
 
         verticess.print();
     }
