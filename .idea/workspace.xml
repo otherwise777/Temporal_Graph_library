@@ -22,14 +22,14 @@
     <favorites_list name="Temporal_Graph_library" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.59070075">
+    <splitter split-orientation="horizontal" split-proportion="0.76954734">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="testclass.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="283">
-                  <caret line="256" column="25" selection-start-line="256" selection-start-column="25" selection-end-line="256" selection-end-column="25" />
+                <state relative-caret-position="408">
+                  <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#test8#0;class#testclass#0" expanded="false" />
@@ -37,24 +37,25 @@
                     <element signature="method#test10#0;class#testclass#0" expanded="false" />
                     <element signature="method#test11#0;class#testclass#0" expanded="false" />
                     <element signature="method#test12#0;class#testclass#0" expanded="false" />
+                    <element signature="method#test13#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
                     <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
-                    <element signature="e#20218#20219#0" expanded="true" />
-                    <element signature="e#20251#20252#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SingleSourceShortestTemporalPathSTT.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="SingleSourceShortestTemporalPathSTT.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="140">
-                  <caret line="24" column="88" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
-                  <folding />
+                <state relative-caret-position="337">
+                  <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+                  <folding>
+                    <element signature="class#Filterstartingedges#0;class#SingleSourceShortestTemporalPathSTT#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -69,12 +70,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SingleSourceShortestTemporalPathEAT.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SingleSourceShortestTemporalPathEAT.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
-                  <folding />
+                <state relative-caret-position="221">
+                  <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+                  <folding>
+                    <element signature="imports" expanded="false" />
+                    <element signature="e#1637#1638#0" expanded="false" />
+                    <element signature="e#1685#1686#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -82,13 +87,9 @@
           <file leaf-file-name="SingleSourceShortestTemporalPathEATWithPaths.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATWithPaths.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
+                <state relative-caret-position="629">
                   <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="55" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#1673#1674#0" expanded="true" />
-                    <element signature="e#1721#1722#0" expanded="true" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -98,7 +99,9 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="170">
                   <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-                  <folding />
+                  <folding>
+                    <element signature="e#0#1072#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -111,6 +114,8 @@
                   <folding>
                     <element signature="e#0#5458#0" expanded="false" />
                     <element signature="imports" expanded="false" />
+                    <element signature="e#2992#2993#0" expanded="false" />
+                    <element signature="e#3033#3034#0" expanded="false" />
                     <element signature="e#3855#3856#0" expanded="false" />
                     <element signature="e#3902#3903#0" expanded="false" />
                     <element signature="e#3954#3955#0" expanded="false" />
@@ -125,9 +130,78 @@
           <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/Graph.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
+                <state relative-caret-position="7378">
                   <caret line="510" column="0" selection-start-line="510" selection-start-column="0" selection-end-line="510" selection-end-column="0" />
-                  <folding />
+                  <folding>
+                    <element signature="e#0#88467#0" expanded="false" />
+                    <element signature="imports" expanded="false" />
+                    <element signature="e#17558#17559#0" expanded="false" />
+                    <element signature="e#17584#17585#0" expanded="false" />
+                    <element signature="e#17960#17961#0" expanded="false" />
+                    <element signature="e#17982#17983#0" expanded="false" />
+                    <element signature="e#18065#18066#0" expanded="false" />
+                    <element signature="e#18084#18085#0" expanded="false" />
+                    <element signature="e#18192#18193#0" expanded="false" />
+                    <element signature="e#18250#18251#0" expanded="false" />
+                    <element signature="e#18356#18357#0" expanded="false" />
+                    <element signature="e#18409#18410#0" expanded="false" />
+                    <element signature="e#25673#25674#0" expanded="false" />
+                    <element signature="e#25714#25715#0" expanded="false" />
+                    <element signature="e#27874#27875#0" expanded="false" />
+                    <element signature="e#27913#27914#0" expanded="false" />
+                    <element signature="e#34432#34433#0" expanded="false" />
+                    <element signature="e#34459#34460#0" expanded="false" />
+                    <element signature="e#36044#36045#0" expanded="false" />
+                    <element signature="e#36107#36108#0" expanded="false" />
+                    <element signature="e#42674#42675#0" expanded="false" />
+                    <element signature="e#42712#42713#0" expanded="false" />
+                    <element signature="e#43095#43096#0" expanded="false" />
+                    <element signature="e#43133#43134#0" expanded="false" />
+                    <element signature="e#43563#43564#0" expanded="false" />
+                    <element signature="e#43591#43592#0" expanded="false" />
+                    <element signature="e#45305#45306#0" expanded="false" />
+                    <element signature="e#45333#45334#0" expanded="false" />
+                    <element signature="e#46253#46254#0" expanded="false" />
+                    <element signature="e#46281#46282#0" expanded="false" />
+                    <element signature="e#46649#46650#0" expanded="false" />
+                    <element signature="e#46700#46701#0" expanded="false" />
+                    <element signature="e#46747#46748#0" expanded="false" />
+                    <element signature="e#46798#46799#0" expanded="false" />
+                    <element signature="e#46840#46841#0" expanded="false" />
+                    <element signature="e#46883#46884#0" expanded="false" />
+                    <element signature="e#47007#47008#0" expanded="false" />
+                    <element signature="e#47040#47041#0" expanded="false" />
+                    <element signature="e#47715#47716#0" expanded="false" />
+                    <element signature="e#47776#47777#0" expanded="false" />
+                    <element signature="e#48907#48908#0" expanded="false" />
+                    <element signature="e#48969#48970#0" expanded="false" />
+                    <element signature="e#49124#49125#0" expanded="false" />
+                    <element signature="e#49149#49150#0" expanded="false" />
+                    <element signature="e#49252#49253#0" expanded="false" />
+                    <element signature="e#49310#49311#0" expanded="false" />
+                    <element signature="e#56797#56798#0" expanded="false" />
+                    <element signature="e#56825#56826#0" expanded="false" />
+                    <element signature="e#78576#78577#0" expanded="false" />
+                    <element signature="e#78604#78605#0" expanded="false" />
+                    <element signature="e#79205#79206#0" expanded="false" />
+                    <element signature="e#79243#79244#0" expanded="false" />
+                    <element signature="e#79714#79715#0" expanded="false" />
+                    <element signature="e#79752#79753#0" expanded="false" />
+                    <element signature="e#81289#81290#0" expanded="false" />
+                    <element signature="e#81317#81318#0" expanded="false" />
+                    <element signature="e#82087#82088#0" expanded="false" />
+                    <element signature="e#82115#82116#0" expanded="false" />
+                    <element signature="e#82576#82577#0" expanded="false" />
+                    <element signature="e#82627#82628#0" expanded="false" />
+                    <element signature="e#82895#82896#0" expanded="false" />
+                    <element signature="e#82938#82939#0" expanded="false" />
+                    <element signature="e#83135#83136#0" expanded="false" />
+                    <element signature="e#83172#83173#0" expanded="false" />
+                    <element signature="e#86205#86206#0" expanded="false" />
+                    <element signature="e#86233#86234#0" expanded="false" />
+                    <element signature="e#88241#88242#0" expanded="false" />
+                    <element signature="e#88269#88270#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -135,23 +209,11 @@
           <file leaf-file-name="Tgraph.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="166">
-                  <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
+                <state relative-caret-position="2091">
+                  <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
                   <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Tuple3.java" pinned="false" current-in-tab="false">
-            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.2/flink-core-1.1.2-sources.jar!/org/apache/flink/api/java/tuple/Tuple3.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
-                  <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-                  <folding>
-                    <element signature="e#0#6088#0" expanded="false" />
-                    <element signature="imports" expanded="false" />
+                    <element signature="e#7246#7247#0" expanded="false" />
+                    <element signature="e#7274#7275#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -161,48 +223,25 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GatherFunction.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="GatherFunction.java" pinned="false" current-in-tab="true">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="255">
                   <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#8726#0" expanded="false" />
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#2333#2334#0" expanded="false" />
-                    <element signature="e#2363#2364#0" expanded="false" />
-                    <element signature="e#2415#2416#0" expanded="false" />
-                    <element signature="e#2462#2463#0" expanded="false" />
-                    <element signature="e#2617#2618#0" expanded="false" />
-                    <element signature="e#2641#2642#0" expanded="false" />
-                    <element signature="e#2684#2685#0" expanded="false" />
-                    <element signature="e#2719#2720#0" expanded="false" />
-                    <element signature="e#4899#4900#0" expanded="false" />
-                    <element signature="e#4953#4954#0" expanded="false" />
-                    <element signature="e#6291#6292#0" expanded="false" />
-                    <element signature="e#6354#6355#0" expanded="false" />
-                    <element signature="e#6978#6979#0" expanded="false" />
-                    <element signature="e#7014#7015#0" expanded="false" />
-                    <element signature="e#7597#7598#0" expanded="false" />
-                    <element signature="e#7619#7620#0" expanded="false" />
-                    <element signature="e#7655#7656#0" expanded="false" />
-                    <element signature="e#7686#7687#0" expanded="false" />
-                    <element signature="e#7833#7834#0" expanded="false" />
-                    <element signature="e#7856#7857#0" expanded="false" />
-                    <element signature="e#7894#7895#0" expanded="false" />
-                    <element signature="e#7927#7928#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SingleSourceShortestPaths.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SingleSourceShortestPaths.java" pinned="false" current-in-tab="false">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/library/SingleSourceShortestPaths.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
+                <state relative-caret-position="442">
                   <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
                   <folding>
-                    <element signature="imports" expanded="true" />
+                    <element signature="e#0#3708#0" expanded="false" />
+                    <element signature="e#2403#2404#0" expanded="false" />
+                    <element signature="e#2436#2437#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -213,38 +252,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="238">
                   <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#11371#0" expanded="false" />
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#2531#2532#0" expanded="false" />
-                    <element signature="e#2561#2562#0" expanded="false" />
-                    <element signature="e#2613#2614#0" expanded="false" />
-                    <element signature="e#2660#2661#0" expanded="false" />
-                    <element signature="e#3218#3219#0" expanded="false" />
-                    <element signature="e#3241#3242#0" expanded="false" />
-                    <element signature="e#3288#3289#0" expanded="false" />
-                    <element signature="e#3321#3322#0" expanded="false" />
-                    <element signature="e#7856#7857#0" expanded="false" />
-                    <element signature="e#7910#7911#0" expanded="false" />
-                    <element signature="e#9249#9250#0" expanded="false" />
-                    <element signature="e#9312#9313#0" expanded="false" />
-                    <element signature="e#10443#10444#0" expanded="false" />
-                    <element signature="e#10470#10471#0" expanded="false" />
-                    <element signature="e#10512#10513#0" expanded="false" />
-                    <element signature="e#10543#10544#0" expanded="false" />
-                    <element signature="e#10763#10764#0" expanded="false" />
-                    <element signature="e#10813#10814#0" expanded="false" />
-                    <element signature="e#10869#10870#0" expanded="false" />
-                    <element signature="e#10889#10890#0" expanded="false" />
-                    <element signature="e#11037#11038#0" expanded="false" />
-                    <element signature="e#11059#11060#0" expanded="false" />
-                    <element signature="e#11095#11096#0" expanded="false" />
-                    <element signature="e#11126#11127#0" expanded="false" />
-                    <element signature="e#11273#11274#0" expanded="false" />
-                    <element signature="e#11296#11297#0" expanded="false" />
-                    <element signature="e#11334#11335#0" expanded="false" />
-                    <element signature="e#11367#11368#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -387,7 +395,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -574,6 +581,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1134,7 +1142,8 @@
       <workItem from="1477057832139" duration="55164000" />
       <workItem from="1477556853848" duration="9132000" />
       <workItem from="1477903247479" duration="61911000" />
-      <workItem from="1478716853011" duration="11094000" />
+      <workItem from="1478716853011" duration="23886000" />
+      <workItem from="1478851667511" duration="10220000" />
     </task>
     <servers />
   </component>
@@ -1156,7 +1165,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137301000" />
+    <option name="totallyTimeSpent" value="160313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1171,11 +1180,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3557047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35346755" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.066625915" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10880195" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1205,13 +1214,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java</url>
-          <line>82</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java</url>
+          <line>171</line>
           <properties />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1220,19 +1229,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-java/1.1.2/flink-java-1.1.2-sources.jar!/org/apache/flink/api/java/io/CsvReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2006">
-          <caret line="151" column="21" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#80007#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2997#2998#0" expanded="false" />
-            <element signature="e#3020#3021#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/testdata">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1254,7 +1250,8 @@
         <state relative-caret-position="3332">
           <caret line="211" column="17" selection-start-line="211" selection-start-column="17" selection-end-line="211" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#7246#7247#0" expanded="false" />
+            <element signature="e#7274#7275#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1300,23 +1297,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#1982#0" expanded="false" />
-            <element signature="e#1627#1628#0" expanded="false" />
-            <element signature="e#1683#1684#0" expanded="false" />
-            <element signature="e#1716#1717#0" expanded="false" />
-            <element signature="e#1736#1737#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1782#1783#0" expanded="false" />
-            <element signature="e#1818#1819#0" expanded="false" />
-            <element signature="e#1841#1842#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1882#1883#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
-            <element signature="e#1938#1939#0" expanded="false" />
-            <element signature="e#1962#1963#0" expanded="false" />
-            <element signature="e#1978#1979#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1360,13 +1340,12 @@
             <element signature="method#test10#0;class#testclass#0" expanded="false" />
             <element signature="method#test11#0;class#testclass#0" expanded="false" />
             <element signature="method#test12#0;class#testclass#0" expanded="false" />
+            <element signature="method#test13#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
             <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
-            <element signature="e#20218#20219#0" expanded="true" />
-            <element signature="e#20251#20252#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1593,23 +1572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#1982#0" expanded="false" />
-            <element signature="e#1627#1628#0" expanded="false" />
-            <element signature="e#1683#1684#0" expanded="false" />
-            <element signature="e#1716#1717#0" expanded="false" />
-            <element signature="e#1736#1737#0" expanded="false" />
-            <element signature="e#1761#1762#0" expanded="false" />
-            <element signature="e#1782#1783#0" expanded="false" />
-            <element signature="e#1818#1819#0" expanded="false" />
-            <element signature="e#1841#1842#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1882#1883#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
-            <element signature="e#1938#1939#0" expanded="false" />
-            <element signature="e#1962#1963#0" expanded="false" />
-            <element signature="e#1978#1979#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1638,84 +1600,14 @@
           <folding>
             <element signature="e#0#5458#0" expanded="false" />
             <element signature="imports" expanded="false" />
+            <element signature="e#2992#2993#0" expanded="false" />
+            <element signature="e#3033#3034#0" expanded="false" />
             <element signature="e#3855#3856#0" expanded="false" />
             <element signature="e#3902#3903#0" expanded="false" />
             <element signature="e#3954#3955#0" expanded="false" />
             <element signature="e#4007#4008#0" expanded="false" />
             <element signature="e#4069#4070#0" expanded="false" />
             <element signature="e#4100#4101#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#11371#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2531#2532#0" expanded="false" />
-            <element signature="e#2561#2562#0" expanded="false" />
-            <element signature="e#2613#2614#0" expanded="false" />
-            <element signature="e#2660#2661#0" expanded="false" />
-            <element signature="e#3218#3219#0" expanded="false" />
-            <element signature="e#3241#3242#0" expanded="false" />
-            <element signature="e#3288#3289#0" expanded="false" />
-            <element signature="e#3321#3322#0" expanded="false" />
-            <element signature="e#7856#7857#0" expanded="false" />
-            <element signature="e#7910#7911#0" expanded="false" />
-            <element signature="e#9249#9250#0" expanded="false" />
-            <element signature="e#9312#9313#0" expanded="false" />
-            <element signature="e#10443#10444#0" expanded="false" />
-            <element signature="e#10470#10471#0" expanded="false" />
-            <element signature="e#10512#10513#0" expanded="false" />
-            <element signature="e#10543#10544#0" expanded="false" />
-            <element signature="e#10763#10764#0" expanded="false" />
-            <element signature="e#10813#10814#0" expanded="false" />
-            <element signature="e#10869#10870#0" expanded="false" />
-            <element signature="e#10889#10890#0" expanded="false" />
-            <element signature="e#11037#11038#0" expanded="false" />
-            <element signature="e#11059#11060#0" expanded="false" />
-            <element signature="e#11095#11096#0" expanded="false" />
-            <element signature="e#11126#11127#0" expanded="false" />
-            <element signature="e#11273#11274#0" expanded="false" />
-            <element signature="e#11296#11297#0" expanded="false" />
-            <element signature="e#11334#11335#0" expanded="false" />
-            <element signature="e#11367#11368#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#8726#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2333#2334#0" expanded="false" />
-            <element signature="e#2363#2364#0" expanded="false" />
-            <element signature="e#2415#2416#0" expanded="false" />
-            <element signature="e#2462#2463#0" expanded="false" />
-            <element signature="e#2617#2618#0" expanded="false" />
-            <element signature="e#2641#2642#0" expanded="false" />
-            <element signature="e#2684#2685#0" expanded="false" />
-            <element signature="e#2719#2720#0" expanded="false" />
-            <element signature="e#4899#4900#0" expanded="false" />
-            <element signature="e#4953#4954#0" expanded="false" />
-            <element signature="e#6291#6292#0" expanded="false" />
-            <element signature="e#6354#6355#0" expanded="false" />
-            <element signature="e#6978#6979#0" expanded="false" />
-            <element signature="e#7014#7015#0" expanded="false" />
-            <element signature="e#7597#7598#0" expanded="false" />
-            <element signature="e#7619#7620#0" expanded="false" />
-            <element signature="e#7655#7656#0" expanded="false" />
-            <element signature="e#7686#7687#0" expanded="false" />
-            <element signature="e#7833#7834#0" expanded="false" />
-            <element signature="e#7856#7857#0" expanded="false" />
-            <element signature="e#7894#7895#0" expanded="false" />
-            <element signature="e#7927#7928#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1738,40 +1630,77 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="7378">
           <caret line="510" column="0" selection-start-line="510" selection-start-column="0" selection-end-line="510" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="256" column="25" selection-start-line="256" selection-start-column="25" selection-end-line="256" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#test8#0;class#testclass#0" expanded="false" />
-            <element signature="method#test9#0;class#testclass#0" expanded="false" />
-            <element signature="method#test10#0;class#testclass#0" expanded="false" />
-            <element signature="method#test11#0;class#testclass#0" expanded="false" />
-            <element signature="method#test12#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
-            <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
-            <element signature="e#20218#20219#0" expanded="true" />
-            <element signature="e#20251#20252#0" expanded="true" />
+            <element signature="e#0#88467#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#17558#17559#0" expanded="false" />
+            <element signature="e#17584#17585#0" expanded="false" />
+            <element signature="e#17960#17961#0" expanded="false" />
+            <element signature="e#17982#17983#0" expanded="false" />
+            <element signature="e#18065#18066#0" expanded="false" />
+            <element signature="e#18084#18085#0" expanded="false" />
+            <element signature="e#18192#18193#0" expanded="false" />
+            <element signature="e#18250#18251#0" expanded="false" />
+            <element signature="e#18356#18357#0" expanded="false" />
+            <element signature="e#18409#18410#0" expanded="false" />
+            <element signature="e#25673#25674#0" expanded="false" />
+            <element signature="e#25714#25715#0" expanded="false" />
+            <element signature="e#27874#27875#0" expanded="false" />
+            <element signature="e#27913#27914#0" expanded="false" />
+            <element signature="e#34432#34433#0" expanded="false" />
+            <element signature="e#34459#34460#0" expanded="false" />
+            <element signature="e#36044#36045#0" expanded="false" />
+            <element signature="e#36107#36108#0" expanded="false" />
+            <element signature="e#42674#42675#0" expanded="false" />
+            <element signature="e#42712#42713#0" expanded="false" />
+            <element signature="e#43095#43096#0" expanded="false" />
+            <element signature="e#43133#43134#0" expanded="false" />
+            <element signature="e#43563#43564#0" expanded="false" />
+            <element signature="e#43591#43592#0" expanded="false" />
+            <element signature="e#45305#45306#0" expanded="false" />
+            <element signature="e#45333#45334#0" expanded="false" />
+            <element signature="e#46253#46254#0" expanded="false" />
+            <element signature="e#46281#46282#0" expanded="false" />
+            <element signature="e#46649#46650#0" expanded="false" />
+            <element signature="e#46700#46701#0" expanded="false" />
+            <element signature="e#46747#46748#0" expanded="false" />
+            <element signature="e#46798#46799#0" expanded="false" />
+            <element signature="e#46840#46841#0" expanded="false" />
+            <element signature="e#46883#46884#0" expanded="false" />
+            <element signature="e#47007#47008#0" expanded="false" />
+            <element signature="e#47040#47041#0" expanded="false" />
+            <element signature="e#47715#47716#0" expanded="false" />
+            <element signature="e#47776#47777#0" expanded="false" />
+            <element signature="e#48907#48908#0" expanded="false" />
+            <element signature="e#48969#48970#0" expanded="false" />
+            <element signature="e#49124#49125#0" expanded="false" />
+            <element signature="e#49149#49150#0" expanded="false" />
+            <element signature="e#49252#49253#0" expanded="false" />
+            <element signature="e#49310#49311#0" expanded="false" />
+            <element signature="e#56797#56798#0" expanded="false" />
+            <element signature="e#56825#56826#0" expanded="false" />
+            <element signature="e#78576#78577#0" expanded="false" />
+            <element signature="e#78604#78605#0" expanded="false" />
+            <element signature="e#79205#79206#0" expanded="false" />
+            <element signature="e#79243#79244#0" expanded="false" />
+            <element signature="e#79714#79715#0" expanded="false" />
+            <element signature="e#79752#79753#0" expanded="false" />
+            <element signature="e#81289#81290#0" expanded="false" />
+            <element signature="e#81317#81318#0" expanded="false" />
+            <element signature="e#82087#82088#0" expanded="false" />
+            <element signature="e#82115#82116#0" expanded="false" />
+            <element signature="e#82576#82577#0" expanded="false" />
+            <element signature="e#82627#82628#0" expanded="false" />
+            <element signature="e#82895#82896#0" expanded="false" />
+            <element signature="e#82938#82939#0" expanded="false" />
+            <element signature="e#83135#83136#0" expanded="false" />
+            <element signature="e#83172#83173#0" expanded="false" />
+            <element signature="e#86205#86206#0" expanded="false" />
+            <element signature="e#86233#86234#0" expanded="false" />
+            <element signature="e#88241#88242#0" expanded="false" />
+            <element signature="e#88269#88270#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1786,20 +1715,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATWithPaths.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="629">
           <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1673#1674#0" expanded="true" />
-            <element signature="e#1721#1722#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="24" column="88" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -1808,25 +1725,99 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/library/SingleSourceShortestPaths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#1072#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+        <state relative-caret-position="221">
+          <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1637#1638#0" expanded="false" />
+            <element signature="e#1685#1686#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/library/SingleSourceShortestPaths.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#3708#0" expanded="false" />
+            <element signature="e#2403#2404#0" expanded="false" />
+            <element signature="e#2436#2437#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2091">
+          <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
+          <folding>
+            <element signature="e#7246#7247#0" expanded="false" />
+            <element signature="e#7274#7275#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_91/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/GatherFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#test8#0;class#testclass#0" expanded="false" />
+            <element signature="method#test9#0;class#testclass#0" expanded="false" />
+            <element signature="method#test10#0;class#testclass#0" expanded="false" />
+            <element signature="method#test11#0;class#testclass#0" expanded="false" />
+            <element signature="method#test12#0;class#testclass#0" expanded="false" />
+            <element signature="method#test13#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
+            <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+          <folding>
+            <element signature="class#Filterstartingedges#0;class#SingleSourceShortestTemporalPathSTT#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
