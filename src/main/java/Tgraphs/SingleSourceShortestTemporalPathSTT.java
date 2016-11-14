@@ -90,6 +90,7 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
         * */
         public ArrayList<Tuple2<Double,Double>> map(Vertex<K, NullValue> value) throws Exception {
             ArrayList<Tuple2<Double,Double>> nodeList = new ArrayList<>();
+//            return nodeList;
              if (value.f0.equals(srcVertexId)) {
                  for (Tuple2<Double,Double> tuple: startedges) {
                      nodeList.add(new Tuple2<>(tuple.f0,0D));
@@ -108,8 +109,8 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
         public Double map(Vertex<K, ArrayList<Tuple2<Double, Double>>> value) throws Exception {
             Double mindist = Double.MAX_VALUE;
             for (Tuple2<Double,Double> tuple : value.getValue()) {
-                if(tuple.f1 - tuple.f0 < mindist) {
-                    mindist = tuple.f1 - tuple.f0;
+                if(Math.abs(tuple.f1 - tuple.f0) < mindist) {
+                    mindist = Math.abs(tuple.f1 - tuple.f0);
                 }
             }
             return mindist;
@@ -131,7 +132,7 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
             for (Edge<K, Tuple3<EV, Double, Double>> edge : getEdges()) {
                 for (Tuple2<Double,Double> tuple : vertex.getValue()) {
 //                    check if the starting time of the edge is geq final time of the vertex
-                    if(edge.getValue().f1 >= tuple.f1) {
+                    if(edge.getValue().f1 >= tuple.f1 && edge.getValue().f1 >= tuple.f0) {
 //                        sends message to the target vertex with starting time of the node and finishing tiem of the edge
                         sendMessageTo(edge.getTarget(),new Tuple2<>(tuple.f0,edge.getValue().f2));
                     }

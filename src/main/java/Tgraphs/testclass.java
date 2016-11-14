@@ -268,7 +268,7 @@ public class testclass {
         Configuration conf = new Configuration();
         conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
-        int maxIterations = 2;
+        int maxIterations = 5;
 
         DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
                 .fieldDelimiter(",")  // node IDs are separated by spaces

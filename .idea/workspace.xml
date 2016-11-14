@@ -28,8 +28,8 @@
           <file leaf-file-name="testclass.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
+                <state relative-caret-position="1020">
+                  <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#test8#0;class#testclass#0" expanded="false" />
@@ -51,8 +51,8 @@
           <file leaf-file-name="SingleSourceShortestTemporalPathSTT.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="337">
-                  <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+                <state relative-caret-position="966">
+                  <caret line="134" column="87" selection-start-line="134" selection-start-column="87" selection-end-line="134" selection-end-column="87" />
                   <folding>
                     <element signature="class#Filterstartingedges#0;class#SingleSourceShortestTemporalPathSTT#0" expanded="false" />
                   </folding>
@@ -338,8 +338,8 @@
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATWithPaths.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java" />
       </list>
     </option>
   </component>
@@ -1143,7 +1143,7 @@
       <workItem from="1477556853848" duration="9132000" />
       <workItem from="1477903247479" duration="61911000" />
       <workItem from="1478716853011" duration="23886000" />
-      <workItem from="1478851667511" duration="10220000" />
+      <workItem from="1478851667511" duration="11530000" />
     </task>
     <servers />
   </component>
@@ -1165,7 +1165,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160313000" />
+    <option name="totallyTimeSpent" value="161623000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1215,7 +1215,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java</url>
-          <line>171</line>
+          <line>172</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -1792,8 +1792,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
+        <state relative-caret-position="1020">
+          <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#test8#0;class#testclass#0" expanded="false" />
@@ -1813,8 +1813,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+        <state relative-caret-position="966">
+          <caret line="134" column="87" selection-start-line="134" selection-start-column="87" selection-end-line="134" selection-end-column="87" />
           <folding>
             <element signature="class#Filterstartingedges#0;class#SingleSourceShortestTemporalPathSTT#0" expanded="false" />
           </folding>
