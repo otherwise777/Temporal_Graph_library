@@ -416,13 +416,4 @@ public class testclass {
 
 
 
-
-//    public static final class InitVertices implements MapFunction<Long, Long> {
-//
-//        @Override
-//        public Long map(Long vertexId) {
-//            return vertexId;
-//        }
-//    }
-
 }

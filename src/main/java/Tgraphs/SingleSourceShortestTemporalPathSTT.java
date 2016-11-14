@@ -28,8 +28,6 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
 
     private final K srcVertexId;
     private final Integer maxIterations;
-    private DataSet<Tuple2<Double,Double>> startedges;
-    private ArrayList<Tuple2<Double,Double>> listedges;
 
     public SingleSourceShortestTemporalPathSTT(K srcVertexId, Integer maxIterations) {
         this.srcVertexId = srcVertexId;
@@ -37,76 +35,51 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
     }
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
-        //Filling up the startingedges with distinct values of the starting times of the starting edges
-        DataSet<Edge<K,Tuple3<EV,Double,Double>>> startedgesset = input.getGellyGraph().getEdges().filter(new Filterstartingedges(srcVertexId));
-        startedges = startedgesset.map(new MapFunction<Edge<K, Tuple3<EV, Double, Double>>, Tuple2<Double,Double>>() {
-            @Override
-            public Tuple2<Double,Double> map(Edge<K, Tuple3<EV, Double, Double>> value) throws Exception {
-                return new Tuple2<>(value.getValue().f1,Double.MAX_VALUE);
-            }
-        }).distinct();
-
-        listedges = (ArrayList<Tuple2<Double, Double>>) startedges.collect();
-//        System.out.println("printing edges");
-//        System.out.println(listedges.toString());
-//        startedges.print();
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId,listedges)).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).getVertices().print();
-        return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId,listedges)).runScatterGatherIteration(
+        return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
                 maxIterations).mapVertices(new finalVerticesMapper<>()).getVertices();
-
     }
-    /*
-    * Filter to filter out the edges which have srcvertexid as source veretx
-    * */
-    public class Filterstartingedges implements FilterFunction<Edge<K,Tuple3<EV,Double,Double>>> {
-        private K srcVertexId;
-        public Filterstartingedges(K srcVertexId) { this.srcVertexId = srcVertexId; }
-
-        @Override
-        public boolean filter(Edge<K, Tuple3<EV, Double, Double>> value) throws Exception {
-            if(value.getSource().equals(srcVertexId)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
+/*
+* Initialization mapper for the vertex values, sets the source vertex value to an empty arraylist and the the rest to null,
+* this way don't need an initializer with a collect() function
+*
+*
+* input: Tgraph <K,Double,EV,Double>
+* output: K as Arraylist
+* */
     public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, NullValue>, ArrayList<Tuple2<Double,Double>>> {
 
         private K srcVertexId;
-        private ArrayList<Tuple2<Double,Double>> startedges;
 
-        public InitVerticesMapper(K srcId, ArrayList<Tuple2<Double,Double>> startedges) {
-            this.startedges = startedges;
+        public InitVerticesMapper(K srcId) {
             this.srcVertexId = srcId;
         }
 
-        /*
-        * adds the startingedge dataset to every edge, and changes the starting vertex with null values in that dataset
-        * */
         public ArrayList<Tuple2<Double,Double>> map(Vertex<K, NullValue> value) throws Exception {
-            ArrayList<Tuple2<Double,Double>> nodeList = new ArrayList<>();
-//            return nodeList;
              if (value.f0.equals(srcVertexId)) {
-                 for (Tuple2<Double,Double> tuple: startedges) {
-                     nodeList.add(new Tuple2<>(tuple.f0,0D));
-                 }
-                return nodeList;
+                return new ArrayList<>();
             } else {
-                return new ArrayList<>(startedges);
+                return null;
             }
         }
     }
+
     /*
-    * final mapper, gets arraylist with values and maps it to
+    * finalization mapper, maps the Arrays in the vertex values to double values
+    * Of all the values in the arraylist we take the difference between the 2nd
+    * and the first tuple value and determine the minimum value of the List
+    * then we return that value as it is the fastest travel time
+    *
+    * Input: ArrayList<Tuple2<Double,Double>>>
+    * Output: Double
+    *
     * */
     public static final class finalVerticesMapper<K>	implements MapFunction<Vertex<K, ArrayList<Tuple2<Double,Double>>>, Double> {
         @Override
         public Double map(Vertex<K, ArrayList<Tuple2<Double, Double>>> value) throws Exception {
+            if(value.getValue() == null) {
+                return Double.MAX_VALUE;
+            }
             Double mindist = Double.MAX_VALUE;
             for (Tuple2<Double,Double> tuple : value.getValue()) {
                 if(Math.abs(tuple.f1 - tuple.f0) < mindist) {
@@ -119,66 +92,80 @@ public class SingleSourceShortestTemporalPathSTT<K,EV> implements TGraphAlgorith
     /*
     * mindistance function from scatterfunction with:
     * K as K
-    * VV as Double
-    * Message as Tuple2<Double,ArrayList<K>>
+    * VV as ArrayList<Tuple2<Double,Double>>
+    * Message as Tuple2<Double,Double>
     * EV as Tuple3<EV, Double, Double>
     *
-    * checks if vertexvalue is < inf, then sends a message to neighboor vertexes
-    * with end time and such
+    * Checks if the vertexvalue is initialized and then checks the minimum path value and propagates it forward
     * */
     private static final class MinDistanceMessengerforTuplewithpath<K,EV> extends ScatterFunction<K, ArrayList<Tuple2<Double,Double>>, Tuple2<Double,Double>, Tuple3<EV, Double, Double>> {
         @Override
+
         public void sendMessages(Vertex<K, ArrayList<Tuple2<Double, Double>>> vertex) throws Exception {
-            for (Edge<K, Tuple3<EV, Double, Double>> edge : getEdges()) {
-                for (Tuple2<Double,Double> tuple : vertex.getValue()) {
-//                    check if the starting time of the edge is geq final time of the vertex
-                    if(edge.getValue().f1 >= tuple.f1 && edge.getValue().f1 >= tuple.f0) {
-//                        sends message to the target vertex with starting time of the node and finishing tiem of the edge
-                        sendMessageTo(edge.getTarget(),new Tuple2<>(tuple.f0,edge.getValue().f2));
+
+            if (vertex.getValue() != null) {
+//                check if the vertex is initalized, we only accept vertexes with null values at the collect function
+                if (vertex.getValue().size() == 0) {
+//                    we have source vertex, time to fill it up with all source id's
+                    for (Edge<K, Tuple3<EV, Double, Double>> edge : getEdges()) {
+//                        vertex.getValue().add(new Tuple2<>(edge.getValue().f1, edge.getValue().f2));
+
+                        sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f1, edge.getValue().f2));
+                    }
+                } else {
+//                    the size of the vertex value is not 0, so there have been incomming edges
+                    for (Edge<K, Tuple3<EV, Double, Double>> edge : getEdges()) {
+                        for (Tuple2<Double, Double> tuple : vertex.getValue()) {
+//                            check if the starting time of the edge is geq final time of the vertex
+                            if (edge.getValue().f1 >= tuple.f1 && edge.getValue().f1 >= tuple.f0) {
+//                               sends message to the target vertex with starting time of the node and finishing tiem of the edge
+                                sendMessageTo(edge.getTarget(), new Tuple2<>(tuple.f0, edge.getValue().f2));
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
+
+
+
+
     /**
      * K as K
-     * VV as Tuple2<Double,ArrayList<K>>
-     * Message as Tuple2<Double,ArrayList<K>>
+     * VV as  ArrayList<Tuple2<Double, Double>>
+     * Message as Tuple2<Double,Double>
      *
-     * @param <K>
+     * collects messages from the Vertices and check the minimum paths, then stores those minimum paths in the Vertex
      */
     private static final class VertexDistanceUpdaterwithpath<K> extends GatherFunction<K, ArrayList<Tuple2<Double, Double>>, Tuple2<Double,Double>> {
 
-//        @Override
-//        public void updateVertex(Vertex<K, Double> vertex, MessageIterator<Double> inMessages) {
-//
-//            Double minDistance = Double.MAX_VALUE;
-//            for (Double msg : inMessages) {
-//                if (msg < minDistance) {
-//                    minDistance = msg;
-//                }
-//            }
-//
-//            if (vertex.getValue() > minDistance) {
-//                setNewVertexValue(minDistance);
-//            }
-//        }
-
-
         @Override
         public void updateVertex(Vertex<K, ArrayList<Tuple2<Double, Double>>> vertex, MessageIterator<Tuple2<Double,Double>> inMessages) throws Exception {
-            ArrayList<Tuple2<Double,Double>> minimums = new ArrayList<>(vertex.getValue());
+            ArrayList<Tuple2<Double,Double>> vertexvalue = vertex.getValue();
+            if(vertexvalue == null) {
+                vertexvalue = new ArrayList<>();
+            }
+//            ArrayList<Tuple2<Double,Double>> minimums = new ArrayList<>(vertex.getValue());
 
             for (Tuple2<Double,Double> tuple: inMessages)  {
-                for(Tuple2<Double,Double> min : minimums) {
-                    if(tuple.f0.equals(min.f0) && tuple.f1 < min.f1) {
+                boolean tuplefound = false;
+                for(Tuple2<Double,Double> min : vertexvalue) {
+                    if(tuple.f0.equals(min.f0)) {
+                        tuplefound = true;
+                        if (tuple.f1 < min.f1) {
+
 //                        starting times are the same but new path is smaller
-                        min.f1 = tuple.f1;
+                            min.f1 = tuple.f1;
+                        }
                     }
                 }
+                if(!tuplefound) {
+                    vertexvalue.add(new Tuple2<>(tuple.f0,tuple.f1));
+                }
             }
-            setNewVertexValue(minimums);
+            setNewVertexValue(vertexvalue);
         }
     }
 }
