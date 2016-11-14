@@ -275,9 +275,7 @@ public class testclass {
                 .ignoreComments("%")  // comments start with "%"
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
-        DataSet<Vertex<String,Double>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTT<>("A",maxIterations));
-
-        verticess.print();
+        tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTWithPaths<>("A",maxIterations)).print();
     }
     /**
      * Distributes the minimum distance associated with a given vertex among all
