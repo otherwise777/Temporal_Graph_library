@@ -2,11 +2,14 @@ package Tgraphs;
 
 import org.apache.flink.api.common.functions.FlatJoinFunction;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.functions.FunctionAnnotation;
 import org.apache.flink.api.java.operators.JoinOperator;
+import org.apache.flink.api.java.operators.MapOperator;
 import org.apache.flink.api.java.operators.ProjectOperator;
+import org.apache.flink.api.java.operators.ReduceOperator;
 import org.apache.flink.api.java.tuple.*;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
@@ -22,8 +25,11 @@ import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.ScatterFunction;
 import org.apache.flink.types.NullValue;
 import org.apache.flink.util.Collector;
+import scala.util.parsing.combinator.testing.Str;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by s133781 on 24-Oct-16.
@@ -31,7 +37,7 @@ import java.util.ArrayList;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test15();
+        test14();
     }
 
 
@@ -266,7 +272,9 @@ public class testclass {
     public static void test15() throws Exception {
 
         Configuration conf = new Configuration();
-        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 16000);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
         int maxIterations = 5;
 
@@ -274,10 +282,87 @@ public class testclass {
                 .fieldDelimiter(",")  // node IDs are separated by spaces
                 .ignoreComments("%")  // comments start with "%"
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
-        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
-        tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTWithPaths<>("A",maxIterations)).print();
+        Tgraph<String, NullValue, NullValue, Double> TemporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
+//        tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTJustPaths<>("A",maxIterations)).print();
+//        DataSet<Vertex<String, ArrayList<String>>> temp = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTJustPaths<>("A", maxIterations));
+//        DataSet<Vertex<String, ArrayList<String>>> test = temp.reduce(new ReduceFunction<Vertex<String, ArrayList<String>>>() {
+//            @Override
+//            public Vertex<String, ArrayList<String>>
+//            reduce(Vertex<String, ArrayList<String>> value1,
+//                   Vertex<String, ArrayList<String>> value2) throws Exception {
+//                ArrayList<String> stringlist = new ArrayList<>(value1.getValue());
+//                stringlist.addAll(value2.getValue());
+//                return new Vertex<>("", stringlist);
+//            }
+//        });
+//        determining the betweenness
+
+//        String testasda = "ts";
+//        MapOperator<Vertex<String, NullValue>, Object> map = tempgraphdoubles.getVertices().map(new MapFunction<Vertex<String, NullValue>, Object>(tempgraphdoubles) {
+//            @Override
+//            public Object map(Vertex<String, NullValue> value) throws Exception {
+//                return null;
+//            }
+//        });
+
+//        Graph<String,DataSet<Vertex<String,ArrayList<String>>>,Tuple3<NullValue,Double,Double>> te = tempgraphdoubles.getGellyGraph().mapVertices(new vertextestmapper<String>(tempgraphdoubles));
+
+        DataSet<String> setforlist = TemporalGraph.getVertices().map(new MapFunction<Vertex<String, NullValue>, String>() {
+
+            @Override
+            public String map(Vertex<String, NullValue> value) throws Exception {
+                return value.getId();
+            }
+        });
+        List<String> vertexcollection = setforlist.collect();
+        DataSet<ArrayList<String>> collectionDataSet;
+//        List<ArrayList<String>> collection = null;
+        ArrayList<String> temparlist = new ArrayList<>();
+
+
+//        collectionDataSet = TemporalGraph.run(new SingleSourceShortestTemporalPathSTTJustPaths<>(vertexcollection.get(0), maxIterations)).map(new vertextestmapperdataset());
+
+        int timer = 0;
+
+        for (String vertexid : vertexcollection) {
+            timer++;
+            List<ArrayList<String>> temp = TemporalGraph.run(new SingleSourceShortestTemporalPathSTTJustPaths<>(vertexid, maxIterations)).map(new vertextestmapperdataset()).collect();
+            for (ArrayList<String> t : temp) {
+                temparlist.addAll(t);
+            }
+            System.out.println(timer);
+
+        }
+        System.out.println(temparlist.toString());
+
+//        System.out.println(something.toString());
+
+
     }
-    /**
+    public static final class vertextestmapperdataset<K>	implements MapFunction<Vertex<String, ArrayList<String>>, ArrayList<String>> {
+        @Override
+        public ArrayList<String> map(Vertex<String, ArrayList<String>> value) throws Exception {
+            return value.getValue();
+        }
+    }
+
+//    public static final class testmapper<K>	implements MapFunction<Vertex<String, NullValue>,>
+    public static final class vertextestmapper<K>	implements MapFunction<Vertex<String, NullValue>, DataSet<Vertex<String, ArrayList<String>>>> {
+
+        private Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles;
+        public vertextestmapper(Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles) {
+            this.tempgraphdoubles = tempgraphdoubles;
+        }
+
+
+    @Override
+    public DataSet<Vertex<String, ArrayList<String>>> map(Vertex<String, NullValue> value) throws Exception {
+        DataSet<Vertex<String, ArrayList<String>>> tempa = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTJustPaths<>((String) value.getId(), 30));
+
+        return tempa;
+    }
+}
+        /**
      * Distributes the minimum distance associated with a given vertex among all
      * the target vertices summed up with the edge's value.
      */

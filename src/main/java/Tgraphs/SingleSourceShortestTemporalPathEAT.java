@@ -73,6 +73,7 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
             if (vertex.getValue() < Double.POSITIVE_INFINITY) { //Checks if it has been passed for the first time
                 for (Edge<K, Tuple3<EV,Double,Double>> edge : getEdges()) {
                     if (edge.getValue().f1 >= vertex.getValue()) { //If starting time of the edge
+
                         sendMessageTo(edge.getTarget(), edge.getValue().f2.doubleValue());
                     }
                 }

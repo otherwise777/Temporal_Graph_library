@@ -22,17 +22,17 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathSTTWithPaths<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Tuple2<Double,ArrayList<K>>>>> {
+public class SingleSourceShortestTemporalPathSTTJustPaths<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,ArrayList<K>>>> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
 
-    public SingleSourceShortestTemporalPathSTTWithPaths(K srcVertexId, Integer maxIterations) {
+    public SingleSourceShortestTemporalPathSTTJustPaths(K srcVertexId, Integer maxIterations) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
     @Override
-    public DataSet<Vertex<K,Tuple2<Double,ArrayList<K>>>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
+    public DataSet<Vertex<K,ArrayList<K>>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
                 maxIterations).mapVertices(new finalVerticesMapper<>()).getVertices();
@@ -72,12 +72,12 @@ public class SingleSourceShortestTemporalPathSTTWithPaths<K,EV> implements TGrap
     * Output: Double
     *
     * */
-    public static final class finalVerticesMapper<K>	implements MapFunction<Vertex<K, ArrayList<Tuple3<Double,Double,ArrayList<K>>>>, Tuple2<Double,ArrayList<K>>> {
+    public static final class finalVerticesMapper<K>	implements MapFunction<Vertex<K, ArrayList<Tuple3<Double,Double,ArrayList<K>>>>, ArrayList<K>> {
         @Override
-        public Tuple2<Double,ArrayList<K>> map(Vertex<K, ArrayList<Tuple3<Double,Double,ArrayList<K>>>> value) throws Exception {
+        public ArrayList<K> map(Vertex<K, ArrayList<Tuple3<Double,Double,ArrayList<K>>>> value) throws Exception {
             ArrayList<K> shortestpath = new ArrayList<K>();
             if(value.getValue() == null) {
-                return new Tuple2<>(Double.MAX_VALUE,shortestpath);
+                return shortestpath;
             }
 
             Double mindist = Double.MAX_VALUE;
@@ -87,7 +87,7 @@ public class SingleSourceShortestTemporalPathSTTWithPaths<K,EV> implements TGrap
                     shortestpath = tuple.f2;
                 }
             }
-            return new Tuple2<>(mindist,shortestpath);
+            return shortestpath;
         }
     }
     /*

@@ -9,8 +9,7 @@ import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.ScatterFunction;
-
-
+import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
 
@@ -23,24 +22,24 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGraphAlgorithm<K,Double,EV,Double,DataSet<Vertex<K,Tuple2<Double,ArrayList<K>>>>> {
+public class SingleSourceShortestTemporalPathEATJustPaths<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,ArrayList<K>>>> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
 
-    public SingleSourceShortestTemporalPathEATWithPaths(K srcVertexId, Integer maxIterations) {
+    public SingleSourceShortestTemporalPathEATJustPaths(K srcVertexId, Integer maxIterations) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
     @Override
-    public DataSet<Vertex<K, Tuple2<Double, ArrayList<K>>>> run(Tgraph<K, Double, EV, Double> input) throws Exception {
+    public DataSet<Vertex<K,ArrayList<K>>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).getVertices();
+                maxIterations).mapVertices(new finalisationmapper<>(srcVertexId)).getVertices();
 
     }
 
-    public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, Double>, Tuple2<Double, ArrayList<K>>> {
+    public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, NullValue>, Tuple2<Double, ArrayList<K>>> {
 
         private K srcVertexId;
 
@@ -48,7 +47,7 @@ public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGrap
             this.srcVertexId = srcId;
         }
 
-        public Tuple2<Double, ArrayList<K>> map(Vertex<K, Double> value) throws Exception {
+        public Tuple2<Double, ArrayList<K>> map(Vertex<K, NullValue> value) throws Exception {
             ArrayList<K> emptylist = new ArrayList<>();
             if (value.f0.equals(srcVertexId)) {
                 return new Tuple2<>(0.0,emptylist);
@@ -58,6 +57,19 @@ public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGrap
         }
     }
 
+    public static final class finalisationmapper<K>	implements MapFunction<Vertex<K, Tuple2<Double,ArrayList<K>>>, ArrayList<K>> {
+        private K srcVertexId;
+        public finalisationmapper(K srcVertexId) {
+            this.srcVertexId = srcVertexId;
+        }
+
+        @Override
+        public ArrayList<K> map(Vertex<K, Tuple2<Double, ArrayList<K>>> value) throws Exception {
+            ArrayList<K> temp = value.getValue().f1;
+            if(temp.size() >  0 ) { temp.remove(0); }
+            return temp;
+        }
+    }
     /*
     * mindistance function from scatterfunction with:
     * K as K
@@ -76,6 +88,7 @@ public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGrap
                 for (Edge<K, Tuple3<EV,Double,Double>> edge : getEdges()) {
                     if (edge.getValue().f1 >= vertex.getValue().f0) {
                         ArrayList<K> temp = new ArrayList<>(vertex.getValue().f1);
+
                         temp.add(vertex.getId());
 //                        System.out.println("temparray of " + vertex.getId() + ": " + temp.toString());
                         sendMessageTo(edge.getTarget(), new Tuple2<>(edge.getValue().f2.doubleValue(), temp) );
