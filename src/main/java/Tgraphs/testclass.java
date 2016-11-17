@@ -255,16 +255,17 @@ public class testclass {
         Configuration conf = new Configuration();
         conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
-        int maxIterations = 10;
+        int maxIterations = 1;
 
         DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
                 .fieldDelimiter(",")  // node IDs are separated by spaces
                 .ignoreComments("%")  // comments start with "%"
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
-        DataSet<Vertex<String,Double>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT<>("A",maxIterations));
 
-        verticess.print();
+        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT3<String,NullValue>("A",maxIterations)).print();
+
+//        verticess.print();
     }
     /*
 * Test with testgraph2, single shortset path EAT without paths

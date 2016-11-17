@@ -22,20 +22,16 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,ArrayList<K>>>> {
+public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
 
-    private final K srcVertexId;
     private final Integer maxIterations;
 
-    public SingleSourceShortestTemporalPathEATBetweenness(K srcVertexId, Integer maxIterations) {
-        this.srcVertexId = srcVertexId;
+    public SingleSourceShortestTemporalPathEATBetweenness(Integer maxIterations) {
         this.maxIterations = maxIterations;
     }
     @Override
-    public DataSet<Vertex<K,ArrayList<K>>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).getVertices().print();
+    public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
+        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).getVertices().print();
         return null;
 //        return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
 //                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
@@ -53,22 +49,6 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
     }
 
 
-//        private K srcVertexId;
-//
-//        public InitVerticesMapper(K srcId) {
-//            this.srcVertexId = srcId;
-//        }
-//
-//        public Tuple2<Double, ArrayList<K>> map(Vertex<K, NullValue> value) throws Exception {
-//            ArrayList<K> emptylist = new ArrayList<>();
-//            if (value.f0.equals(srcVertexId)) {
-//                return new Tuple2<>(0.0,emptylist);
-//            } else {
-//                return new Tuple2<>(Double.MAX_VALUE,emptylist);
-//            }
-//        }
-//    }
-
     public static final class finalisationmapper<K>	implements MapFunction<Vertex<K, Tuple2<Double,ArrayList<K>>>, ArrayList<K>> {
         private K srcVertexId;
         public finalisationmapper(K srcVertexId) {
@@ -84,7 +64,12 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
     }
 
     private static final class MinDistanceMessengerforTuplewithpath<K,EV> extends
-            ScatterFunction<K, ArrayList<Tuple3<K, Double, ArrayList<K>>>, Tuple3<K,Double,ArrayList<K>>, Tuple3<EV, Double, Double>> {
+            ScatterFunction<
+                    K,
+                    ArrayList<Tuple3<K, Double, ArrayList<K>>>,
+                    Tuple3<K,Double,ArrayList<K>>,
+                    Tuple3<EV, Double, Double>
+                    > {
         @Override
         public void sendMessages(Vertex<K, ArrayList<Tuple3<K, Double, ArrayList<K>>>> vertex) {
 //            looping over every possible vertex value
@@ -103,33 +88,38 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
     }
 
 
-
+//TODO:
+//    the arraylist should be a mapping for major speedup and simplicity
     private static final class VertexDistanceUpdaterwithpath<K> extends GatherFunction<K, ArrayList<Tuple3<K, Double, ArrayList<K>>>, Tuple3<K,Double,ArrayList<K>>> {
 
         @Override
         public void updateVertex(Vertex<K, ArrayList<Tuple3<K, Double, ArrayList<K>>>> vertex, MessageIterator<Tuple3<K, Double, ArrayList<K>>> inMessages) throws Exception {
-//            initliazing vertex
+//            initliazing vertex values,
             ArrayList<Tuple3<K, Double, ArrayList<K>>> vertexlist = vertex.getValue();
+            boolean update = false;
             for (Tuple3<K,Double,ArrayList<K>> msg : inMessages) {
-                if(isValueInArrayList(vertexlist,msg.f0)) {
-
+                if(!isValueInArrayList(vertexlist,msg.f0)) {
+                    vertexlist.add(msg);
                 }
             }
             for(Tuple3<K, Double, ArrayList<K>> vertexValue : vertex.getValue()) {
+                Double minDistance = Double.MAX_VALUE;
+                ArrayList<K> minpath = vertexValue.f2;
+                for (Tuple3<K,Double,ArrayList<K>> msg : inMessages) {
+                    if (msg.f1 < minDistance) {
+                        minDistance = msg.f1;
+                        minpath = msg.f2;
+                    }
+                }
 
-            }
-            Double minDistance = Double.MAX_VALUE;
-            ArrayList<K> minpath = vertex.getValue().f1;
-            for (Tuple2<Double,ArrayList<K>> msg : inMessages) {
-                if (msg.f0 < minDistance) {
-                    minDistance = msg.getField(0);
-                    minpath = msg.f1;
+                if (minDistance < vertexValue.f1) {
+                    updatearrayList(vertexlist,vertexValue.f0,minDistance,minpath);
                 }
             }
-
-            if (vertex.getValue().f0 > minDistance) {
-                setNewVertexValue(new Tuple2<>(minDistance,minpath));
+            if(update) {
+                setNewVertexValue(vertexlist);
             }
+
         }
         private boolean isValueInArrayList(ArrayList<Tuple3<K, Double, ArrayList<K>>> thelist,K value) {
             for(Tuple3<K, Double, ArrayList<K>> somevalue: thelist) {
@@ -138,6 +128,14 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
                 }
             }
             return false;
+        }
+        public void updatearrayList(ArrayList<Tuple3<K, Double, ArrayList<K>>> thelist, K index, Double newdouble, ArrayList<K> newlist) {
+            for(Tuple3<K, Double, ArrayList<K>> somevalue: thelist) {
+                if(somevalue.f0.equals(index)) {
+                    somevalue.f1 = newdouble;
+                    somevalue.f2 = newlist;
+                }
+            }
         }
     }
 
