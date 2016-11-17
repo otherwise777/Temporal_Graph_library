@@ -255,7 +255,7 @@ public class testclass {
         Configuration conf = new Configuration();
         conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
-        int maxIterations = 1;
+        int maxIterations = 5;
 
         DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
                 .fieldDelimiter(",")  // node IDs are separated by spaces
@@ -263,7 +263,7 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
 
-        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT3<String,NullValue>("A",maxIterations)).print();
+        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATBetweenness<String,NullValue>(maxIterations)).print();
 
 //        verticess.print();
     }
