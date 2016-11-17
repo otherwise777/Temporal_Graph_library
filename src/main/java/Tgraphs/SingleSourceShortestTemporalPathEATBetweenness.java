@@ -43,10 +43,12 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
                 maxIterations).mapVertices(new inbetweenmapper<>()).reverse().runScatterGatherIteration(
                 new MinDistanceMessengerCountingPaths<K,EV>(), new VertexDistanceUpdaterCountingPaths<K>(),
                 maxIterations).getVertices().print();
-        return null;
-//        return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-//                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-//                maxIterations).getVertices();
+        return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
+                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
+                maxIterations).mapVertices(new inbetweenmapper<>()).reverse().runScatterGatherIteration(
+                new MinDistanceMessengerCountingPaths<K,EV>(), new VertexDistanceUpdaterCountingPaths<K>(),
+                maxIterations).mapVertices(new finalisationmapper<>()).getVertices();
+
 
     }
 
@@ -74,14 +76,13 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
         }
     }
 
-    public static final class finalisationmapper<K>	implements MapFunction<Vertex<K, Tuple2<Double,ArrayList<K>>>, ArrayList<K>> {
+    public static final class finalisationmapper<K>	implements MapFunction<Vertex<K, Tuple2<Double,ArrayList<ArrayList<K>>>>, Double> {
         @Override
-        public ArrayList<K> map(Vertex<K, Tuple2<Double, ArrayList<K>>> value) throws Exception {
-            ArrayList<K> temp = value.getValue().f1;
-            if(temp.size() >  0 ) { temp.remove(0); }
-            return temp;
+        public Double map(Vertex<K, Tuple2<Double, ArrayList<ArrayList<K>>>> value) throws Exception {
+            return value.getValue().f0;
         }
     }
+
     private static final class MinDistanceMessengerCountingPaths<K,EV> extends
             ScatterFunction<
                     K,
@@ -99,6 +100,7 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
                         ArrayList<K> newpath = new ArrayList<K>(path);
                         newpath.remove(newpath.size() - 1);
                         sendMessageTo(edge.getTarget(),newpath);
+
                     }
                 }
             }
@@ -117,9 +119,9 @@ public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGr
             boolean update = false;
             for (ArrayList<K> incommingpath : messageIterator) {
                 vertex.getValue().f0 = vertex.getValue().f0 + 1;
-                if(vertexvalue.size() > 0 ) {
+                update = true;
+                if(incommingpath.size() > 0 ) {
                     vertexvalue.add(incommingpath);
-                    update = true;
                 }
             }
             if (update) {
