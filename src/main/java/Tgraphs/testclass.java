@@ -263,7 +263,7 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
 
-        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATBetweenness<String,NullValue>(maxIterations)).print();
+        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT3<String,NullValue>("A",maxIterations)).print();
 
 //        verticess.print();
     }
