@@ -31,6 +31,9 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
+
+
+
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(

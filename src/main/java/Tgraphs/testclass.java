@@ -37,7 +37,7 @@ import java.util.List;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test14();
+        test16();
     }
 
 
@@ -263,9 +263,27 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
 
-        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEAT3<String,NullValue>("A",maxIterations)).print();
+        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATBetweenness<String,NullValue>(maxIterations)).print();
 
 //        verticess.print();
+    }
+
+    public static void test16() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 16000);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 5;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, NullValue, NullValue, Double> TemporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
+        TemporalGraph.run(new SSSPTemporalCloseness<>("A",30,1,false));
+//        TemporalGraph.run(new SingleSourceShortestTemporalPathEAT<>("A",30)).print();
     }
     /*
 * Test with testgraph2, single shortset path EAT without paths

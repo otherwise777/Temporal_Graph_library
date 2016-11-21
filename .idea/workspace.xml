@@ -22,22 +22,19 @@
     <favorites_list name="Temporal_Graph_library" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.66738045">
+    <splitter split-orientation="horizontal" split-proportion="0.83851975">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="testclass.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="testclass.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="237">
-                  <caret line="265" column="92" selection-start-line="265" selection-start-column="92" selection-end-line="265" selection-end-column="92" />
+                <state relative-caret-position="151">
+                  <caret line="306" column="71" selection-start-line="306" selection-start-column="65" selection-end-line="306" selection-end-column="71" />
                   <folding>
-                    <element signature="imports" expanded="true" />
                     <element signature="method#test8#0;class#testclass#0" expanded="false" />
-                    <element signature="method#test9#0;class#testclass#0" expanded="false" />
                     <element signature="method#test10#0;class#testclass#0" expanded="false" />
                     <element signature="method#test11#0;class#testclass#0" expanded="false" />
                     <element signature="method#test12#0;class#testclass#0" expanded="false" />
-                    <element signature="method#test13#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
                     <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
@@ -48,26 +45,93 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SingleSourceShortestTemporalPathEATBetweenness.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATBetweenness.java">
+          <file leaf-file-name="SSSPTemporalCloseness.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SSSPTemporalCloseness.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="388">
-                  <caret line="49" column="84" selection-start-line="49" selection-start-column="84" selection-end-line="49" selection-end-column="84" />
+                <state relative-caret-position="305">
+                  <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
                   <folding>
-                    <element signature="e#1014#1015#0" expanded="true" />
-                    <element signature="e#1064#1065#0" expanded="true" />
-                    <element signature="class#InitVerticesMapper#0;class#SingleSourceShortestTemporalPathEATBetweenness#0" expanded="false" />
-                    <element signature="class#inbetweenmapper#0;class#SingleSourceShortestTemporalPathEATBetweenness#0" expanded="false" />
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MapFunction.class" pinned="false" current-in-tab="false">
-            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.3/flink-core-1.1.3.jar!/org/apache/flink/api/common/functions/MapFunction.class">
+          <file leaf-file-name="ChainedAllReduceDriver.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/chaining/ChainedAllReduceDriver.class">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+                <state relative-caret-position="177">
+                  <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CountingCollector.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/util/metrics/CountingCollector.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="289">
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MapDriver.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/MapDriver.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="244">
+                  <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BatchTask.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/BatchTask.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="177">
+                  <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Task.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/taskmanager/Task.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="195">
+                  <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ForkJoinWorkerThread.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinWorkerThread.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="177">
+                  <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ForkJoinPool.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinPool.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="195">
+                  <caret line="598" column="0" selection-start-line="598" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Graph.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.1.3/flink-gelly_2.10-1.1.3.jar!/org/apache/flink/graph/Graph.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="288">
+                  <caret line="491" column="17" selection-start-line="491" selection-start-column="17" selection-end-line="491" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -127,7 +191,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ScatterFunction.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="ScatterFunction.java" pinned="false" current-in-tab="true">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="186">
@@ -137,12 +201,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ScatterFunction.class" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ScatterFunction.class" pinned="false" current-in-tab="false">
             <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.1.3/flink-gelly_2.10-1.1.3.jar!/org/apache/flink/graph/spargel/ScatterFunction.class">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-                  <folding />
+                <state relative-caret-position="-136">
+                  <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+                  <folding>
+                    <element signature="e#0#5507#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -235,14 +301,15 @@
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTTWithPaths.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathSTTJustPaths.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATJustPaths.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java" />
         <option value="$PROJECT_DIR$/datasets/Testgraph2" />
-        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT2.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT3.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATBetweenness.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/SSSPTemporalCloseness.java" />
       </list>
     </option>
   </component>
@@ -298,6 +365,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -416,9 +486,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -437,18 +504,18 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\git\Temporal_Graph_library" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Tgraphs" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\git\Temporal_Graph_library\datasets" />
       <recent name="C:\git\Temporal_Graph_library\.idea" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Tgraphs" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\git\Temporal_Graph_library" />
     </key>
   </component>
   <component name="RunManager" selected="Application.testclass">
@@ -982,7 +1049,8 @@
       <workItem from="1478716853011" duration="23886000" />
       <workItem from="1478851667511" duration="23680000" />
       <workItem from="1479131105798" duration="46282000" />
-      <workItem from="1479381486593" duration="19893000" />
+      <workItem from="1479381486593" duration="20548000" />
+      <workItem from="1479720049667" duration="10625000" />
     </task>
     <servers />
   </component>
@@ -1004,7 +1072,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239948000" />
+    <option name="totallyTimeSpent" value="251228000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1018,12 +1086,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31543624" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3131991" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32823962" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2732274" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1051,7 +1119,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="38" />
+      <option name="time" value="39" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1060,83 +1128,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-java/1.1.2/flink-java-1.1.2-sources.jar!/org/apache/flink/api/java/ExecutionEnvironment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="1162" column="35" selection-start-line="1162" selection-start-column="35" selection-end-line="1162" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TgraphTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161024.051634-72.jar!/org/apache/flink/graph/ReduceNeighborsFunction.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161024.051634-72.jar!/org/apache/flink/graph/Triplet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161024.051634-72.jar!/org/apache/flink/graph/Graph.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.2/flink-core-1.1.2-sources.jar!/org/apache/flink/api/java/tuple/Tuple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#4816#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161024.051634-72.jar!/org/apache/flink/graph/Edge.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.2/flink-core-1.1.2-sources.jar!/org/apache/flink/api/common/functions/FilterFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-SNAPSHOT-sources.jar!/org/apache/flink/graph/library/SingleSourceShortestPaths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-SNAPSHOT-sources.jar!/org/apache/flink/graph/library/LabelPropagation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20161027.041407-75.jar!/org/apache/flink/graph/Graph.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1162,17 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1458#0" expanded="false" />
-            <element signature="e#1289#1290#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-            <element signature="e#1334#1335#0" expanded="false" />
-            <element signature="e#1355#1356#0" expanded="false" />
-            <element signature="e#1383#1384#0" expanded="false" />
-            <element signature="e#1402#1403#0" expanded="false" />
-            <element signature="e#1434#1435#0" expanded="false" />
-            <element signature="e#1454#1455#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1202,10 +1182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#6088#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1234,7 +1210,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-120">
           <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1264,7 +1239,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1293,9 +1267,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="391" column="38" selection-start-line="391" selection-start-column="38" selection-end-line="391" selection-end-column="38" />
-          <folding>
-            <element signature="e#17328#17334#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1327,21 +1298,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="1683" column="0" selection-start-line="1683" selection-start-column="0" selection-end-line="1683" selection-end-column="0" />
-          <folding>
-            <element signature="e#20153#20199#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1349,7 +1309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,26 +1345,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.2/flink-core-1.1.2-sources.jar!/org/apache/flink/api/java/typeutils/TypeExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8483">
           <caret line="564" column="0" selection-start-line="564" selection-start-column="0" selection-end-line="564" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#74490#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#71896#71897#0" expanded="false" />
-            <element signature="e#71965#71966#0" expanded="false" />
-            <element signature="e#72713#72714#0" expanded="false" />
-            <element signature="e#72773#72774#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1413,28 +1356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27993#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#5824#5825#0" expanded="false" />
-            <element signature="e#5863#5864#0" expanded="false" />
-            <element signature="e#9080#9081#0" expanded="false" />
-            <element signature="e#9118#9119#0" expanded="false" />
-            <element signature="e#9268#9269#0" expanded="false" />
-            <element signature="e#9300#9301#0" expanded="false" />
-            <element signature="e#10987#10988#0" expanded="false" />
-            <element signature="e#11018#11019#0" expanded="false" />
-            <element signature="e#14471#14472#0" expanded="false" />
-            <element signature="e#14502#14503#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1494,7 +1415,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="95" column="6" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1514,44 +1434,148 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.1.3/flink-gelly_2.10-1.1.3.jar!/org/apache/flink/graph/spargel/ScatterFunction.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEATBetweenness.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
+        <state relative-caret-position="595">
           <caret line="49" column="84" selection-start-line="49" selection-start-column="84" selection-end-line="49" selection-end-column="84" />
           <folding>
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1064#1065#0" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="class#InitVerticesMapper#0;class#SingleSourceShortestTemporalPathEATBetweenness#0" expanded="false" />
             <element signature="class#inbetweenmapper#0;class#SingleSourceShortestTemporalPathEATBetweenness#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.1.3/flink-gelly_2.10-1.1.3.jar!/org/apache/flink/graph/spargel/ScatterFunction.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#5507#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.2-SNAPSHOT/flink-gelly_2.10-1.2-20160927.035755-46-sources.jar!/org/apache/flink/graph/spargel/ScatterFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SingleSourceShortestTemporalPathEAT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Tgraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-gelly_2.10/1.1.3/flink-gelly_2.10-1.1.3.jar!/org/apache/flink/graph/Graph.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="491" column="17" selection-start-line="491" selection-start-column="17" selection-end-line="491" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.3/flink-core-1.1.3.jar!/org/apache/flink/api/common/functions/ReduceFunction.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="265" column="92" selection-start-line="265" selection-start-column="92" selection-end-line="265" selection-end-column="92" />
+        <state relative-caret-position="151">
+          <caret line="306" column="71" selection-start-line="306" selection-start-column="65" selection-end-line="306" selection-end-column="71" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#test8#0;class#testclass#0" expanded="false" />
-            <element signature="method#test9#0;class#testclass#0" expanded="false" />
             <element signature="method#test10#0;class#testclass#0" expanded="false" />
             <element signature="method#test11#0;class#testclass#0" expanded="false" />
             <element signature="method#test12#0;class#testclass#0" expanded="false" />
-            <element signature="method#test13#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
             <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
             <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/chaining/ChainedAllReduceDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/util/metrics/CountingCollector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/taskmanager/Task.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/BatchTask.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-runtime_2.10/1.1.3/flink-runtime_2.10-1.1.3.jar!/org/apache/flink/runtime/operators/MapDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinWorkerThread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinPool.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="598" column="0" selection-start-line="598" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/SSSPTemporalCloseness.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
