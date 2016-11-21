@@ -11,14 +11,14 @@ import org.apache.flink.types.NullValue;
  * Created by s133781 on 03-Nov-16.
  *
  */
-public class SSSPTemporalCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,Double> {
+public class SSSTPClosenessSingleNode<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,Double> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
     private final Integer method;
     private final boolean Normalized;
 
-    public SSSPTemporalCloseness(K srcVertexId, Integer maxIterations, Integer method, boolean Normalized) {
+    public SSSTPClosenessSingleNode(K srcVertexId, Integer maxIterations, Integer method, boolean Normalized) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
         this.method = method;
@@ -26,21 +26,27 @@ public class SSSPTemporalCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,
     }
 
     public Double run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
-        DataSet<Vertex<K,Double>> a = input.run(new SingleSourceShortestTemporalPathEAT<K, EV>(srcVertexId, maxIterations))
-                .map(new MapVertexForSummation());
-        DataSet<Vertex<K, Double>> b = a.reduce(new ReduceFunction<Vertex<K, Double>>() {
-            @Override
-            public Vertex<K, Double> reduce(Vertex<K, Double> kDoubleVertex, Vertex<K, Double> t1) throws Exception {
-                return null;
-            }
-        });
-        b.print();
-        return null;
+        Double result;
+//       if chosen method is EAT
+        if(method == 1) {
+            result = (Double) input.run(new SingleSourceShortestTemporalPathEAT<K, EV>(srcVertexId, maxIterations))
+                    .map(new MapVertexForSummation()).reduce(new ReduceCloseness()).collect().get(0);
+//            if chosen method i SP
+        } else {
+            result = (Double) input.run(new SingleSourceShortestTemporalPathSTT<K, EV>(srcVertexId, maxIterations))
+                    .map(new MapVertexForSummation()).reduce(new ReduceCloseness()).collect().get(0);
+        }
+        if(Normalized) {
+            Long nodecount = input.numberOfVertices();
+            return result / nodecount;
+        } else {
+            return result;
+        }
     }
-    public static final class ReduceCloseness<K>	implements ReduceFunction<Vertex<K,Double>> {
+    public static final class ReduceCloseness<K>	implements ReduceFunction<Double> {
         @Override
-        public Vertex<K, Double> reduce(Vertex<K, Double> vertex1, Vertex<K, Double> vertex2) throws Exception {
-            return new Vertex<>(vertex1.getId(), vertex1.getValue() + vertex2.getValue());
+        public Double reduce(Double t1, Double t2) throws Exception {
+            return t1 + t2;
         }
     }
     /*
@@ -56,4 +62,5 @@ public class SSSPTemporalCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,
             }
         }
     }
+
 }

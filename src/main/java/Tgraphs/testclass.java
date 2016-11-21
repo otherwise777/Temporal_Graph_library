@@ -1,33 +1,20 @@
 package Tgraphs;
 
-import org.apache.flink.api.common.functions.FlatJoinFunction;
 import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.functions.FunctionAnnotation;
-import org.apache.flink.api.java.operators.JoinOperator;
-import org.apache.flink.api.java.operators.MapOperator;
-import org.apache.flink.api.java.operators.ProjectOperator;
-import org.apache.flink.api.java.operators.ReduceOperator;
 import org.apache.flink.api.java.tuple.*;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
-import org.apache.flink.graph.library.LabelPropagation;
 import org.apache.flink.graph.library.SingleSourceShortestPaths;
-import org.apache.flink.graph.pregel.ComputeFunction;
-import org.apache.flink.graph.pregel.MessageCombiner;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.ScatterFunction;
 import org.apache.flink.types.NullValue;
-import org.apache.flink.util.Collector;
-import scala.util.parsing.combinator.testing.Str;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +24,7 @@ import java.util.List;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test16();
+        test14();
     }
 
 
@@ -263,7 +250,7 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
 
-        tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATBetweenness<String,NullValue>(maxIterations)).print();
+        tempgraphdoubles.run(new SSSTPBetweenness<String,NullValue>(maxIterations)).print();
 
 //        verticess.print();
     }
@@ -282,7 +269,7 @@ public class testclass {
                 .ignoreComments("%")  // comments start with "%"
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> TemporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
-        TemporalGraph.run(new SSSPTemporalCloseness<>("A",30,1,false));
+        System.out.println(TemporalGraph.run(new SSSTPClosenessSingleNode<>("B",30,1,false)));
 //        TemporalGraph.run(new SingleSourceShortestTemporalPathEAT<>("A",30)).print();
     }
     /*

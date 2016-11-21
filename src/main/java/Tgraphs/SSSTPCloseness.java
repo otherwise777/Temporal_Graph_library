@@ -1,7 +1,6 @@
 package Tgraphs;
 
 import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.api.common.typeutils.base.DoubleComparator;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -23,26 +22,19 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathEATBetweenness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
+public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
 
     private final Integer maxIterations;
+    private final Integer method;
+    private final boolean Normalized;
 
-    public SingleSourceShortestTemporalPathEATBetweenness(Integer maxIterations) {
+    public SSSTPCloseness(Integer maxIterations, Integer method, boolean Normalized) {
         this.maxIterations = maxIterations;
+        this.method = method;
+        this.Normalized = Normalized;
     }
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).getVertices().print();
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).mapVertices(new inbetweenmapper<>()).getVertices().print();
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).mapVertices(new inbetweenmapper<>()).reverse().runScatterGatherIteration(
-                new MinDistanceMessengerCountingPaths<K,EV>(), new VertexDistanceUpdaterCountingPaths<K>(),
-                maxIterations).getVertices().print();
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
                 maxIterations).mapVertices(new inbetweenmapper<>()).reverse().runScatterGatherIteration(
