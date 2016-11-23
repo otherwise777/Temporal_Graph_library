@@ -37,7 +37,7 @@ public class SSSTPClosenessSingleNode<K,EV> implements TGraphAlgorithm<K,NullVal
                     .map(new MapVertexForSummation()).reduce(new ReduceCloseness()).collect().get(0);
         }
         if(Normalized) {
-            Long nodecount = input.numberOfVertices();
+            Long nodecount = input.numberOfVertices() - 1;
             return result / nodecount;
         } else {
             return result;

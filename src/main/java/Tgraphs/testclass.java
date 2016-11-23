@@ -24,7 +24,7 @@ import java.util.List;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test14();
+        test18();
     }
 
 
@@ -250,7 +250,25 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
 
-        tempgraphdoubles.run(new SSSTPBetweenness<String,NullValue>(maxIterations)).print();
+        tempgraphdoubles.run(new SSSTPBetweenness<>(maxIterations)).print();
+
+//        verticess.print();
+    }
+
+    public static void test18() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 5;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
+
+        tempgraphdoubles.run(new SSSTPCloseness<>(maxIterations,1,false)).print();
 
 //        verticess.print();
     }

@@ -11,6 +11,7 @@ import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.GraphAlgorithm;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.types.NullValue;
+import scala.math.Numeric;
 
 import javax.xml.crypto.Data;
 
