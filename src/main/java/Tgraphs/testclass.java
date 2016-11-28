@@ -1,6 +1,9 @@
 package Tgraphs;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.*;
@@ -9,6 +12,8 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
+import org.apache.flink.graph.library.GSASingleSourceShortestPaths;
+import org.apache.flink.graph.library.PageRank;
 import org.apache.flink.graph.library.SingleSourceShortestPaths;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.GatherFunction;
@@ -17,6 +22,8 @@ import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by s133781 on 24-Oct-16.
@@ -24,7 +31,7 @@ import java.util.List;
 public class testclass {
     public static void main(String[] args) throws Exception {
         System.out.println("and so the testing begins");
-        test18();
+        test19();
     }
 
 
@@ -254,45 +261,6 @@ public class testclass {
 
 //        verticess.print();
     }
-
-    public static void test18() throws Exception {
-
-        Configuration conf = new Configuration();
-        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
-        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
-        int maxIterations = 5;
-
-        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
-                .fieldDelimiter(",")  // node IDs are separated by spaces
-                .ignoreComments("%")  // comments start with "%"
-                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
-        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
-
-        tempgraphdoubles.run(new SSSTPCloseness<>(maxIterations,1,false)).print();
-
-//        verticess.print();
-    }
-
-    public static void test16() throws Exception {
-
-        Configuration conf = new Configuration();
-        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 16000);
-//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
-//        conf.setFloat(ConfigConstants.Tas, 64000);
-        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
-        int maxIterations = 5;
-
-        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
-                .fieldDelimiter(",")  // node IDs are separated by spaces
-                .ignoreComments("%")  // comments start with "%"
-                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
-        Tgraph<String, NullValue, NullValue, Double> TemporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
-        System.out.println(TemporalGraph.run(new SSSTPClosenessSingleNode<>("B",30,1,false)));
-//        TemporalGraph.run(new SingleSourceShortestTemporalPathEAT<>("A",30)).print();
-    }
-    /*
-* Test with testgraph2, single shortset path EAT without paths
-* */
     public static void test15() throws Exception {
 
         Configuration conf = new Configuration();
@@ -363,6 +331,172 @@ public class testclass {
 
 
     }
+    public static void test16() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 16000);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 5;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, NullValue, NullValue, Double> TemporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
+        System.out.println(TemporalGraph.run(new SSSTPClosenessSingleNode<>("B",30,1,false)));
+//        TemporalGraph.run(new SingleSourceShortestTemporalPathEAT<>("A",30)).print();
+    }
+    public static void test18() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 5;
+
+        DataSet<Tuple4<String, String, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(",")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
+        Tgraph<String, NullValue, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles,env);
+
+
+
+        tempgraphdoubles.run(new SSSTPCloseness<>(maxIterations,1,false)).print();
+
+//        verticess.print();
+    }
+
+    /*
+    * Test with wilco's dataset running different algorithms
+    * */
+    public static void test19() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_FRACTION_KEY, 0.4F);
+//        conf.setFloat(ConfigConstants.Task, 0.4F);
+
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+
+        // sets can be 10M, 1M, 100k, 10k
+        String currentset = "C:\\Dropbox\\graphInstances\\graph1M.txt";
+        int maxiterations = 10;
+        // method can be: closeness, testsssp, ssstp
+        String method = "closeness";
+
+        DataSet<Tuple2<Integer, Integer>> temporalsetdoubles = env.readCsvFile(currentset)
+                .fieldDelimiter(" ")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .includeFields("101")
+                .types(Integer.class, Integer.class); // read the node IDs as Longs
+
+
+        long time = System.nanoTime();
+
+        System.out.println("done loading file");
+
+        if(method == "testsssp") {
+
+            DataSet<Edge<Integer, Double>> newset = temporalsetdoubles.map(new MapFunction<Tuple2<Integer, Integer>, Edge<Integer, Double>>() {
+                @Override
+                public Edge<Integer, Double> map(Tuple2<Integer, Integer> value) throws Exception {
+                    return new Edge<Integer, Double>(value.f0, value.f1, 1D);
+                }
+            });
+
+            Graph<Integer, Double, Double> testgraph = Graph.fromDataSet(newset, new InitVerticesFromIntegerToDouble(), env);
+            testgraph.getUndirected().run(new testSSSP<>(1, maxiterations)).first(10).print();
+        } else if(method == "ssstp") {
+
+//            creating the dataset of edges with random temporal edges
+            DataSet<Tuple4<Integer, Integer, Double, Double>> newset = temporalsetdoubles.map(
+                    new MapFunction<Tuple2<Integer, Integer>, Tuple4<Integer, Integer, Double, Double>>() {
+                        @Override
+                        public Tuple4<Integer, Integer, Double, Double> map(Tuple2<Integer, Integer> value) throws Exception {
+                            Double time =  ThreadLocalRandom.current().nextDouble(1000);
+                            return new Tuple4<>(value.f0, value.f1, time, time + 5);
+                        }
+                    });
+            Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(newset, env);
+//            temporalGraphfullset.getTemporalEdges().print();
+            temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1,maxiterations)).sortPartition(1, Order.ASCENDING).first(200).print();
+
+        } else if(method == "closeness") {
+            //creating the dataset of edges with random temporal edges
+            DataSet<Tuple4<Integer, Integer, Double, Double>> newset = temporalsetdoubles.map(
+                    new MapFunction<Tuple2<Integer, Integer>, Tuple4<Integer, Integer, Double, Double>>() {
+                        @Override
+                        public Tuple4<Integer, Integer, Double, Double> map(Tuple2<Integer, Integer> value) throws Exception {
+                            Double time =  ThreadLocalRandom.current().nextDouble(1000);
+                            return new Tuple4<>(value.f0, value.f1, time, time + 5);
+                        }
+                    });
+            Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(newset, env);
+//            temporalGraphfullset.getTemporalEdges().print();
+            temporalGraphfullset.run(new SSSTPCloseness<>(maxiterations,1,false)).sortPartition(1, Order.DESCENDING).first(200).print();
+        }
+
+        System.out.println((System.nanoTime() - time) / 1000000000 + " seconds");
+    }
+
+    public static void test20() throws Exception {
+
+        Configuration conf = new Configuration();
+        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_FRACTION_KEY,0.4F);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
+        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        int maxIterations = 1;
+
+        DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile("C:\\Dropbox\\AA_uni\\Data sets\\youtube growth\\youtube-u-growth\\out.youtube-u-growth")
+            .fieldDelimiter(" ")  // node IDs are separated by spaces
+            .ignoreComments("%")  // comments start with "%"
+            .types(Integer.class, Integer.class, Double.class, Double.class); // read the node IDs as Longs
+
+        DataSet<Tuple4<Integer, Integer, Double, Double>> newset = temporalsetdoubles.map(
+                new MapFunction<Tuple4<Integer, Integer, Double, Double>, Tuple4<Integer, Integer, Double, Double>>() {
+            @Override
+            public Tuple4<Integer, Integer, Double, Double> map(Tuple4<Integer, Integer, Double, Double> value) throws Exception {
+                return new Tuple4<>(value.f0,value.f1,value.f3 - 1165708800,value.f3 + 1 - 1165708800);
+            }
+        });
+        Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(newset.first(50000), env);
+        Graph<Integer, Double, Double> tempgraph = temporalGraphfullset.getGellyGraph().mapVertices(new InitVerticeNullfordoubles()).mapEdges(new MapFunction<Edge<Integer, Tuple3<NullValue, Double, Double>>, Double>() {
+            @Override
+            public Double map(Edge<Integer, Tuple3<NullValue, Double, Double>> integerTuple3Edge) throws Exception {
+                return 0D;
+            }
+        });
+        tempgraph.run(new PageRank<>(0.85,maxIterations)).first(50).print();
+
+//        Tgraph<Integer, NullValue, NullValue, Double> temporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(newset.first(500000), env);
+//        DataSet<Vertex<Integer, Double>> result = temporalGraph.run(new SingleSourceShortestTemporalPathEAT<>(2, maxIterations));
+//        result = result.filter(new FilterFunction<Vertex<Integer, Double>>() {
+//            @Override
+//            public boolean filter(Vertex<Integer, Double> integerDoubleVertex) throws Exception {
+//                if(integerDoubleVertex.getValue() == Double.MAX_VALUE) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//        });
+//        result.first(50).print();
+//        System.out.println(result.collect().size());
+
+//        temporalGraph.getTemporalEdges().first(50).print();
+//        System.out.println(TemporalGraph.run(new SSSTPClosenessSingleNode<>("B",30,1,false)));
+//        TemporalGraph.run(new SingleSourceShortestTemporalPathEAT<>("A",30)).print();
+    }
+    /*
+* Test with testgraph2, single shortset path EAT without paths
+* */
+
     public static final class vertextestmapperdataset<K>	implements MapFunction<Vertex<String, ArrayList<String>>, ArrayList<String>> {
         @Override
         public ArrayList<String> map(Vertex<String, ArrayList<String>> value) throws Exception {
@@ -379,13 +513,13 @@ public class testclass {
         }
 
 
-    @Override
-    public DataSet<Vertex<String, ArrayList<String>>> map(Vertex<String, NullValue> value) throws Exception {
-        DataSet<Vertex<String, ArrayList<String>>> tempa = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTJustPaths<>((String) value.getId(), 30));
+        @Override
+        public DataSet<Vertex<String, ArrayList<String>>> map(Vertex<String, NullValue> value) throws Exception {
+            DataSet<Vertex<String, ArrayList<String>>> tempa = tempgraphdoubles.run(new SingleSourceShortestTemporalPathSTTJustPaths<>((String) value.getId(), 30));
 
-        return tempa;
+            return tempa;
+        }
     }
-}
         /**
      * Distributes the minimum distance associated with a given vertex among all
      * the target vertices summed up with the edge's value.
@@ -517,6 +651,26 @@ public class testclass {
 
         @Override
         public Double map(String vertexId) {
+            return 0D;
+        }
+    }
+    public static final class InitVerticesFromNullToDouble implements MapFunction<NullValue, Double> {
+        @Override
+        public Double map(NullValue nullValue) throws Exception {
+            return 0D;
+        }
+    }
+    public static final class InitVerticesFromIntegerToDouble implements MapFunction<Integer, Double> {
+        @Override
+        public Double map(Integer t) throws Exception {
+            return 0D;
+        }
+    }
+
+    public static final class InitVerticeNullfordoubles implements MapFunction<Vertex<Integer,NullValue>, Double> {
+
+        @Override
+        public Double map(Vertex<Integer, NullValue> integerNullValueVertex) throws Exception {
             return 0D;
         }
     }

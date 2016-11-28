@@ -1,6 +1,7 @@
 package Tgraphs;
 
 import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
@@ -11,6 +12,7 @@ import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.GraphAlgorithm;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.types.NullValue;
+import org.apache.flink.util.Collector;
 import scala.math.Numeric;
 
 import javax.xml.crypto.Data;
@@ -252,6 +254,25 @@ public class Tgraph<K,VV,EV,N> {
         return algorithm.run(this);
     }
 
+    /**
+     * This operation adds all inverse-direction edges to the graph.
+     *
+     * @return the undirected graph.
+     */
+    public Tgraph<K, VV, EV, N> getUndirected() throws Exception {
+
+        return new Tgraph<K, VV, EV, N>(vertices,getGellyGraph().getUndirected().getEdges(),context);
+    }
+
+    private static final class RegularAndReversedEdgesMap<K, EV>
+            implements FlatMapFunction<Edge<K, EV>, Edge<K, EV>> {
+
+        @Override
+        public void flatMap(Edge<K, EV> edge, Collector<Edge<K, EV>> out) throws Exception {
+            out.collect(new Edge<K, EV>(edge.f0, edge.f1, edge.f2));
+            out.collect(new Edge<K, EV>(edge.f1, edge.f0, edge.f2));
+        }
+    }
 
     /*
     Determines the shortest path from @startingnode to every node in the graph

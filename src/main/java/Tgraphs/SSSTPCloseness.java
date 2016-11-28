@@ -9,6 +9,7 @@ import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.ScatterFunction;
+import org.apache.flink.graph.spargel.ScatterGatherConfiguration;
 import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
@@ -37,16 +38,19 @@ public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Doub
     }
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
-        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
-                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).mapVertices(new debugmapper<>()).getVertices().print();
+//        input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
+//                new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
+//                maxIterations).mapVertices(new debugmapper<>()).getVertices().print();
 //        return null;
+        ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
+        parameters.setName("test closeness");
+        parameters.setSolutionSetUnmanagedMemory(true);
 
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).mapVertices(new inbetweenmapper<>()).runScatterGatherIteration(
+                maxIterations, parameters).mapVertices(new inbetweenmapper<>()).runScatterGatherIteration(
                 new MinDistanceMessengerCountingPaths<K,EV>(), new VertexDistanceUpdaterCountingPaths<K>(),
-                1).mapVertices(new finalisationmapper<>()).getVertices();
+                1, parameters).mapVertices(new finalisationmapper<>()).getVertices();
 
 
     }
@@ -115,7 +119,7 @@ public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Doub
                 K value = tuple.f0;
                 if (dist != 0) {
 //                        sends message to source value with the inverse of the distance
-                    System.out.println("message send: " + vertex.getId().toString() + "->" + value.toString() + " : " + 1/dist);
+//                    System.out.println("message send: " + vertex.getId().toString() + "->" + value.toString() + " : " + 1/dist);
 
                     sendMessageTo(value,1/dist );
                 }
@@ -153,7 +157,7 @@ public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Doub
         @Override
         public void sendMessages(Vertex<K, BetVertexValue<K>> vertex) throws Exception {
 
-            System.out.println("start of iteration");
+//            System.out.println("start of iteration");
             for (Edge<K, Tuple3<EV, Double, Double>> edge : getEdges()) {
                 Iterator it = vertex.getValue().getIterator();
                 for (Map.Entry<K, Tuple3<Double,ArrayList<K>,Boolean>> entry : vertex.getValue().getentrySet()) {
@@ -164,7 +168,7 @@ public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Doub
 //                    Checks whether it can be send
                         if (edge.getValue().f1 >= tuple.f0) {
                             BetMsg<K> temp = new BetMsg<>(value, edge.getValue().f2, null);
-                            System.out.println("message send: " + value.toString() + ".." + edge.getSource().toString() + "->" + edge.getTarget().toString() + " : " + edge.getValue().f2.toString());
+//                            System.out.println("message send: " + value.toString() + ".." + edge.getSource().toString() + "->" + edge.getTarget().toString() + " : " + edge.getValue().f2.toString());
                             sendMessageTo(edge.getTarget(), temp);
                         }
                     }

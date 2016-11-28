@@ -9,6 +9,7 @@ import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.ScatterFunction;
+import org.apache.flink.graph.spargel.ScatterGatherConfiguration;
 import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ import java.util.ArrayList;
 public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
 
     private final K srcVertexId;
-    private final Integer maxIterations;
+    private final int maxIterations;
 
-    public SingleSourceShortestTemporalPathEAT(K srcVertexId, Integer maxIterations) {
+    public SingleSourceShortestTemporalPathEAT(K srcVertexId, int maxIterations) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
@@ -36,9 +37,13 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
 
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
+        ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
+        parameters.setName("test single source shortest temporal path EAT");
+        parameters.setSolutionSetUnmanagedMemory(true);
+
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
-                maxIterations).getVertices();
+                maxIterations,parameters).getVertices();
 
     }
 
