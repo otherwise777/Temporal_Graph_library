@@ -44,7 +44,9 @@ public class testSSSP<K> implements GraphAlgorithm<K, Double, Double, DataSet<Ve
 
         ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
         parameters.setName("test SSSP");
-        parameters.setSolutionSetUnmanagedMemory(true);
+//        parameters.setSolutionSetUnmanagedMemory(true);
+        parameters.setParallelism(1);
+//        parameters.set?
 
         return input.mapVertices(new org.apache.flink.graph.library.SingleSourceShortestPaths.InitVerticesMapper<K>(srcVertexId))
                 .runScatterGatherIteration(new MinDistanceMessenger<K>(), new VertexDistanceUpdater<K>(),

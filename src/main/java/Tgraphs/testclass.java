@@ -374,19 +374,19 @@ public class testclass {
     public static void test19() throws Exception {
 
         Configuration conf = new Configuration();
-        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
         conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_FRACTION_KEY, 0.4F);
-//        conf.setFloat(ConfigConstants.Task, 0.4F);
+        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SIZE_KEY,100000);
 
 //        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
 //        conf.setFloat(ConfigConstants.Tas, 64000);
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
 
         // sets can be 10M, 1M, 100k, 10k
-        String currentset = "C:\\Dropbox\\graphInstances\\graph1M.txt";
+        String currentset = "C:\\Dropbox\\graphInstances\\graph1m.txt";
         int maxiterations = 10;
         // method can be: closeness, testsssp, ssstp
-        String method = "closeness";
+        String method = "testsssp";
 
         DataSet<Tuple2<Integer, Integer>> temporalsetdoubles = env.readCsvFile(currentset)
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
@@ -409,7 +409,7 @@ public class testclass {
             });
 
             Graph<Integer, Double, Double> testgraph = Graph.fromDataSet(newset, new InitVerticesFromIntegerToDouble(), env);
-            testgraph.getUndirected().run(new testSSSP<>(1, maxiterations)).first(10).print();
+            testgraph.run(new testSSSP<>(1, maxiterations)).first(10).print();
         } else if(method == "ssstp") {
 
 //            creating the dataset of edges with random temporal edges
