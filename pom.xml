@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>een_naam</groupId>
-    <artifactId>wer</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>test</artifactId>
+    <version>1.0</version>
     <dependencies>
         <dependency>
             <groupId>org.apache.flink</groupId>
