@@ -43,7 +43,7 @@ public class SSSTPCloseness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Doub
 //                maxIterations).mapVertices(new debugmapper<>()).getVertices().print();
 //        return null;
         ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
-        parameters.setName("test closeness");
+        parameters.setName("closeness");
         parameters.setSolutionSetUnmanagedMemory(true);
 
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>()).runScatterGatherIteration(

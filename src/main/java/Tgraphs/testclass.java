@@ -29,7 +29,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by s133781 on 24-Oct-16.
  */
 public class testclass {
+    private static String[] arguments;
+
+
     public static void main(String[] args) throws Exception {
+        arguments = args;
         System.out.println("and so the testing begins");
         test19();
     }
@@ -56,7 +60,6 @@ public class testclass {
     /**
      * Initializes the vertex values with the vertex ID
      */
-
 
     private static void test9() throws Exception {
         Configuration conf = new Configuration();
@@ -372,21 +375,43 @@ public class testclass {
     * Test with wilco's dataset running different algorithms
     * */
     public static void test19() throws Exception {
-
-        Configuration conf = new Configuration();
-//        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
-        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_FRACTION_KEY, 0.4F);
-        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SIZE_KEY,100000);
-
-//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
-//        conf.setFloat(ConfigConstants.Tas, 64000);
-        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
+        final ExecutionEnvironment env;
 
         // sets can be 10M, 1M, 100k, 10k
-        String currentset = "C:\\Dropbox\\graphInstances\\graph1m.txt";
-        int maxiterations = 10;
+        String currentset = "C:\\Dropbox\\graphInstances\\" + arguments[0] + ".txt";
+        int maxiterations = Integer.parseInt(arguments[1]);
         // method can be: closeness, testsssp, ssstp
-        String method = "testsssp";
+        String method = arguments[2];
+        // boolean for usage of undirected graph
+        String undirected;
+        if(arguments.length > 3) {
+            undirected = arguments[3];
+        } else {
+            undirected = "false";
+        }
+
+        if(arguments.length > 4) {
+            Configuration conf = new Configuration();
+            conf.setString("fs.overwrite-files","true");
+            env = ExecutionEnvironment.createLocalEnvironment(conf);
+        } else {
+            env = ExecutionEnvironment.getExecutionEnvironment();
+
+        }
+
+
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_FRACTION_KEY, 0.4F);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SIZE_KEY,100000);
+//        conf.setString(ConfigConstants.TASK_MANAGER_MEMORY_OFF_HEAP_KEY, "2000");
+//        System.out.println(arguments[0]);
+//        conf.setFloat(ConfigConstants.TASK_MANAGER_MEMORY_SEGMENT_SIZE_KEY, 64000);
+//        conf.setFloat(ConfigConstants.Tas, 64000);
+//
+
+
+
+
 
         DataSet<Tuple2<Integer, Integer>> temporalsetdoubles = env.readCsvFile(currentset)
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
@@ -399,7 +424,7 @@ public class testclass {
 
         System.out.println("done loading file");
 
-        if(method == "testsssp") {
+        if(method.equals("testsssp")) {
 
             DataSet<Edge<Integer, Double>> newset = temporalsetdoubles.map(new MapFunction<Tuple2<Integer, Integer>, Edge<Integer, Double>>() {
                 @Override
@@ -409,8 +434,8 @@ public class testclass {
             });
 
             Graph<Integer, Double, Double> testgraph = Graph.fromDataSet(newset, new InitVerticesFromIntegerToDouble(), env);
-            testgraph.run(new testSSSP<>(1, maxiterations)).first(10).print();
-        } else if(method == "ssstp") {
+            testgraph.getUndirected().run(new testSSSP<>(1, maxiterations)).first(10).print();
+        } else if(method.equals("ssstp")) {
 
 //            creating the dataset of edges with random temporal edges
             DataSet<Tuple4<Integer, Integer, Double, Double>> newset = temporalsetdoubles.map(
@@ -423,9 +448,20 @@ public class testclass {
                     });
             Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(newset, env);
 //            temporalGraphfullset.getTemporalEdges().print();
-            temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1,maxiterations)).sortPartition(1, Order.ASCENDING).first(200).print();
+            DataSet<Vertex<Integer, Double>> resultset;
 
-        } else if(method == "closeness") {
+            if(undirected.equals("true")) {
+                System.out.println("works");
+                resultset = temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations));
+//                testvar.first(10).print();
+            } else {
+                resultset = temporalGraphfullset.run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations));
+            }
+//            resultset.print();
+            resultset.writeAsText("file:///C:\\Dropbox\\graphInstancesresult\\result_ssstp_" + arguments[0] + ".txt");
+            System.out.println(env.execute().getNetRuntime());
+
+        } else if(method.equals("closeness")) {
             //creating the dataset of edges with random temporal edges
             DataSet<Tuple4<Integer, Integer, Double, Double>> newset = temporalsetdoubles.map(
                     new MapFunction<Tuple2<Integer, Integer>, Tuple4<Integer, Integer, Double, Double>>() {
@@ -440,7 +476,7 @@ public class testclass {
             temporalGraphfullset.run(new SSSTPCloseness<>(maxiterations,1,false)).sortPartition(1, Order.DESCENDING).first(200).print();
         }
 
-        System.out.println((System.nanoTime() - time) / 1000000000 + " seconds");
+//        System.out.println((System.nanoTime() - time) / 1000000000 + " seconds");
     }
 
     public static void test20() throws Exception {

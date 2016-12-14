@@ -15,12 +15,15 @@ import org.apache.flink.types.NullValue;
 import java.util.ArrayList;
 
 /**
- * Created by s133781 on 03-Nov-16.
+ * Created by Wouter Ligtenberg on 03-Nov-16.
  *
- * input:
+ * This is an implementation of the Single-Source-Shortest-Temporal Paths EAT (earliest arrival time) algorithm
+ * using a scatter gather iteration. It determines the shortest temporal EAT path from the source node to all other nodes
+ * in the temporal graph.
+ * Input:
  * Tgraph <K,Double,EV,Double>
- * output:
- * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
+ * Output:
+ * Dataset<Vertex<K,Double>>
  *
  */
 public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Double>>> {
@@ -28,17 +31,21 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
     private final K srcVertexId;
     private final int maxIterations;
 
+    /**
+    * Creates an instance of the SingleSourceShortestTemporalPathEAT algorithm
+    * @param srcVertexId The ID of the source vertex.
+    * @param maxIterations The maximum number of iterations to run.
+    *
+    */
     public SingleSourceShortestTemporalPathEAT(K srcVertexId, int maxIterations) {
         this.srcVertexId = srcVertexId;
         this.maxIterations = maxIterations;
     }
 
-
-
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
-        parameters.setName("test single source shortest temporal path EAT");
+        parameters.setName("SSSTP");
         parameters.setSolutionSetUnmanagedMemory(true);
 
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(

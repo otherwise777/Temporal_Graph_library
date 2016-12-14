@@ -17,10 +17,13 @@ import org.apache.flink.types.NullValue;
  */
 public class memoryranouterror {
     public static void main(String[] args) throws Exception {
+//        Configuration conf = new Configuration();
 //        conf.setString(ConfigConstants.TASK_MANAGER_MEMORY_OFF_HEAP_KEY, "2000");
+
+//        final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSet<Tuple2<Long, Long>> twitterEdges = env.readCsvFile("./datasets/out.munmun_twitter_social")
+        DataSet<Tuple2<Long, Long>> twitterEdges = env.readCsvFile("C:\\git\\Temporal_Graph_library\\datasets\\out.munmun_twitter_social")
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
                 .ignoreComments("%")  // comments start with "%"
                 .types(Long.class,Long.class); // read the node IDs as Longs
@@ -35,7 +38,7 @@ public class memoryranouterror {
         });
 
         Long source = 0L;
-        DataSet<Vertex<Long, Double>> verticesWithCommunity = newgraph.run(new SingleSourceShortestPaths<Long>(source,1));
-        verticesWithCommunity.first(50).print();
+        DataSet<Vertex<Long, Double>> verticesWithCommunity = newgraph.run(new SingleSourceShortestPaths<Long>(source,30));
+        verticesWithCommunity.print();
     }
 }
