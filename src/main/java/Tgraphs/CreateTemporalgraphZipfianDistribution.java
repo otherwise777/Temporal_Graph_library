@@ -8,6 +8,8 @@ import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 
+import java.util.Random;
+
 /**
  * Created by s133781 on 07-Dec-16.
  */
@@ -19,10 +21,11 @@ public class CreateTemporalgraphZipfianDistribution {
         env = ExecutionEnvironment.createLocalEnvironment(conf);
         env.setParallelism(1);
 
+        Random R = new Random();
         String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
         String graph = "tgraph1m";
-        Integer distributionamount = 10000;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_uniform_" + distributionamount + ".txt";
+        Integer distributionamount = 100000;
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_zipfian.txt";
 
 //
         DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
@@ -35,8 +38,14 @@ public class CreateTemporalgraphZipfianDistribution {
                 new MapFunction<Tuple3<Integer, Integer, Integer>, Tuple4<Integer, Integer, Integer, Integer>>() {
                     @Override
                     public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
-                        Integer timestart = value.f2;
-                        return new Tuple4<>(value.f0, value.f1, timestart, timestart + distributionamount);
+                        Double timeend = zipfianfunction(R.nextInt(100000)) * distributionamount + value.f2;
+                        return new Tuple4<>(value.f0, value.f1, value.f2, timeend.intValue());
+                    }
+                    Double zipfianfunction(Integer input) {
+                        if((2 ^ input) == 0) {
+                            return 0d;
+                        }
+                        return 1d / (2 ^ input);
                     }
                 });
         newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {
@@ -47,4 +56,5 @@ public class CreateTemporalgraphZipfianDistribution {
         });
         env.execute();
     }
+
 }
