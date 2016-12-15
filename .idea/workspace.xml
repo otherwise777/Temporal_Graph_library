@@ -97,8 +97,8 @@
       <file leaf-file-name="CreateTemporalgraph.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-425">
-              <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+            <state relative-caret-position="272">
+              <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
               <folding>
                 <element signature="method#cleanfacebookgraph#0;class#CreateTemporalgraph#0" expanded="false" />
                 <element signature="method#cleanWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
@@ -1073,7 +1073,7 @@
       <workItem from="1479912226765" duration="64603000" />
       <workItem from="1480496005523" duration="10470000" />
       <workItem from="1481711080403" duration="5996000" />
-      <workItem from="1481725478665" duration="8782000" />
+      <workItem from="1481725478665" duration="9245000" />
     </task>
     <servers />
   </component>
@@ -1101,7 +1101,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="379915000" />
+    <option name="totallyTimeSpent" value="380378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1658,8 +1658,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-425">
-          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+        <state relative-caret-position="272">
+          <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
           <folding>
             <element signature="method#cleanfacebookgraph#0;class#CreateTemporalgraph#0" expanded="false" />
             <element signature="method#cleanWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
