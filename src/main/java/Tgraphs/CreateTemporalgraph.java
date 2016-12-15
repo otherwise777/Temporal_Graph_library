@@ -11,15 +11,14 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
+import org.apache.hadoop.ipc.Server;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.*;
+import java.sql.*;
 
 /**
  * Created by s133781 on 07-Dec-16.
@@ -38,7 +37,7 @@ public class CreateTemporalgraph {
         String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph100k.txt";
         boolean runonetime = true;
 
-        unionWikiEditGraph(env);
+        cleanupFacebookMessageGraph();
 //        cleanWikiEditGraph();
 //        cleanfacebookgraph(env,"C:\\Dropbox\\tgraphInstances\\facebookfriends_uncleaned.txt","C:\\Dropbox\\tgraphInstances\\tgraph_real_facebookfriends.txt");
 
@@ -213,9 +212,13 @@ public class CreateTemporalgraph {
             ex.printStackTrace();
         }
     }
-    public static void unionWikiEditGraph(ExecutionEnvironment env) {
+    /*
+    * This class is used to combine all the different subssets created by the cleanfacebookgraph() class
+    * */
+    public static void unionWikiEditGraph(ExecutionEnvironment env) throws Exception {
 
         String inputfilestart = "C:\\Dropbox\\tgraphInstances\\wikieditsnotraw_3.txt";
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsraw_combined.txt";
 
         DataSet<Tuple4<Integer, Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(inputfilestart)
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
@@ -225,7 +228,7 @@ public class CreateTemporalgraph {
 
         for (int a = 4; a < 20; a++) {
             String inputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsnotraw_" + a + ".txt";
-            String outputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsraw_combined.txt";
+
 
             DataSet<Tuple4<Integer, Integer, Integer, Integer>> tempset = env.readCsvFile(inputfile)
                     .fieldDelimiter(" ")  // node IDs are separated by spaces
@@ -234,9 +237,88 @@ public class CreateTemporalgraph {
                     .types(Integer.class, Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
 
             temporalsetdoubles = temporalsetdoubles.union(tempset);
-
-
+            System.out.println("count of iteration: " + a + " " + temporalsetdoubles.count());
 
         }
+        temporalsetdoubles.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {
+            @Override
+            public String format(Tuple4<Integer, Integer, Integer, Integer> value) {
+                return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f3;
+            }
+        });
+        env.execute();
+    }
+    /*
+    * This class reads the file and adds everything to a mysql database to be grouped
+    * */
+    public static void cleanupFacebookMessageGraph() throws SQLException, ClassNotFoundException {
+
+        String inputfile = "C:\\Dropbox\\tgraphInstances\\facebook_messages_uncleaned.txt";
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection=DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3307/datasets","root","usbw");
+//here sonoo is database name, root is username and password
+//            Statement stmt=connection.createStatement();
+            ArrayList<String> queries = new ArrayList<>();
+            Scanner input = new Scanner(new File(inputfile));
+            Statement statement = connection.createStatement();
+            String appender = "INSERT into wikimsg (src,tar,sta,end) VALUES";
+            int i = 0;
+
+            while (input.hasNextLine()) {
+
+                String line = input.nextLine();
+
+                String[] lineelements = line.split(" ");
+                if (Objects.equals(lineelements[0], "%")) {
+                    continue;
+                }
+                if (lineelements.length < 4) {
+                    continue;
+                }
+
+                String src = lineelements[0];
+                String tar = lineelements[1];
+                String sta = lineelements[3];
+                String end = "0";
+
+//                statement.addBatch("INSERT into wikimsg (src,tar,sta,end) VALUES ");
+                i++;
+                if(i % 5000 == 0) {
+                    appender = appender + "(" + src + "," + tar + "," + sta + "," + end + ")";
+                    System.out.println("currently at: " + i);
+                    statement.addBatch(appender);
+                    statement.executeBatch();
+                    appender = "INSERT into wikimsg (src,tar,sta,end) VALUES";
+                } else {
+                    appender = appender + "(" + src + "," + tar + "," + sta + "," + end + "),";
+                }
+
+            }
+            System.out.println("starting execute");
+
+            statement.executeBatch();
+            statement.close();
+            connection.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public static void cleanupFacebookMessageGraphGetResultsquery() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection=DriverManager.getConnection(
+                "jdbc:mysql://localhost:3307/datasets","root","usbw");
+//here sonoo is database name, root is username and password
+//            Statement stmt=connection.createStatement();
+        ArrayList<String> queries = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        String appender = "INSERT into wikimsg (src,tar,sta,end) VALUES";
+        int i = 0;
+
+        
     }
 }
