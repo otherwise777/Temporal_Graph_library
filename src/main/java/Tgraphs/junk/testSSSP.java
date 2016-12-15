@@ -1,4 +1,4 @@
-package Tgraphs;
+package Tgraphs.junk;
 
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;

@@ -1,5 +1,7 @@
-package Tgraphs;
+package Tgraphs.BenchmarkingClasses;
 
+import Tgraphs.SingleSourceShortestTemporalPathEAT;
+import Tgraphs.Tgraph;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -19,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by s133781 on 07-Dec-16.
  */
-public class anaysistest {
+public class analysistest {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env;
         if(args.length > 4) {

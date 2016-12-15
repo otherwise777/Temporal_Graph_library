@@ -1,4 +1,4 @@
-package Tgraphs;
+package Tgraphs.Creatingtemporalgraphs;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.flink.api.common.functions.MapFunction;

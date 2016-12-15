@@ -32,12 +32,11 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="testclass.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/testclass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="63" column="49" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
+            <state relative-caret-position="0">
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="false" />
                 <element signature="method#test9#0;class#testclass#0" expanded="false" />
                 <element signature="method#test10#0;class#testclass#0" expanded="false" />
                 <element signature="method#test11#0;class#testclass#0" expanded="false" />
@@ -53,30 +52,26 @@
                 <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
                 <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
                 <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
-                <element signature="e#34441#34442#0" expanded="false" />
-                <element signature="e#34474#34475#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CreateTemporalgraphZipfianDistribution.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphZipfianDistribution.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphZipfianDistribution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CreateTemporalgraphUniformDistribution.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphUniformDistribution.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphUniformDistribution.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -85,83 +80,83 @@
         </entry>
       </file>
       <file leaf-file-name="anaysistestparalel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/anaysistestparalel.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/BenchmarkingClasses/anaysistestparalel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="57" column="107" selection-start-line="57" selection-start-column="82" selection-end-line="57" selection-end-column="107" />
+            <state relative-caret-position="119">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateTemporalgraph.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraph.java">
+      <file leaf-file-name="testSSSP.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/testSSSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="321" selection-end-column="8" />
+            <state relative-caret-position="136">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="memoryranouterror.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/memoryranouterror.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateTemporalgraph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#cleanfacebookgraph#0;class#CreateTemporalgraph#0" expanded="false" />
+                <element signature="method#cleanWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
                 <element signature="method#unionWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
-                <marker date="1481807951425" expanded="true" signature="12106:12150" ph="INSERT into wikimsg... " />
-                <marker date="1481807951425" expanded="true" signature="12741:12785" ph="INSERT into wikimsg... " />
-                <marker date="1481807951425" expanded="true" signature="12741:12786" ph="INSERT into wikimsg... " />
-                <marker date="1481807951425" expanded="true" signature="13132:13176" ph="INSERT into wikimsg... " />
+                <element signature="method#cleanupFacebookMessageGraph#0;class#CreateTemporalgraph#0" expanded="false" />
+                <element signature="method#cleanupFacebookMessageGraphGetResultsquery#0;class#CreateTemporalgraph#0" expanded="false" />
+                <element signature="method#cleangraphuniform#0;class#CreateTemporalgraph#0" expanded="false" />
+                <marker date="1481814832990" expanded="true" signature="12358:12402" ph="INSERT into wikimsg... " />
+                <marker date="1481814832990" expanded="true" signature="12993:13037" ph="INSERT into wikimsg... " />
+                <marker date="1481814832990" expanded="true" signature="12993:13038" ph="INSERT into wikimsg... " />
+                <marker date="1481814832990" expanded="true" signature="13384:13428" ph="INSERT into wikimsg... " />
+                <marker date="1481814832990" expanded="true" signature="14698:14753" ph="SELECT * FRO... wikimsg" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_91/src.zip!/java/util/ArrayList.java">
+      <file leaf-file-name="CreateTemporalgraphLinearDistribution.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphLinearDistribution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="1269" column="26" selection-start-line="1269" selection-start-column="26" selection-end-line="1269" selection-end-column="26" />
-              <folding>
-                <element signature="e#46390#46391#0" expanded="true" />
-                <element signature="e#46455#46456#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+            <state relative-caret-position="-8">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSet.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-java/1.1.3/flink-java-1.1.3-sources.jar!/org/apache/flink/api/java/DataSet.java">
+      <file leaf-file-name="CreateTemporalgraphNormalDistribution.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphNormalDistribution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7769">
-              <caret line="553" column="40" selection-start-line="553" selection-start-column="40" selection-end-line="553" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#80366#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#6449#6450#0" expanded="false" />
-                <element signature="e#6475#6476#0" expanded="false" />
-                <element signature="e#15583#15584#0" expanded="false" />
-                <element signature="e#15631#15632#0" expanded="false" />
-                <element signature="e#16230#16231#0" expanded="false" />
-                <element signature="e#16278#16279#0" expanded="false" />
-                <element signature="e#16881#16882#0" expanded="false" />
-                <element signature="e#16929#16930#0" expanded="false" />
-                <element signature="e#27646#27647#0" expanded="false" />
-                <element signature="e#27723#27724#0" expanded="false" />
-                <element signature="e#33302#33303#0" expanded="false" />
-                <element signature="e#33351#33352#0" expanded="false" />
-                <element signature="e#67881#67882#0" expanded="false" />
-                <element signature="e#67946#67947#0" expanded="false" />
-                <element signature="e#76308#76309#0" expanded="false" />
-                <element signature="e#76372#76373#0" expanded="false" />
-                <element signature="e#76814#76815#0" expanded="false" />
-                <element signature="e#76886#76887#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="-8">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="analysistest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/BenchmarkingClasses/analysistest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -220,6 +215,10 @@
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/anaysistestparalel.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/anaysistest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphZipfianDistribution.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/BenchmarkingClasses/anaysistestparalel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Tgraphs/junk/memoryranouterror.java" />
       </list>
     </option>
   </component>
@@ -445,6 +444,96 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tgraphs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tgraphs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Creatingtemporalgraphs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tgraphs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BenchmarkingClasses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Temporal_Graph_library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="datasets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -492,7 +581,7 @@
   <component name="RunManager" selected="Application.CreateTemporalgraph">
     <configuration default="false" name="testclass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Tgraphs.testclass" />
+      <option name="MAIN_CLASS_NAME" value="Tgraphs.junk.testclass" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -529,11 +618,11 @@
     <configuration default="false" name="memoryranouterror" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="Tgraphs.*" />
+          <option name="PATTERN" value="Tgraphs.Creatingtemporalgraphs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="Tgraphs.memoryranouterror" />
+      <option name="MAIN_CLASS_NAME" value="Tgraphs.junk.memoryranouterror" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -549,11 +638,11 @@
     <configuration default="false" name="CreateTemporalgraph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="Tgraphs.*" />
+          <option name="PATTERN" value="Tgraphs.Creatingtemporalgraphs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="Tgraphs.CreateTemporalgraph" />
+      <option name="MAIN_CLASS_NAME" value="Tgraphs.Creatingtemporalgraphs.CreateTemporalgraph" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1091,7 +1180,7 @@
       <workItem from="1479912226765" duration="64603000" />
       <workItem from="1480496005523" duration="10470000" />
       <workItem from="1481711080403" duration="5996000" />
-      <workItem from="1481725478665" duration="15911000" />
+      <workItem from="1481725478665" duration="20948000" />
     </task>
     <servers />
   </component>
@@ -1119,11 +1208,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="387044000" />
+    <option name="totallyTimeSpent" value="392081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1138,7 +1227,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21088019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25366747" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1202,7 +1291,7 @@
           <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="67" />
+      <option name="time" value="68" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1211,13 +1300,6 @@
     <option name="FILTER_TARGETS" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinWorkerThread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/concurrent/forkjoin/ForkJoinPool.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1451,16 +1533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testSSSP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.1.3/flink-core-1.1.3.jar!/org/apache/flink/configuration/ConfigConstants.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -1504,16 +1576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/memoryranouterror.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-java/1.1.2/flink-java-1.1.2-sources.jar!/org/apache/flink/api/java/io/CsvReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
@@ -1521,73 +1583,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphNormalDistribution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/testdata">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphLinearDistribution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/testclass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="63" column="49" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#test9#0;class#testclass#0" expanded="false" />
-            <element signature="method#test10#0;class#testclass#0" expanded="false" />
-            <element signature="method#test11#0;class#testclass#0" expanded="false" />
-            <element signature="method#test12#0;class#testclass#0" expanded="false" />
-            <element signature="method#test13#0;class#testclass#0" expanded="false" />
-            <element signature="method#test14#0;class#testclass#0" expanded="false" />
-            <element signature="method#test15#0;class#testclass#0" expanded="false" />
-            <element signature="method#test16#0;class#testclass#0" expanded="false" />
-            <element signature="method#test18#0;class#testclass#0" expanded="false" />
-            <element signature="method#test20#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
-            <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
-            <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
-            <element signature="e#34441#34442#0" expanded="false" />
-            <element signature="e#34474#34475#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphZipfianDistribution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraphUniformDistribution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1624,14 +1623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="218" column="23" selection-start-line="218" selection-start-column="23" selection-end-line="218" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/anaysistestparalel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="57" column="107" selection-start-line="57" selection-start-column="82" selection-end-line="57" selection-end-column="107" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1678,19 +1669,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/CreateTemporalgraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="321" selection-end-column="8" />
+        <state relative-caret-position="215">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#cleanfacebookgraph#0;class#CreateTemporalgraph#0" expanded="false" />
+            <element signature="method#cleanWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
             <element signature="method#unionWikiEditGraph#0;class#CreateTemporalgraph#0" expanded="false" />
-            <marker date="1481807951425" expanded="true" signature="12106:12150" ph="INSERT into wikimsg... " />
-            <marker date="1481807951425" expanded="true" signature="12741:12785" ph="INSERT into wikimsg... " />
-            <marker date="1481807951425" expanded="true" signature="12741:12786" ph="INSERT into wikimsg... " />
-            <marker date="1481807951425" expanded="true" signature="13132:13176" ph="INSERT into wikimsg... " />
+            <element signature="method#cleanupFacebookMessageGraph#0;class#CreateTemporalgraph#0" expanded="false" />
+            <element signature="method#cleanupFacebookMessageGraphGetResultsquery#0;class#CreateTemporalgraph#0" expanded="false" />
+            <element signature="method#cleangraphuniform#0;class#CreateTemporalgraph#0" expanded="false" />
+            <marker date="1481814832990" expanded="true" signature="12358:12402" ph="INSERT into wikimsg... " />
+            <marker date="1481814832990" expanded="true" signature="12993:13037" ph="INSERT into wikimsg... " />
+            <marker date="1481814832990" expanded="true" signature="12993:13038" ph="INSERT into wikimsg... " />
+            <marker date="1481814832990" expanded="true" signature="13384:13428" ph="INSERT into wikimsg... " />
+            <marker date="1481814832990" expanded="true" signature="14698:14753" ph="SELECT * FRO... wikimsg" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphLinearDistribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphNormalDistribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphUniformDistribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/Creatingtemporalgraphs/CreateTemporalgraphZipfianDistribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/BenchmarkingClasses/analysistest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/BenchmarkingClasses/anaysistestparalel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/testclass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <element signature="method#test9#0;class#testclass#0" expanded="false" />
+            <element signature="method#test10#0;class#testclass#0" expanded="false" />
+            <element signature="method#test11#0;class#testclass#0" expanded="false" />
+            <element signature="method#test12#0;class#testclass#0" expanded="false" />
+            <element signature="method#test13#0;class#testclass#0" expanded="false" />
+            <element signature="method#test14#0;class#testclass#0" expanded="false" />
+            <element signature="method#test15#0;class#testclass#0" expanded="false" />
+            <element signature="method#test16#0;class#testclass#0" expanded="false" />
+            <element signature="method#test18#0;class#testclass#0" expanded="false" />
+            <element signature="method#test20#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessenger#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuple#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuplewithpath2#0;class#testclass#0" expanded="false" />
+            <element signature="class#MinDistanceMessengerforTuplewithpath#0;class#testclass#0" expanded="false" />
+            <element signature="class#VertexDistanceUpdater#0;class#testclass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/testSSSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tgraphs/junk/memoryranouterror.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

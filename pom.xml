@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Tgraphs.CreateTemporalgraph</mainClass>
+                            <mainClass>Tgraphs.Creatingtemporalgraphs.CreateTemporalgraph</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

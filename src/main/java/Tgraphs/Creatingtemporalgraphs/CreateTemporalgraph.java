@@ -1,4 +1,4 @@
-package Tgraphs;
+package Tgraphs.Creatingtemporalgraphs;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -37,9 +37,14 @@ public class CreateTemporalgraph {
         String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph100k.txt";
         boolean runonetime = true;
 
-        cleanupFacebookMessageGraph();
+
+//        cleangraphuniform(env,"C:\\Dropbox\\tgraphInstances\\facebook_messages_uncleaned.txt","C:\\Dropbox\\tgraphInstances\\facebook_messages_cleaned_uniform.txt");
+
+//        cleanupFacebookMessageGraphGetResultsquery();
+
+//        cleanupFacebookMessageGraph();
 //        cleanWikiEditGraph();
-//        cleanfacebookgraph(env,"C:\\Dropbox\\tgraphInstances\\facebookfriends_uncleaned.txt","C:\\Dropbox\\tgraphInstances\\tgraph_real_facebookfriends.txt");
+        cleanfacebookgraph(env,"C:\\Dropbox\\tgraphInstances\\facebookfriends_uncleaned.txt","C:\\Dropbox\\tgraphInstances\\tgraph_real_facebookfriends.txt");
 
         if(runonetime) { return; }
 //
@@ -98,7 +103,7 @@ public class CreateTemporalgraph {
         tempb.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple3<Integer, Integer, Integer>>() {
             @Override
             public String format(Tuple3<Integer, Integer, Integer> value) {
-                return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f2 + 1;
+                return value.f0 + " " + value.f1 + " " + value.f2 + " " + (value.f2 + 1);
             }
         });
         env.execute();
@@ -308,7 +313,9 @@ public class CreateTemporalgraph {
         }
     }
 
-    public static void cleanupFacebookMessageGraphGetResultsquery() throws ClassNotFoundException, SQLException {
+    public static void cleanupFacebookMessageGraphGetResultsquery() throws ClassNotFoundException, SQLException, IOException {
+
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\facebook_messages_cleaned.txt";
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection=DriverManager.getConnection(
                 "jdbc:mysql://localhost:3307/datasets","root","usbw");
@@ -319,6 +326,53 @@ public class CreateTemporalgraph {
         String appender = "INSERT into wikimsg (src,tar,sta,end) VALUES";
         int i = 0;
 
-        
+        ArrayList<Tuple4<String,String,Integer,Integer>> resulttuples = new ArrayList<>();
+        ResultSet results = statement.executeQuery("SELECT * FROM  `wikimsg` WHERE 1 ORDER BY src, tar, sta");
+        String lastsource = "";
+        String lasttarget = "";
+        Integer lasttime = 0;
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outputfile));
+        while (results.next()) {
+            i++;
+            String source = results.getString(1);
+            String target = results.getString(2);
+            Integer start = results.getInt(3);
+//            check if we have the same element as before
+            if(source.equals(lastsource) && target.equals(lasttarget)) {
+//                both messages happend within 24hours
+                if(lasttime + 86400 > start) {
+                    writer.append(source + " " + target + " " + lasttime + " " + start + System.lineSeparator());
+//                    resulttuples.add(new Tuple4<>(source,target,lasttime,start));
+                }
+                lasttime = start;
+            } else {
+                lastsource = source;
+                lasttarget = target;
+            }
+
+
+        }
+        writer.close();
+
+    }
+
+    /*
+    * Transforms a graph with time instances to a uniformly distributed time windowed graph
+    * */
+    public static void cleangraphuniform(ExecutionEnvironment env, String inputfile, String outputfile) throws Exception {
+        DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(inputfile)
+                .fieldDelimiter(" ")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .includeFields("1101")
+                .types(Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
+
+        temporalsetdoubles.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple3<Integer, Integer, Integer>>() {
+            @Override
+            public String format(Tuple3<Integer, Integer, Integer> value) {
+                return value.f0 + " " + value.f1 + " " + value.f2 + " " + (value.f2 + 1);
+            }
+        });
+        env.execute();
+
     }
 }

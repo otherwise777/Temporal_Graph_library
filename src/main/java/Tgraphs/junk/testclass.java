@@ -1,7 +1,6 @@
-package Tgraphs;
+package Tgraphs.junk;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import org.apache.flink.api.common.functions.FilterFunction;
+import Tgraphs.*;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
@@ -12,7 +11,6 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
-import org.apache.flink.graph.library.GSASingleSourceShortestPaths;
 import org.apache.flink.graph.library.PageRank;
 import org.apache.flink.graph.library.SingleSourceShortestPaths;
 import org.apache.flink.graph.spargel.MessageIterator;
@@ -22,7 +20,6 @@ import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
