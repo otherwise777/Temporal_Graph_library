@@ -1,16 +1,25 @@
 package Tgraphs;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.io.TextOutputFormat;
+import org.apache.flink.api.java.operators.DataSink;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by s133781 on 07-Dec-16.
@@ -27,10 +36,13 @@ public class CreateTemporalgraph {
         Random R = new Random();
         Integer height = 10000;
         String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph100k.txt";
+        boolean runonetime = true;
 
+        unionWikiEditGraph(env);
+//        cleanWikiEditGraph();
+//        cleanfacebookgraph(env,"C:\\Dropbox\\tgraphInstances\\facebookfriends_uncleaned.txt","C:\\Dropbox\\tgraphInstances\\tgraph_real_facebookfriends.txt");
 
-
-
+        if(runonetime) { return; }
 //
         DataSet<Tuple2<Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
@@ -54,5 +66,177 @@ public class CreateTemporalgraph {
             }
         });
         env.execute();
+    }
+    /*
+    * Cleans up facebook friendship graph, removes zero values and removes a value to make the set smaller and adding a 4th value, a +1
+    * */
+    public static void cleanfacebookgraph(ExecutionEnvironment env, String inputfile, String outputfile) throws Exception {
+        DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(inputfile)
+                .fieldDelimiter(" ")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .includeFields("1101")
+                .types(Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
+
+        DataSet<Tuple3<Integer, Integer, Integer>> tempa = temporalsetdoubles.filter(new FilterFunction<Tuple3<Integer, Integer, Integer>>() {
+            @Override
+            public boolean filter(Tuple3<Integer, Integer, Integer> value) throws Exception {
+                if (value.f2 == 0) {
+                    return false;
+                }
+                return true;
+            }
+        });
+
+//        tempa.minBy(2).print();
+        DataSet<Tuple3<Integer, Integer, Integer>> tempb = tempa.map(new MapFunction<Tuple3<Integer, Integer, Integer>, Tuple3<Integer, Integer, Integer>>() {
+             @Override
+             public Tuple3<Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
+                 return new Tuple3<Integer, Integer, Integer>(value.f0,value.f1,value.f2 - 1157454928);
+             }
+         });
+
+
+        tempb.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple3<Integer, Integer, Integer>>() {
+            @Override
+            public String format(Tuple3<Integer, Integer, Integer> value) {
+                return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f2 + 1;
+            }
+        });
+        env.execute();
+
+    }
+
+    /*
+    * this class was created to clean up the wikiedits page, it had edges labels indicating if an edge was removed or added, i transformed
+    * it into a temporal graph with time windows of the edge existince.
+    * Some of the code is a bit hacky since i reached the upper limits of my systems heap space
+    * */
+    public static void cleanWikiEditGraph() {
+
+
+
+        try {
+//            System.out.print(inputfile);
+
+//            File file = new File(input.nextLine());
+
+//            input = new Scanner(file);
+
+//            hasmap with source target as key, and time as result
+            HashMap<String,String> allentries = new HashMap<>();
+
+
+
+
+            int i = 0;
+            int faultrecords = 0;
+            int succesfullwrites = 0;
+            int startingminus = 0;
+            for (int a = 11; a < 20; a++) {
+                String inputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsraw.txt";
+                String outputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsnotraw_" + a + ".txt";
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(outputfile));
+                Scanner input = new Scanner(new File(inputfile));
+                System.out.println("removing entries: " + allentries.size());
+                allentries.clear();
+                while (input.hasNextLine()) {
+                    String line = input.nextLine();
+
+                    String[] lineelements = line.split(" ");
+                    if (Objects.equals(lineelements[0], "%")) {
+                        continue;
+                    } else {
+                        if (lineelements.length < 4) {
+                            continue;
+                        }
+//                    int source = lineelements[0]
+//                    int i = source + target % 100;
+                        // put in file_i
+
+                        String sourcetarget = lineelements[0] + "_" + lineelements[1];
+
+
+                        if (sourcetarget.length() == a) {
+
+
+                            String evalue = lineelements[2];
+                            String time = lineelements[3];
+//                    if the entry is available
+//                    System.out.println("starting line: " + line);
+                            if (allentries.containsKey(sourcetarget)) {
+                                if (evalue.equals("-1")) {
+//                            write it away
+//                            System.out.println("match found, writing it to file");
+                                    writer.append(sourcetarget.replaceAll("_", " ") + " " + allentries.get(sourcetarget) + " " + time + System.lineSeparator());
+                                    allentries.remove(sourcetarget);
+                                    succesfullwrites++;
+                                } else {
+//                            overwrite it if it exists
+                                    allentries.put(sourcetarget, time);
+                                    faultrecords++;
+                                    System.out.println("this shouldnt happen, but overwriting +1");
+                                }
+                            } else {
+//                        it doesnt exist,
+                                if (Objects.equals(evalue, "-1")) {
+//                            we do nothing since we ignore this case
+                                    startingminus++;
+                                } else {
+//                            create the instance
+                                    allentries.put(sourcetarget, time);
+                                }
+                            }
+                            i++;
+                            if (i % 50000 == 0) {
+                                writer.flush();
+                                System.out.println("processing line: " + line);
+                            }
+                        }
+
+                    }
+
+//                System.out.println(line);
+
+                }
+                input.close();
+                writer.close();
+            }
+            System.out.println("Records that were left untouched: " + allentries.size());
+            System.out.println("Records that were duplicate: " + faultrecords);
+            System.out.println("Records that were succesfully processed: " + succesfullwrites);
+            System.out.println("Records that had a removal before adding: " + startingminus);
+
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    public static void unionWikiEditGraph(ExecutionEnvironment env) {
+
+        String inputfilestart = "C:\\Dropbox\\tgraphInstances\\wikieditsnotraw_3.txt";
+
+        DataSet<Tuple4<Integer, Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(inputfilestart)
+                .fieldDelimiter(" ")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .includeFields("1111")
+                .types(Integer.class, Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
+
+        for (int a = 4; a < 20; a++) {
+            String inputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsnotraw_" + a + ".txt";
+            String outputfile = "C:\\Dropbox\\tgraphInstances\\wikieditsraw_combined.txt";
+
+            DataSet<Tuple4<Integer, Integer, Integer, Integer>> tempset = env.readCsvFile(inputfile)
+                    .fieldDelimiter(" ")  // node IDs are separated by spaces
+                    .ignoreComments("%")  // comments start with "%"
+                    .includeFields("1111")
+                    .types(Integer.class, Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
+
+            temporalsetdoubles = temporalsetdoubles.union(tempset);
+
+
+
+        }
     }
 }
