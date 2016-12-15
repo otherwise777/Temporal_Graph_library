@@ -47,4 +47,4 @@ Temporary Items
 .apdisk
 *.jar
 /target
-.idea/workspace.xml
+/.idea

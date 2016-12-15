@@ -19,7 +19,10 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by s133781 on 07-Dec-16.
+ * Class for doing some benchmarking tests with the EAT algorithm
+ * The class iterates over the different graphs indicated by @param graphs
+ * the class then appends the results in the results.txt file for the results
+ *
  */
 public class analysistest {
     public static void main(String[] args) throws Exception {
