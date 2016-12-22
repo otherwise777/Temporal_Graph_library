@@ -11,6 +11,8 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
+import org.apache.flink.graph.library.GSAPageRank;
+import org.apache.flink.graph.library.LabelPropagation;
 import org.apache.flink.graph.library.PageRank;
 import org.apache.flink.graph.library.SingleSourceShortestPaths;
 import org.apache.flink.graph.spargel.MessageIterator;
@@ -32,7 +34,7 @@ public class testclass {
     public static void main(String[] args) throws Exception {
         arguments = args;
         System.out.println("and so the testing begins");
-        test19();
+        test13();
     }
 
 
@@ -237,9 +239,18 @@ public class testclass {
                 .types(String.class, String.class, Double.class, Double.class); // read the node IDs as Longs
         Tgraph<String, Double, NullValue, Double> tempgraphdoubles = Tgraph.From4TupleNoEdgesWithVertices(temporalsetdoubles,new InitVerticesfordoubles(),env);
 
-        DataSet<Vertex<String,Tuple2<Double,ArrayList<String>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>("A",maxIterations));
+        Graph<String, Double, Double> tempgraph = tempgraphdoubles.getGellyGraph().mapVertices(new InitVerticeNullfordoublesstring()).mapEdges(new MapFunction<Edge<String, Tuple3<NullValue, Double, Double>>, Double>() {
+            @Override
+            public Double map(Edge<String, Tuple3<NullValue, Double, Double>> stringTuple3Edge) throws Exception {
+                return 1D;
+            }
+        });
+        tempgraph.run(new PageRank<>(0.85,30)).print();
+//        tempgraph.run(new LabelPropagation<>())
 
-        verticess.print();
+//        DataSet<Vertex<String,Tuple2<Double,ArrayList<String>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>("A",maxIterations));
+
+//        verticess.print();
     }
     /*
 * Test with testgraph2, single shortset path EAT without paths
@@ -486,7 +497,7 @@ public class testclass {
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
         int maxIterations = 1;
 
-        DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile("C:\\Dropbox\\AA_uni\\Data sets\\youtube growth\\youtube-u-growth\\out.youtube-u-growth")
+        DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile("C:\\git\\Temporal_Graph_library\\datasets\\Testgraph2")
             .fieldDelimiter(" ")  // node IDs are separated by spaces
             .ignoreComments("%")  // comments start with "%"
             .types(Integer.class, Integer.class, Double.class, Double.class); // read the node IDs as Longs
@@ -502,10 +513,10 @@ public class testclass {
         Graph<Integer, Double, Double> tempgraph = temporalGraphfullset.getGellyGraph().mapVertices(new InitVerticeNullfordoubles()).mapEdges(new MapFunction<Edge<Integer, Tuple3<NullValue, Double, Double>>, Double>() {
             @Override
             public Double map(Edge<Integer, Tuple3<NullValue, Double, Double>> integerTuple3Edge) throws Exception {
-                return 0D;
+                return 1D;
             }
         });
-        tempgraph.run(new PageRank<>(0.85,maxIterations)).first(50).print();
+        tempgraph.run(new PageRank<>(0.85,1)).first(50).print();
 
 //        Tgraph<Integer, NullValue, NullValue, Double> temporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(newset.first(500000), env);
 //        DataSet<Vertex<Integer, Double>> result = temporalGraph.run(new SingleSourceShortestTemporalPathEAT<>(2, maxIterations));
@@ -704,6 +715,13 @@ public class testclass {
 
         @Override
         public Double map(Vertex<Integer, NullValue> integerNullValueVertex) throws Exception {
+            return 0D;
+        }
+    }
+    public static final class InitVerticeNullfordoublesstring implements MapFunction<Vertex<String,Double>, Double> {
+
+        @Override
+        public Double map(Vertex<String, Double> integerNullValueVertex) throws Exception {
             return 0D;
         }
     }

@@ -4,12 +4,14 @@ import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.ScatterFunction;
 import org.apache.flink.graph.spargel.ScatterGatherConfiguration;
+import org.apache.flink.metrics.Counter;
 import org.apache.flink.types.NullValue;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
         this.maxIterations = maxIterations;
     }
 
+
+
     @Override
     public DataSet<Vertex<K,Double>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         ScatterGatherConfiguration parameters = new ScatterGatherConfiguration();
@@ -54,14 +58,15 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
 
     }
 
+    /**
+    * Initialize function for the vertices of the Tgraph, it transforms the vertices from NullValue to Double to be
+    * used in the signal collect algorithm
+    * */
     public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, NullValue>, Double> {
-
         private K srcVertexId;
-
         public InitVerticesMapper(K srcId) {
             this.srcVertexId = srcId;
         }
-
         public Double map(Vertex<K, NullValue> value) throws Exception {
              if (value.f0.equals(srcVertexId)) {
                 return 0.0;
@@ -72,7 +77,7 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
     }
 
 
-    /*
+    /**
     * mindistance function from scatterfunction with:
     * K as K
     * VV as Double
@@ -84,7 +89,9 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
     * */
     private static final class MinDistanceMessengerforTuplewithpath<K,EV> extends ScatterFunction<K, Double, Double, Tuple3<EV, Double, Double>> {
         @Override
+
         public void sendMessages(Vertex<K, Double> vertex) {
+
             if (vertex.getValue() < Double.POSITIVE_INFINITY) { //Checks if it has been passed for the first time
                 for (Edge<K, Tuple3<EV,Double,Double>> edge : getEdges()) {
                     if (edge.getValue().f1 >= vertex.getValue()) { //If starting time of the edge
@@ -95,15 +102,17 @@ public class SingleSourceShortestTemporalPathEAT<K,EV> implements TGraphAlgorith
             }
         }
     }
+
     /**
+     * Gatherfunction of the SSSTPEAT
+     * checks all incomming messages and stores
+     *
      * K as K
      * VV as Tuple2<Double,ArrayList<K>>
      * Message as Tuple2<Double,ArrayList<K>>
      *
      * @param <K>
      */
-
-
     private static final class VertexDistanceUpdaterwithpath<K> extends GatherFunction<K, Double, Double> {
 
         @Override

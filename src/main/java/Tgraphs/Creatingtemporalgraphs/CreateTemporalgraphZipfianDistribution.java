@@ -22,10 +22,10 @@ public class CreateTemporalgraphZipfianDistribution {
         env.setParallelism(1);
 
         Random R = new Random();
-        String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
-        String graph = "tgraph1m";
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
+        String graph = "tgraph_real_facebookmsges_uniform";
         Integer distributionamount = 100000;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_zipfian.txt";
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_zipfian_0.txt";
 
 //
         DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
@@ -51,7 +51,7 @@ public class CreateTemporalgraphZipfianDistribution {
         newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {
             @Override
             public String format(Tuple4<Integer, Integer, Integer, Integer> value) {
-                return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f3;
+                return value.f0 + " " + value.f1 + " " + value.f2 + " " + (value.f3 - 1);
             }
         });
         env.execute();

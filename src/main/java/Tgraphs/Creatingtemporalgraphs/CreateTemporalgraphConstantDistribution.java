@@ -1,5 +1,6 @@
 package Tgraphs.Creatingtemporalgraphs;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -13,18 +14,18 @@ import java.util.Random;
 /**
  * Created by s133781 on 07-Dec-16.
  */
-public class CreateTemporalgraphLinearDistribution {
+public class CreateTemporalgraphConstantDistribution {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env;
         Configuration conf = new Configuration();
         conf.setString("fs.overwrite-files","true");
         env = ExecutionEnvironment.createLocalEnvironment(conf);
         env.setParallelism(1);
-        Random R = new Random();
+
         String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
         String graph = "tgraph1m";
         Integer distributionamount = 1000;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_linear_" + distributionamount + ".txt";
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_uniform_" + distributionamount + ".txt";
 
 //
         DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
@@ -38,8 +39,7 @@ public class CreateTemporalgraphLinearDistribution {
                     @Override
                     public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
                         Integer timestart = value.f2;
-                        Integer timeend = R.nextInt(distributionamount) + timestart;
-                        return new Tuple4<>(value.f0, value.f1, timestart, timeend);
+                        return new Tuple4<>(value.f0, value.f1, timestart, timestart + distributionamount);
                     }
                 });
         newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {

@@ -1,0 +1,2 @@
+direction graph iteration  paralel running_time
+graph iteration  paralel running_time

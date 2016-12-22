@@ -1,17 +1,14 @@
 package Tgraphs.BenchmarkingClasses;
 
-import Tgraphs.SSSTPCloseness;
+import Tgraphs.SingleSourceShortestTemporalPathEAT;
 import Tgraphs.Tgraph;
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.types.NullValue;
 
 import java.io.FileWriter;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by s133781 on 07-Dec-16.
@@ -26,39 +23,64 @@ public class anaysistestparalel {
 
 
         int testsPerLoop = 10;
-        Integer[] paralels = {1,2,3,4,5,6,7,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+        Integer[] paralels = {1,2,3,4,5,6,7,8,9,10};
         int maxiterations = 30;
-        String resultfile = args[1];
-        String fileprefix = args[0];
-        String junkoutputfile = args[3];
-        String graph = "tgraph1m_uniform_100k";
-
+        String resultfile = "results.txt";
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\graph1m\\";
+        String junkoutputfile = "junk.txt";
+//        String graph = "tgraph1m_uniform_100k";
+        String[] graphs = {
+//                "tgraph_real_facebookfriends_uniform.txt",
+//                "tgraph_real_facebookmsges_intervalgraph.txt",
+//                "tgraph_real_facebookmsges_uniform.txt",
+//                "tgraph1m_uniform_1000.txt",
+//                "tgraph1m_uniform_10000.txt",
+                "tgraph1m_normal_mean_1m_sd_6.txt",
+                "tgraph1m_normal_mean_1m_sd_12.txt",
+                "tgraph1m_normal_mean_1m_sd_24.txt",
+                "tgraph1m_normal_mean_1m_sd_48.txt",
+                "tgraph1m_constant_0.txt",
+                "tgraph1m_constant_1.txt",
+                "tgraph1m_constant_10.txt",
+                "tgraph1m_constant_100.txt",
+                "tgraph1m_constant_1000.txt",
+                "tgraph1m_constant_10000.txt",
+                "tgraph1m_constant_100000.txt",
+                "tgraph1m_zipfian_0.txt",
+                "tgraph1m_zipfian_1.txt"
+        };
 
 //        logger
         FileWriter writer = new FileWriter(resultfile,true);
-        writer.append("test round with undirected graphs" + System.lineSeparator());
+//        writer.append("test round with undirected graphs" + System.lineSeparator());
         writer.append("graph iteration  paralel running_time" + System.lineSeparator());
         writer.close();
+        for( String graph: graphs) {
+            for (Integer paralel : paralels) {
+                env = ExecutionEnvironment.createLocalEnvironment(conf);
+                env.setParallelism(paralel);
+                DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile(fileprefix + graph)
+                        .fieldDelimiter(" ")  // node IDs are separated by spaces
+                        .ignoreComments("%")  // comments start with "%"
+                        .includeFields("1111")
+                        .types(Integer.class, Integer.class, Double.class, Double.class); // read the node IDs as Longs
 
-        for( Integer paralel: paralels) {
-            env = ExecutionEnvironment.createLocalEnvironment(conf);
-            env.setParallelism(paralel);
-            DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
-                    .fieldDelimiter(" ")  // node IDs are separated by spaces
-                    .ignoreComments("%")  // comments start with "%"
-                    .includeFields("1111")
-                    .types(Integer.class,Integer.class, Double.class, Double.class); // read the node IDs as Longs
 
-
-            Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
-            for (int i = 0; i <= testsPerLoop; i++) {
-//                temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText(junkoutputfile);
-                temporalGraphfullset.getUndirected().run(new SSSTPCloseness<>(maxiterations, 1, true)).first(1).writeAsText(junkoutputfile);
-                Long runningtime = env.execute().getNetRuntime();
-
+                Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
+                Long totaltime = 0L;
+                for (int i = 0; i <= testsPerLoop; i++) {
+                    temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("junk\\" + graph + paralel + i + junkoutputfile);
+//                temporalGraphfullset.getUndirected().run(new SSSTPCloseness<>(maxiterations, 1, true)).first(1).writeAsText(junkoutputfile);
+                    Long runningtime = env.execute().getNetRuntime();
+                    if (i != 0) {
+                        totaltime = totaltime + runningtime;
+                    }
+                }
+//            stores the total running time of 10 tests, excluding the first
                 FileWriter writer2 = new FileWriter(resultfile, true);
-                writer2.append(graph + " " + i + " " + paralel + " " + runningtime + System.lineSeparator());
+                writer2.append(graph + " " + paralel + " " + totaltime + System.lineSeparator());
                 writer2.close();
+
             }
         }
 

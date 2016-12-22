@@ -7,6 +7,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
 import org.apache.flink.graph.Vertex;
+import org.apache.flink.graph.library.PageRank;
 import org.apache.flink.graph.library.SingleSourceShortestPaths;
 import org.apache.flink.types.NullValue;
 

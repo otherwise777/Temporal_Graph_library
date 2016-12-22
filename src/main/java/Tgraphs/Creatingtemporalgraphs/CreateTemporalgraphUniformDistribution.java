@@ -1,6 +1,5 @@
 package Tgraphs.Creatingtemporalgraphs;
 
-import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -21,17 +20,17 @@ public class CreateTemporalgraphUniformDistribution {
         conf.setString("fs.overwrite-files","true");
         env = ExecutionEnvironment.createLocalEnvironment(conf);
         env.setParallelism(1);
-
-        String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
-        String graph = "tgraph1m";
-        Integer distributionamount = 1000;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_uniform_" + distributionamount + ".txt";
+        Random R = new Random();
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
+        String graph = "tgraph_real_facebookmsges_uniform";
+        Integer distributionamount = 10000;
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_uniform_" + distributionamount + ".txt";
 
 //
         DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
                 .fieldDelimiter(" ")  // node IDs are separated by spaces
                 .ignoreComments("%")  // comments start with "%"
-                .includeFields("111")
+                .includeFields("1110")
                 .types(Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
 
         DataSet<Tuple4<Integer, Integer, Integer, Integer>> newset = temporalsetdoubles.map(
@@ -39,7 +38,8 @@ public class CreateTemporalgraphUniformDistribution {
                     @Override
                     public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
                         Integer timestart = value.f2;
-                        return new Tuple4<>(value.f0, value.f1, timestart, timestart + distributionamount);
+                        Integer timeend = R.nextInt(distributionamount) + timestart;
+                        return new Tuple4<>(value.f0, value.f1, timestart, timeend);
                     }
                 });
         newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {

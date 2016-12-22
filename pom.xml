@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Tgraphs.Creatingtemporalgraphs.CreateTemporalgraph</mainClass>
+                            <mainClass>Tgraphs.BenchmarkingClasses.anaysistestparalel</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

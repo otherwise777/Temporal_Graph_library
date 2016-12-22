@@ -1,5 +1,7 @@
-package Tgraphs;
+package Tgraphs.junk;
 
+import Tgraphs.TGraphAlgorithm;
+import Tgraphs.Tgraph;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.tuple.Tuple2;
