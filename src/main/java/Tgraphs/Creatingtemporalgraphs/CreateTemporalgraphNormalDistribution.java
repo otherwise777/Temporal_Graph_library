@@ -25,13 +25,14 @@ public class CreateTemporalgraphNormalDistribution {
         conf.setString("fs.overwrite-files","true");
         env = ExecutionEnvironment.createLocalEnvironment(conf);
         env.setParallelism(1);
-        String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
-        String graph = "tgraph1m";
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
+        String graph = "tgraph_real_facebookmsges_uniform";
         NormalDistribution d;
         Integer setlength = 1000000;
         Integer height = 100000;
-        Integer variancedivider = 48;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_mean_1m_sd_" + variancedivider + ".txt";
+        Random R = new Random();
+        Integer variancedivider = 24;
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_mean_1m_sd_" + variancedivider + ".txt";
 
 //        distrbution, first number is the n / 2,
         d = new NormalDistribution(setlength / 2,setlength / variancedivider);
@@ -51,7 +52,8 @@ public class CreateTemporalgraphNormalDistribution {
                     public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
 //                        for the normal distribution
                         Integer timestart = value.f2;
-                        Double time = d.density(timestart) * multiplier + timestart;
+                        Integer randomtimestart = R.nextInt(1000000);
+                        Double time = d.density(randomtimestart) * multiplier + timestart;
 
                         return new Tuple4<>(value.f0, value.f1, timestart, time.intValue());
                     }
