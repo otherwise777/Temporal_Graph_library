@@ -32,7 +32,7 @@ public class CreateTemporalgraphNormalDistribution {
         Integer height = 100000;
         Random R = new Random();
         Integer variancedivider = 24;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_mean_1m_sd_" + variancedivider + ".txt";
+        String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_normal_mean_1m_sd_" + variancedivider + ".txt";
 
 //        distrbution, first number is the n / 2,
         d = new NormalDistribution(setlength / 2,setlength / variancedivider);

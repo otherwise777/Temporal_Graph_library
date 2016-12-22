@@ -22,10 +22,10 @@ public class CreateTemporalgraphConstantDistribution {
         env = ExecutionEnvironment.createLocalEnvironment(conf);
         env.setParallelism(1);
 
-        String fileprefix = "C:\\Dropbox\\tgraphInstances\\";
-        String graph = "tgraph1m";
-        Integer distributionamount = 1000;
-        String outputfile = "C:\\Dropbox\\tgraphInstances\\tgraph1m_uniform_" + distributionamount + ".txt";
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
+        String graph = "tgraph_real_facebookmsges_uniform";
+        Integer[] distributionamounts = {0,1,10,100,1000,10000,100000};
+
 
 //
         DataSet<Tuple3<Integer, Integer, Integer>> temporalsetdoubles = env.readCsvFile(fileprefix + graph + ".txt")
@@ -33,21 +33,23 @@ public class CreateTemporalgraphConstantDistribution {
                 .ignoreComments("%")  // comments start with "%"
                 .includeFields("111")
                 .types(Integer.class, Integer.class, Integer.class); // read the node IDs as Longs
-
-        DataSet<Tuple4<Integer, Integer, Integer, Integer>> newset = temporalsetdoubles.map(
-                new MapFunction<Tuple3<Integer, Integer, Integer>, Tuple4<Integer, Integer, Integer, Integer>>() {
-                    @Override
-                    public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
-                        Integer timestart = value.f2;
-                        return new Tuple4<>(value.f0, value.f1, timestart, timestart + distributionamount);
-                    }
-                });
-        newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {
-            @Override
-            public String format(Tuple4<Integer, Integer, Integer, Integer> value) {
-                return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f3;
-            }
-        });
-        env.execute();
+        for(Integer distributionamount : distributionamounts) {
+            String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_constant_" + distributionamount + ".txt";
+            DataSet<Tuple4<Integer, Integer, Integer, Integer>> newset = temporalsetdoubles.map(
+                    new MapFunction<Tuple3<Integer, Integer, Integer>, Tuple4<Integer, Integer, Integer, Integer>>() {
+                        @Override
+                        public Tuple4<Integer, Integer, Integer, Integer> map(Tuple3<Integer, Integer, Integer> value) throws Exception {
+                            Integer timestart = value.f2;
+                            return new Tuple4<>(value.f0, value.f1, timestart, timestart + distributionamount);
+                        }
+                    });
+            newset.writeAsFormattedText(outputfile, new TextOutputFormat.TextFormatter<Tuple4<Integer, Integer, Integer, Integer>>() {
+                @Override
+                public String format(Tuple4<Integer, Integer, Integer, Integer> value) {
+                    return value.f0 + " " + value.f1 + " " + value.f2 + " " + value.f3;
+                }
+            });
+            env.execute();
+        }
     }
 }
