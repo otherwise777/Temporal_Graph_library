@@ -23,37 +23,38 @@ public class anaysistestparalel {
 
 
         int testsPerLoop = 10;
-        Integer[] paralels = {1,2,3,4,5,6,7,8,9,10};
+        Integer[] paralels = {1};
         int maxiterations = 30;
         String resultfile = "results.txt";
-        String fileprefix = "C:\\Dropbox\\tgraphInstances\\graph1m\\";
+        String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
         String junkoutputfile = "junk.txt";
 //        String graph = "tgraph1m_uniform_100k";
         String[] graphs = {
+                "tgraph_real_wikiedithyperlinks.txt"
 //                "tgraph_real_facebookfriends_uniform.txt",
 //                "tgraph_real_facebookmsges_intervalgraph.txt",
 //                "tgraph_real_facebookmsges_uniform.txt",
 //                "tgraph1m_uniform_1000.txt",
 //                "tgraph1m_uniform_10000.txt",
-                "tgraph1m_normal_mean_1m_sd_6.txt",
-                "tgraph1m_normal_mean_1m_sd_12.txt",
-                "tgraph1m_normal_mean_1m_sd_24.txt",
-                "tgraph1m_normal_mean_1m_sd_48.txt",
-                "tgraph1m_constant_0.txt",
-                "tgraph1m_constant_1.txt",
-                "tgraph1m_constant_10.txt",
-                "tgraph1m_constant_100.txt",
-                "tgraph1m_constant_1000.txt",
-                "tgraph1m_constant_10000.txt",
-                "tgraph1m_constant_100000.txt",
-                "tgraph1m_zipfian_0.txt",
-                "tgraph1m_zipfian_1.txt"
+//                "tgraph1m_normal_mean_1m_sd_6.txt",
+//                "tgraph1m_normal_mean_1m_sd_12.txt",
+//                "tgraph1m_normal_mean_1m_sd_24.txt",
+//                "tgraph1m_normal_mean_1m_sd_48.txt",
+//                "tgraph1m_constant_0.txt",
+//                "tgraph1m_constant_1.txt",
+//                "tgraph1m_constant_10.txt",
+//                "tgraph1m_constant_100.txt",
+//                "tgraph1m_constant_1000.txt",
+//                "tgraph1m_constant_10000.txt",
+//                "tgraph1m_constant_100000.txt",
+//                "tgraph1m_zipfian_0.txt",
+//                "tgraph1m_zipfian_1.txt"
         };
 
 //        logger
         FileWriter writer = new FileWriter(resultfile,true);
 //        writer.append("test round with undirected graphs" + System.lineSeparator());
-        writer.append("graph iteration  paralel running_time" + System.lineSeparator());
+        writer.append("graph iteration paralel running_time" + System.lineSeparator());
         writer.close();
         for( String graph: graphs) {
             for (Integer paralel : paralels) {
@@ -67,6 +68,8 @@ public class anaysistestparalel {
 
 
                 Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
+                System.out.println(temporalGraphfullset.getVertices().count());
+                if(testsPerLoop == 10) {return; }
                 Long totaltime = 0L;
                 for (int i = 0; i <= testsPerLoop; i++) {
                     temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("junk\\" + graph + paralel + i + junkoutputfile);

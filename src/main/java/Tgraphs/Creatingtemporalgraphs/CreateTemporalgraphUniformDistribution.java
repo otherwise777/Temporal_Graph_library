@@ -23,7 +23,7 @@ public class CreateTemporalgraphUniformDistribution {
         Random R = new Random();
         String fileprefix = "C:\\Dropbox\\tgraphInstances\\realgraph\\";
         String graph = "tgraph_real_facebookmsges_uniform";
-        Integer distributionamount = 10000;
+        Integer distributionamount = 100000;
         String outputfile = "C:\\Dropbox\\tgraphInstances\\realgraph\\tgraph1m_uniform_" + distributionamount + ".txt";
 
 //

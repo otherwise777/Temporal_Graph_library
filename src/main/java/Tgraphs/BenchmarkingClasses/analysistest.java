@@ -39,39 +39,29 @@ public class analysistest {
 
 
         int paralelInstances = 8;
-        int testsPerLoop = 1;
+        int testsPerLoop = 10;
         int maxiterations = 30;
         String resultfile = "results.txt";
         String fileprefix = "C:\\Dropbox\\tgraphInstances\\graph1m\\";
         String junkoutputfile = "junk.txt";
-//        String[] graphs = {"graph10k","graph100k","graph1m","graph10m","sparse10k","sparse100k","sparse1m","sparse10m","sparse50m"};
         String[] graphs = {
-//                "tgraph_real_facebookfriends_uniform.txt",
-//                "tgraph_real_facebookmsges_intervalgraph.txt",
-//                "tgraph_real_facebookmsges_uniform.txt",
-//                "tgraph_real_wikiedithyperlinks.txt",
-//                "tgraph100k.txt",
-//                "tgraph100k_uniform_1.txt",
-//                "tgraph10k.txt",
-//                "tgraph10k_uniform_1.txt",
-//                "tgraph1m.txt",
-                "tgraph1m_linear_1000.txt",
-                "tgraph1m_linear_10000.txt",
-                "tgraph1m_linear_100000.txt",
-                "tgraph1m_mean_1m_sd_12.txt",
-                "tgraph1m_mean_1m_sd_24.txt",
-                "tgraph1m_mean_1m_sd_48.txt",
-                "tgraph1m_mean_1m_sd_6.txt",
-                "tgraph1m_uniform_0.txt",
-                "tgraph1m_uniform_1.txt",
-                "tgraph1m_uniform_10.txt",
-                "tgraph1m_uniform_100.txt",
+                "tgraph1m_constant_0.txt",
+                "tgraph1m_constant_1.txt",
+                "tgraph1m_constant_10.txt",
+                "tgraph1m_constant_100.txt",
+                "tgraph1m_constant_1000.txt",
+                "tgraph1m_constant_10000.txt",
+                "tgraph1m_constant_100000.txt",
+                "tgraph1m_normal_mean_1m_sd_12.txt",
+                "tgraph1m_normal_mean_1m_sd_24.txt",
+                "tgraph1m_normal_mean_1m_sd_48.txt",
+                "tgraph1m_normal_mean_1m_sd_6.txt",
                 "tgraph1m_uniform_1000.txt",
                 "tgraph1m_uniform_10000.txt",
+                "tgraph1m_uniform_100000.txt",
                 "tgraph1m_zipfian_0.txt",
                 "tgraph1m_zipfian_1.txt"
         };
-//        String[] graphs = {"graph1m"};
         env.setParallelism(paralelInstances);
 
 //        logger
@@ -88,16 +78,16 @@ public class analysistest {
                     .types(Integer.class, Integer.class, Double.class, Double.class); // read the node IDs as Longs
 
             Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
-//            for(int i = 1; i <= testsPerLoop; i++) {
-//                temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("1" + junkoutputfile);;
-//                Long runningtime = env.execute().getNetRuntime();
-//
-//                FileWriter writer2 = new FileWriter(resultfile,true);
-//                writer2.append("undirected " + graph + " " + i + " " + paralelInstances + " " + runningtime + System.lineSeparator());
-//                writer2.close();
-//            }
-            for(int i = 1; i < testsPerLoop; i++) {
-                temporalGraphfullset.run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("2" + junkoutputfile);;
+            for(int i = 1; i <= testsPerLoop; i++) {
+                temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("junk\\di" + i + graph + junkoutputfile);;
+                Long runningtime = env.execute().getNetRuntime();
+
+                FileWriter writer2 = new FileWriter(resultfile,true);
+                writer2.append("undirected " + graph + " " + i + " " + paralelInstances + " " + runningtime + System.lineSeparator());
+                writer2.close();
+            }
+            for(int i = 1; i <= testsPerLoop; i++) {
+                temporalGraphfullset.run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("junk\\ud" + i + graph + junkoutputfile);;
                 Long runningtime = env.execute().getNetRuntime();
 //                env.getRuntimeContext().getMetricGroup()
 

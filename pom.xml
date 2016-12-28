@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Tgraphs.BenchmarkingClasses.anaysistestparalel</mainClass>
+                            <mainClass>Tgraphs.BenchmarkingClasses.analysistest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
