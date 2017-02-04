@@ -1,11 +1,10 @@
 package Tgraphs;
 
-import org.apache.flink.api.common.functions.FilterFunction;
-import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.*;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.functions.FunctionAnnotation;
 import org.apache.flink.api.java.tuple.*;
 import org.apache.flink.graph.Edge;
 import org.apache.flink.graph.Graph;
@@ -17,9 +16,7 @@ import scala.math.Numeric;
 
 import javax.xml.crypto.Data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.apache.commons.math3.util.Precision.compareTo;
 
@@ -28,9 +25,10 @@ import static org.apache.commons.math3.util.Precision.compareTo;
  */
 public class Tgraph<K,VV,EV,N> {
 
-    private final ExecutionEnvironment context;
-    private final DataSet<Edge<K,Tuple3<EV,N,N>>> edges;
-    private final DataSet<Vertex<K, VV>> vertices;
+    protected final ExecutionEnvironment context;
+    protected final DataSet<Edge<K,Tuple3<EV,N,N>>> edges;
+    protected final DataSet<Vertex<K, VV>> vertices;
+
     /*
     * Constructor that creates the temporal graph from the Tuple5 set
     * */
@@ -243,6 +241,92 @@ public class Tgraph<K,VV,EV,N> {
             return (int) edge.getValue().getField(1) >= start && (int) edge.getValue().getField(2) <= finish;
         }
     }
+
+
+    public Tgraph<K,VV,EV,N> addVertex(final Vertex<K,VV> vertex) throws Exception {
+        List<Vertex<K, VV>> newVertex = new ArrayList<Vertex<K, VV>>();
+        newVertex.add(vertex);
+
+        return addVertices(newVertex);
+    }
+
+    public Tgraph<K,VV,EV,N> addVertices(List<Vertex<K, VV>> verticesToAdd) throws Exception {
+
+        DataSet<Vertex<K, VV>> newVertices = this.vertices.coGroup(this.context.fromCollection(verticesToAdd))
+                .where(0).equalTo(0).with(new VerticesUnionCoGroup<K, VV>());
+
+        return new Tgraph<>(newVertices, this.edges, this.context);
+    }
+
+    private static final class VerticesUnionCoGroup<K, VV> implements CoGroupFunction<Vertex<K, VV>, Vertex<K, VV>, Vertex<K, VV>> {
+
+        @Override
+        public void coGroup(Iterable<Vertex<K, VV>> oldVertices, Iterable<Vertex<K, VV>> newVertices,
+                            Collector<Vertex<K, VV>> out) throws Exception {
+
+            final Iterator<Vertex<K, VV>> oldVerticesIterator = oldVertices.iterator();
+            final Iterator<Vertex<K, VV>> newVerticesIterator = newVertices.iterator();
+
+            // if there is both an old vertex and a new vertex then only the old vertex is emitted
+            if (oldVerticesIterator.hasNext()) {
+                out.collect(oldVerticesIterator.next());
+            } else {
+                out.collect(newVerticesIterator.next());
+            }
+        }
+    }
+
+    public Tgraph<K,VV,EV,N> addEdge(K source, K target, EV edgeValue, N start, N end) {
+
+        List<Edge<K,Tuple3<EV,N,N>>> newEdge = new ArrayList<Edge<K,Tuple3<EV,N,N>>>();
+        newEdge.add(new Edge<K, Tuple3<EV, N, N>>(source,target,new Tuple3<EV, N, N>(edgeValue,start,end)));
+
+        return addEdges(newEdge);
+    }
+
+    /**
+     * Adds the given list edges to the graph.
+     *
+     * When adding an edge for a non-existing set of vertices, the edge is considered invalid and ignored.
+     *
+     * @param newEdges the data set of edges to be added
+     * @return a new graph containing the existing edges plus the newly added edges.
+     */
+    public Tgraph<K,VV,EV,N> addEdges(List<Edge<K,Tuple3<EV,N,N>>> newEdges) {
+
+        DataSet<Edge<K,EV>> newEdgesDataSet = this.context.fromCollection(newEdges);
+
+        DataSet<Edge<K,EV>> validNewEdges = this.getVertices().join(newEdgesDataSet)
+                .where(0).equalTo(0)
+                .with(new Graph.JoinVerticesWithEdgesOnSrc<K, VV, EV>())
+                .join(this.getVertices()).where(1).equalTo(0)
+                .with(new Graph.JoinWithVerticesOnTrg<K, VV, EV>());
+
+        return Graph.fromDataSet(this.vertices, this.edges.union(validNewEdges), this.context);
+    }
+
+    @FunctionAnnotation.ForwardedFieldsSecond("f0; f1; f2")
+    private static final class JoinVerticesWithEdgesOnSrc<K, VV, EV> implements
+            JoinFunction<Vertex<K, VV>, Edge<K, EV>, Edge<K, EV>> {
+
+        @Override
+        public Edge<K, EV> join(Vertex<K, VV> vertex, Edge<K, EV> edge) throws Exception {
+            return edge;
+        }
+    }
+
+    @FunctionAnnotation.ForwardedFieldsFirst("f0; f1; f2")
+    private static final class JoinWithVerticesOnTrg<K, VV, EV> implements
+            JoinFunction<Edge<K, EV>, Vertex<K, VV>, Edge<K, EV>> {
+
+        @Override
+        public Edge<K, EV> join(Edge<K, EV> edge, Vertex<K, VV> vertex) throws Exception {
+            return edge;
+        }
+    }
+
+
+
 
     /**
      * @param algorithm the algorithm to run on the Graph

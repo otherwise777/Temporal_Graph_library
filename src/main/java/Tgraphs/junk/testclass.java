@@ -30,17 +30,39 @@ import java.util.concurrent.ThreadLocalRandom;
 public class testclass {
     private static String[] arguments;
 
+    public testclass() throws Exception {
+    }
+
 
     public static void main(String[] args) throws Exception {
         arguments = args;
         System.out.println("and so the testing begins");
         test13();
     }
+    private static void ssstpeatExample() throws Exception {
+        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
+        DataSet<Tuple4<Integer, Integer, Double, Double>> temporalsetdoubles = env.readCsvFile("./datasets/Testgraph2")
+                .fieldDelimiter(" ")  // node IDs are separated by spaces
+                .ignoreComments("%")  // comments start with "%"
+                .types(Integer.class, Integer.class, Double.class, Double.class); // read the node IDs as Longs
+
+        Tgraph<Integer, NullValue, NullValue, Double> temporalGraph = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
+        temporalGraph.run(new SingleSourceShortestTemporalPathEAT<>(1, 30)).first(20).print();
+    }
+
+    public static final class InitVerticesforInteger implements MapFunction<Integer, Double> {
+
+        @Override
+        public Double map(Integer vertexId) {
+            return 0D;
+        }
+    }
 
     private static void test8() throws Exception {
         Configuration conf = new Configuration();
         conf.setFloat(ConfigConstants.TASK_MANAGER_NETWORK_NUM_BUFFERS_KEY, 2000);
+
         final ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment(conf);
 
 
@@ -689,6 +711,14 @@ public class testclass {
 //            } else {
 //                return Double.MAX_VALUE;
 //            }
+        }
+    }
+
+    public static final class InitVerticesDoublesDoubles implements MapFunction<Double, Double> {
+
+        @Override
+        public Double map(Double aDouble) {
+            return 0D;
         }
     }
     public static final class InitVerticesfordoubles implements MapFunction<String, Double> {
