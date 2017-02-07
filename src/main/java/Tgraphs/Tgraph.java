@@ -243,7 +243,7 @@ public class Tgraph<K,VV,EV,N> {
     }
 
 
-    public Tgraph<K,VV,EV,N> addVertex(final Vertex<K,VV> vertex) throws Exception {
+    /*public Tgraph<K,VV,EV,N> addVertex(final Vertex<K,VV> vertex) throws Exception {
         List<Vertex<K, VV>> newVertex = new ArrayList<Vertex<K, VV>>();
         newVertex.add(vertex);
 
@@ -284,14 +284,14 @@ public class Tgraph<K,VV,EV,N> {
         return addEdges(newEdge);
     }
 
-    /**
+    *//**
      * Adds the given list edges to the graph.
      *
      * When adding an edge for a non-existing set of vertices, the edge is considered invalid and ignored.
      *
      * @param newEdges the data set of edges to be added
      * @return a new graph containing the existing edges plus the newly added edges.
-     */
+     *//*
     public Tgraph<K,VV,EV,N> addEdges(List<Edge<K,Tuple3<EV,N,N>>> newEdges) {
 
         DataSet<Edge<K,EV>> newEdgesDataSet = this.context.fromCollection(newEdges);
@@ -323,7 +323,7 @@ public class Tgraph<K,VV,EV,N> {
         public Edge<K, EV> join(Edge<K, EV> edge, Vertex<K, VV> vertex) throws Exception {
             return edge;
         }
-    }
+    }*/
 
 
 

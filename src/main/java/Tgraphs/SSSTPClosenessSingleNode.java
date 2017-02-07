@@ -11,7 +11,7 @@ import org.apache.flink.types.NullValue;
  * Created by s133781 on 03-Nov-16.
  *
  */
-public class SSSTPClosenessSingleNode<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,Double> {
+public class    SSSTPClosenessSingleNode<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,Double> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
