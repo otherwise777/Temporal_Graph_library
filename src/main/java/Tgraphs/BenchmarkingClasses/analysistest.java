@@ -38,29 +38,14 @@ public class analysistest {
 
 
 
-        int paralelInstances = 8;
-        int testsPerLoop = 10;
+        int paralelInstances = 1;
+        int testsPerLoop = 1;
         int maxiterations = 30;
         String resultfile = "results.txt";
         String fileprefix = "C:\\Dropbox\\tgraphInstances\\graph1m\\";
         String junkoutputfile = "junk.txt";
         String[] graphs = {
                 "tgraph1m_constant_0.txt",
-                "tgraph1m_constant_1.txt",
-                "tgraph1m_constant_10.txt",
-                "tgraph1m_constant_100.txt",
-                "tgraph1m_constant_1000.txt",
-                "tgraph1m_constant_10000.txt",
-                "tgraph1m_constant_100000.txt",
-                "tgraph1m_normal_mean_1m_sd_12.txt",
-                "tgraph1m_normal_mean_1m_sd_24.txt",
-                "tgraph1m_normal_mean_1m_sd_48.txt",
-                "tgraph1m_normal_mean_1m_sd_6.txt",
-                "tgraph1m_uniform_1000.txt",
-                "tgraph1m_uniform_10000.txt",
-                "tgraph1m_uniform_100000.txt",
-                "tgraph1m_zipfian_0.txt",
-                "tgraph1m_zipfian_1.txt"
         };
         env.setParallelism(paralelInstances);
 
@@ -79,7 +64,8 @@ public class analysistest {
 
             Tgraph<Integer, NullValue, NullValue, Double> temporalGraphfullset = Tgraph.From4TupleNoEdgesNoVertexes(temporalsetdoubles, env);
             for(int i = 1; i <= testsPerLoop; i++) {
-                temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations)).first(1).writeAsText("junk\\di" + i + graph + junkoutputfile);;
+                temporalGraphfullset.getUndirected().run(new SingleSourceShortestTemporalPathEAT<>(1, maxiterations))
+                        .first(1).writeAsText("junk\\di" + i + graph + junkoutputfile);;
                 Long runningtime = env.execute().getNetRuntime();
 
                 FileWriter writer2 = new FileWriter(resultfile,true);

@@ -2,3 +2,28 @@ direction graph iteration  paralel running_time
 graph iteration  paralel running_time
 graph iteration paralel running_time
 graph iteration paralel running_time
+direction graph iteration  paralel running_time
+undirected tgraph1m_constant_0.txt 1 8 6491
+undirected tgraph1m_constant_0.txt 2 8 4367
+undirected tgraph1m_constant_0.txt 3 8 3309
+undirected tgraph1m_constant_0.txt 4 8 3268
+direction graph iteration  paralel running_time
+undirected tgraph1m_constant_0.txt 1 8 10903
+undirected tgraph1m_constant_0.txt 2 8 8961
+undirected tgraph1m_constant_0.txt 3 8 4001
+undirected tgraph1m_constant_0.txt 4 8 7380
+undirected tgraph1m_constant_0.txt 5 8 3422
+undirected tgraph1m_constant_0.txt 6 8 6844
+undirected tgraph1m_constant_0.txt 7 8 3359
+undirected tgraph1m_constant_0.txt 8 8 6878
+undirected tgraph1m_constant_0.txt 9 8 3396
+undirected tgraph1m_constant_0.txt 10 8 5410
+directed tgraph1m_constant_0.txt 1 8 2846
+directed tgraph1m_constant_0.txt 2 8 2245
+directed tgraph1m_constant_0.txt 3 8 2309
+directed tgraph1m_constant_0.txt 4 8 4656
+directed tgraph1m_constant_0.txt 5 8 2344
+directed tgraph1m_constant_0.txt 6 8 3486
+direction graph iteration  paralel running_time
+undirected tgraph1m_constant_0.txt 1 1 13670
+directed tgraph1m_constant_0.txt 1 1 6657
