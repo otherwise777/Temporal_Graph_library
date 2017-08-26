@@ -16,9 +16,11 @@ After you've pulled the project let maven import the projects dependancies and s
 This should run and give you some results.
 
 # Dataset Rita
-One of the datasets available in this repository is the dataset Rita, this dataset contains information about all the flights from februari 2017.  
+One of the datasets available in this repository is the dataset Rita, this dataset contains information about all the flights from februari 2017. This dataset contains many columns under which the starting date, the starting time, the arrival time, the carrier ID and airports. Using this dataset we can model a temporal graph with airports as nodes and the departure and arrival time as the temporal edge. Before we can do some analytics on the dataset we first have to clean it, We want to be able to calculate the travel time for example, and the dataset has the time in the format hhmm, meaning we cannot simply contract one from another, luckely this is easily done in Flink.
 
 # example
+This is the example code found in examples/analyze_rita.java, this section explains line by line what is happening.
+
 
 # background
 I made Tink in 2017 for my master thesis for graduation computer science and engineering at the Eindhoven University of Technology. I will present Tink at the Flink forward conference in september 2017 in Berlin. Some sources:
