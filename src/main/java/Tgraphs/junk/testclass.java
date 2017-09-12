@@ -238,9 +238,9 @@ public class testclass {
         Tgraph<Long, Double, Long, Double> tempgraphdoubles = Tgraph.From5TuplewithEdgesandVertices(temporalsetdoubles,new InitVertices(),env);
 
 
-        DataSet<Vertex<Long,Tuple2<Double,ArrayList<Long>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>(1L,maxIterations));
+//        DataSet<Vertex<Long,Tuple2<Double,ArrayList<Long>>>> verticess = tempgraphdoubles.run(new SingleSourceShortestTemporalPathEATWithPaths<>(1L,maxIterations));
 
-        verticess.print();
+//        verticess.print();
 
 // - - -  UDFs - - - //
     }

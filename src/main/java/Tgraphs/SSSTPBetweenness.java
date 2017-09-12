@@ -171,7 +171,7 @@ public class SSSTPBetweenness<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Do
                             ArrayList<K> path = new ArrayList<>(tuple.f1);
                             path.add(vertex.getId());
                             BetMsg<K> temp = new BetMsg<>(value, edge.getValue().f2, path);
-                            System.out.println("message send: " + value.toString() + ".." + edge.getSource().toString() + "->" + edge.getTarget().toString() + " : " + edge.getValue().f2.toString());
+//                            System.out.println("message send: " + value.toString() + ".." + edge.getSource().toString() + "->" + edge.getTarget().toString() + " : " + edge.getValue().f2.toString());
                             sendMessageTo(edge.getTarget(), temp);
                         }
                     }

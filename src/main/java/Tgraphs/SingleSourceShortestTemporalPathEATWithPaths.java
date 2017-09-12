@@ -9,7 +9,7 @@ import org.apache.flink.graph.Vertex;
 import org.apache.flink.graph.spargel.GatherFunction;
 import org.apache.flink.graph.spargel.MessageIterator;
 import org.apache.flink.graph.spargel.ScatterFunction;
-
+import org.apache.flink.types.NullValue;
 
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Dataset<Vertex<K,tuple2<Double,Arraylist<Double>>>>
  *
  */
-public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGraphAlgorithm<K,Double,EV,Double,DataSet<Vertex<K,Tuple2<Double,ArrayList<K>>>>> {
+public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGraphAlgorithm<K,NullValue,EV,Double,DataSet<Vertex<K,Tuple2<Double,ArrayList<K>>>>> {
 
     private final K srcVertexId;
     private final Integer maxIterations;
@@ -33,14 +33,14 @@ public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGrap
         this.maxIterations = maxIterations;
     }
     @Override
-    public DataSet<Vertex<K, Tuple2<Double, ArrayList<K>>>> run(Tgraph<K, Double, EV, Double> input) throws Exception {
+    public DataSet<Vertex<K, Tuple2<Double, ArrayList<K>>>> run(Tgraph<K, NullValue, EV, Double> input) throws Exception {
         return input.getGellyGraph().mapVertices(new InitVerticesMapper<K>(srcVertexId)).runScatterGatherIteration(
                 new MinDistanceMessengerforTuplewithpath<K,EV>(), new VertexDistanceUpdaterwithpath<K>(),
                 maxIterations).getVertices();
 
     }
 
-    public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, Double>, Tuple2<Double, ArrayList<K>>> {
+    public static final class InitVerticesMapper<K>	implements MapFunction<Vertex<K, NullValue>, Tuple2<Double, ArrayList<K>>> {
 
         private K srcVertexId;
 
@@ -48,7 +48,7 @@ public class SingleSourceShortestTemporalPathEATWithPaths<K,EV> implements TGrap
             this.srcVertexId = srcId;
         }
 
-        public Tuple2<Double, ArrayList<K>> map(Vertex<K, Double> value) throws Exception {
+        public Tuple2<Double, ArrayList<K>> map(Vertex<K, NullValue> value) throws Exception {
             ArrayList<K> emptylist = new ArrayList<>();
             if (value.f0.equals(srcVertexId)) {
                 return new Tuple2<>(0.0,emptylist);
